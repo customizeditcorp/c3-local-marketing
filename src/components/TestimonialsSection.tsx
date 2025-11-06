@@ -38,6 +38,17 @@ const TestimonialsSection = () => {
       ]
     },
     {
+      quote: "Tenemos 5 sedes y solo una estaba verificada. Las demás existían pero no pertenecían al mismo perfil. C3 unificó todo nuestro portafolio de Google bajo una misma cuenta, verificó todas nuestras sedes, optimizó cada perfil y creó la website de cada sede con location pages y service pages. Ahora todo está ordenado con una presencia que inspira confianza y acompaña a nuestra empresa en su expansión.",
+      name: "AGS Recycling",
+      business: "AGS Recycling (5 Sedes)",
+      location: "California",
+      results: [
+        "5 sedes unificadas y verificadas",
+        "Website completa con location pages",
+        "Presencia ordenada para expansión"
+      ]
+    },
+    {
       quote: "Antes perdía contratos porque no aparecía en Google. Ahora mi perfil está verificado y mi website se ve tan profesional como la competencia grande.",
       name: "Juan Martínez",
       business: "Martinez Landscaping",
