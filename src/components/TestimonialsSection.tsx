@@ -60,28 +60,6 @@ const TestimonialsSection = () => {
       ]
     },
     {
-      quote: "Antes perdía contratos porque no aparecía en Google. Ahora mi perfil está verificado y mi website se ve tan profesional como la competencia grande.",
-      name: "Juan Martínez",
-      business: "Martinez Landscaping",
-      location: "San Jose, CA",
-      results: [
-        "GBP verificado en 4 semanas",
-        "Website profesional activo",
-        "Ya no depende solo de referencias"
-      ]
-    },
-    {
-      quote: "La barrera del idioma me frenaba con otras agencias. Con C3 todo fue en español y sin complicaciones técnicas. Ahora soy dueño de todo mi sistema digital.",
-      name: "Carlos Rodríguez",
-      business: "Rodriguez HVAC Services",
-      location: "Los Angeles, CA",
-      results: [
-        "Sistema completo en 90 días",
-        "100% dueño de credenciales",
-        "Listo para Google Ads"
-      ]
-    },
-    {
       quote: "C3 lleva más de 6 años manejando mi presencia digital. Me recuperaron mi perfil de Google, lo verificaron y optimizaron más de 500 fotos que yo subía repetidas porque Google no me las aprobaba. Ahora tengo mi website y mi perfil funcionando perfectamente, recibiendo proyectos constantemente gracias a mi fuerte presencia digital.",
       name: "Octavio Claudio",
       business: "Bajascape LLC",
@@ -101,17 +79,6 @@ const TestimonialsSection = () => {
         "Accesos recuperados al 100%",
         "Perfil verificado y optimizado",
         "Visitas al perfil y web se dispararon"
-      ]
-    },
-    {
-      quote: "Lo mejor es que todo es mío. No estoy pagando rentas eternas por algo que nunca voy a poseer. Invertí una vez y ahora tengo mi sistema trabajando 24/7.",
-      name: "Miguel Hernández",
-      business: "Hernández Construction",
-      location: "Santa Maria, CA",
-      results: [
-        "Presencia digital completa",
-        "Website + GBP optimizado",
-        "Sin mensualidades obligatorias"
       ]
     }
   ];
