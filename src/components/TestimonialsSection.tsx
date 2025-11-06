@@ -49,6 +49,17 @@ const TestimonialsSection = () => {
       ]
     },
     {
+      quote: "Estaba frustrado tras perder dinero en websites y agencias que me ofrecían resultados y ninguna me entregó lo prometido. Contraté a C3 y desde la primera semana me entregaron resultados. La agencia anterior ni siquiera pudo verificar mi perfil, no tenía mi número de teléfono correcto. C3 optimizó todo mi perfil de Google, renovó mi website y desde entonces mis números no paran de crecer.",
+      name: "Jose Valdovinos",
+      business: "Valdovinos Services",
+      location: "California",
+      results: [
+        "Resultados desde la primera semana",
+        "Perfil verificado y optimizado",
+        "Números creciendo constantemente"
+      ]
+    },
+    {
       quote: "Antes perdía contratos porque no aparecía en Google. Ahora mi perfil está verificado y mi website se ve tan profesional como la competencia grande.",
       name: "Juan Martínez",
       business: "Martinez Landscaping",
