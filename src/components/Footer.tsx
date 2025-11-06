@@ -1,4 +1,4 @@
-import c3Logo from "@/assets/logos/c3white200x200.svg";
+import c3Logo from "@/assets/logos/c3Verticalorange200x200.svg";
 import { Mail, Globe, Phone, MapPin } from "lucide-react";
 
 const Footer = () => {
@@ -21,8 +21,8 @@ const Footer = () => {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-12 sm:gap-16 mb-12">
           {/* Column 1: Logo + Tagline */}
           <div>
-            <div className="bg-gradient-to-br from-primary to-primary/80 rounded-2xl p-4 w-fit mb-6 shadow-xl">
-              <img src={c3Logo} alt="C3 Marketing" className="h-14 sm:h-16 w-auto" />
+            <div className="w-fit mb-6">
+              <img src={c3Logo} alt="C3 Local Business Marketing" className="h-20 sm:h-24 w-auto rounded-lg shadow-xl" />
             </div>
             <p className="text-xl sm:text-2xl font-bold mb-4 leading-tight">
               De invisible a visible. <span className="text-secondary">En 90 días.</span>
@@ -40,16 +40,16 @@ const Footer = () => {
                 <div className="h-10 w-10 rounded-lg bg-white/10 flex items-center justify-center group-hover:bg-secondary transition-colors">
                   <Mail className="h-5 w-5" />
                 </div>
-                <a href="mailto:inf@c3marketinghub.com" className="hover:text-secondary transition-colors text-base sm:text-lg font-medium">
-                  inf@c3marketinghub.com
+                <a href="mailto:info@c3localmarketing.com" className="hover:text-secondary transition-colors text-base sm:text-lg font-medium">
+                  info@c3localmarketing.com
                 </a>
               </li>
               <li className="flex items-center gap-4 group">
                 <div className="h-10 w-10 rounded-lg bg-white/10 flex items-center justify-center group-hover:bg-secondary transition-colors">
                   <Phone className="h-5 w-5" />
                 </div>
-                <a href="tel:+18056310946" className="hover:text-secondary transition-colors text-base sm:text-lg font-medium">
-                  (805) 631-0946
+                <a href="tel:+18056310949" className="hover:text-secondary transition-colors text-base sm:text-lg font-medium">
+                  (805) 631-0949
                 </a>
               </li>
               <li className="flex items-start gap-4">

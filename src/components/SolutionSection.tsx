@@ -36,9 +36,22 @@ const SolutionSection = () => {
             El sistema que convierte tu negocio en un imán de clientes locales
           </p>
           
-          <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed">
+          <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed mb-8">
             No vendemos "servicios de marketing digital" genéricos. Implementamos un sistema específico probado con más de 10 negocios de servicios hispanos en California.
           </p>
+
+          <div className="bg-gradient-to-br from-primary/10 to-secondary/10 rounded-2xl p-8 border-2 border-primary/30">
+            <p className="text-xl sm:text-2xl font-bold mb-4">
+              Especializados en <span className="text-primary">Home Business Services</span>
+            </p>
+            <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
+              {['Roofing', 'Landscaping', 'HVAC', 'Plumbing', 'Electrical', 'Construction', 'Painting', 'Remodeling'].map((service, i) => (
+                <span key={i} className="bg-background px-4 py-2 rounded-lg font-semibold text-sm sm:text-base border-2 border-primary/20 hover:border-primary/50 transition-colors">
+                  {service}
+                </span>
+              ))}
+            </div>
+          </div>
         </div>
 
         {/* Why It Works */}

@@ -1,6 +1,6 @@
 import { Card } from "@/components/ui/card";
 import paso1 from "@/assets/generated/08_paso1_fundacion_digital.png";
-import paso2 from "@/assets/generated/09_paso2_magnetizacion_local.png";
+import paso2 from "@/assets/generated/09_paso2_magnetizacion_local_new.png";
 import paso3 from "@/assets/generated/10_paso3_confianza_visual.png";
 import paso4 from "@/assets/generated/11_paso4_activacion_247.png";
 
@@ -83,7 +83,7 @@ const StepsSection = () => {
         <div className="space-y-16 sm:space-y-24 max-w-6xl mx-auto">
           {steps.map((step, index) => (
             <Card key={index} className="overflow-hidden border-2 hover:shadow-2xl transition-all">
-              <div className={`grid lg:grid-cols-2 gap-0 ${index % 2 === 1 ? 'lg:grid-flow-dense' : ''}`}>
+              <div className="grid lg:grid-cols-2 gap-0">
                 {/* Content */}
                 <div className="p-8 sm:p-12 lg:p-16 relative bg-background">
                   <div className="text-[120px] sm:text-[140px] font-bold text-muted/10 absolute top-0 right-8 select-none leading-none">
@@ -120,7 +120,7 @@ const StepsSection = () => {
                 </div>
                 
                 {/* Image */}
-                <div className={`${index % 2 === 1 ? 'lg:col-start-1' : ''} min-h-[500px] lg:min-h-[600px] bg-muted`}>
+                <div className="min-h-[500px] lg:min-h-[600px] bg-muted">
                   <img 
                     src={step.image} 
                     alt={`Paso ${step.number}: ${step.title}`}

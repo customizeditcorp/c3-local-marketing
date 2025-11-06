@@ -1,7 +1,19 @@
 import { Card } from "@/components/ui/card";
 import { Quote, MapPin } from "lucide-react";
+import { useEffect } from "react";
 
 const TestimonialsSection = () => {
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://elfsightcdn.com/platform.js';
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      const scripts = document.querySelectorAll('script[src="https://elfsightcdn.com/platform.js"]');
+      scripts.forEach(s => s.remove());
+    };
+  }, []);
   const testimonials = [
     {
       quote: "Antes perdía contratos porque no aparecía en Google. Ahora mi perfil está verificado y mi website se ve tan profesional como la competencia grande.",
@@ -81,6 +93,13 @@ const TestimonialsSection = () => {
               </div>
             </Card>
           ))}
+        </div>
+
+        {/* Google Reviews Widget */}
+        <div className="max-w-5xl mx-auto mt-16">
+          <Card className="p-8 sm:p-12 border-2">
+            <div className="elfsight-app-ca4a2a87-be2a-4c74-8b7e-2f02e19c2c53" data-elfsight-app-lazy></div>
+          </Card>
         </div>
       </div>
     </section>
