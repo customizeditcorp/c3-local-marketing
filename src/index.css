@@ -42,19 +42,19 @@ All colors MUST be HSL.
     --c3-gray-border: 0 0% 61%; /* #9C9C9B - Border Gray */
     
     --background: 0 0% 100%;
-    --foreground: 0 0% 36%; /* C3 Gray Dark for text */
+    --foreground: 222.2 84% 10%; /* Texto más oscuro para mejor contraste */
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 36%;
+    --card-foreground: 222.2 84% 10%;
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 36%;
+    --popover-foreground: 222.2 84% 10%;
     --primary: 9 84% 54%; /* C3 Red */
     --primary-foreground: 0 0% 100%;
     --secondary: 41 96% 54%; /* C3 Yellow */
-    --secondary-foreground: 0 0% 36%;
-    --muted: 0 0% 93%; /* Light gray for subtle backgrounds */
-    --muted-foreground: 0 0% 36%;
+    --secondary-foreground: 222.2 84% 10%;
+    --muted: 210 40% 96%; /* Fondo más contrastado para secciones alternas */
+    --muted-foreground: 215.4 16.3% 35%; /* Texto más oscuro en secciones muted */
     --accent: 41 96% 54%; /* C3 Yellow */
-    --accent-foreground: 0 0% 36%;
+    --accent-foreground: 222.2 84% 10%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
     --border: 0 0% 61%; /* C3 Border Gray */
