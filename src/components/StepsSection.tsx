@@ -120,11 +120,11 @@ const StepsSection = () => {
                 </div>
                 
                 {/* Image */}
-                <div className={`${index % 2 === 1 ? 'lg:col-start-1' : ''} min-h-[400px]`}>
+                <div className={`${index % 2 === 1 ? 'lg:col-start-1' : ''} min-h-[500px] lg:min-h-[600px] bg-muted`}>
                   <img 
                     src={step.image} 
                     alt={`Paso ${step.number}: ${step.title}`}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover object-center"
                   />
                 </div>
               </div>
