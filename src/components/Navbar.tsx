@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import c3Logo from "@/assets/logos/c3white200x200.svg";
+import c3Logo from "@/assets/logos/c3Verticalorange200x200.svg";
 
 const Navbar = () => {
   const scrollToContact = () => {
@@ -12,13 +12,11 @@ const Navbar = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20 sm:h-24">
           <div className="flex-shrink-0">
-            <div className="bg-gradient-to-br from-primary to-primary/80 rounded-xl p-4 sm:p-5 shadow-lg hover:shadow-xl transition-shadow">
-              <img 
-                src={c3Logo} 
-                alt="C3 Marketing" 
-                className="h-14 sm:h-16 lg:h-20 w-auto"
-              />
-            </div>
+            <img 
+              src={c3Logo} 
+              alt="C3 Local Business Marketing" 
+              className="h-16 sm:h-20 lg:h-24 w-auto rounded-lg shadow-lg hover:shadow-xl transition-shadow"
+            />
           </div>
           <Button 
             onClick={scrollToContact}
