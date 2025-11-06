@@ -27,6 +27,17 @@ const TestimonialsSection = () => {
       ]
     },
     {
+      quote: "Pagué por más de un año a esas empresas que llaman ofreciendo GBP y website. Cuando dejé de pagar, mi perfil quedó cerrado temporalmente. Nunca pusieron mi número de teléfono, no recibí ni una llamada y perdí el dominio de mi website porque querían que pagara más para recuperarla. C3 me recuperó al 100% todos mis activos digitales.",
+      name: "Lorenzo",
+      business: "Lorenzo's Plumbing",
+      location: "California",
+      results: [
+        "100% de sus activos recuperados",
+        "Perfil reactivado con información correcta",
+        "Ahora es dueño de todo"
+      ]
+    },
+    {
       quote: "Antes perdía contratos porque no aparecía en Google. Ahora mi perfil está verificado y mi website se ve tan profesional como la competencia grande.",
       name: "Juan Martínez",
       business: "Martinez Landscaping",
