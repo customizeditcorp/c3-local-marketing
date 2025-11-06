@@ -19,7 +19,7 @@ const VideoTestimonialSection = () => {
             <div className="aspect-video bg-muted relative group">
               <iframe
                 className="w-full h-full"
-                src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
+                src="https://www.youtube.com/embed/0necdQ-wcTo"
                 title="Testimonio de Cliente - Santa Maria"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
