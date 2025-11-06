@@ -51,7 +51,7 @@ const TestimonialsSection = () => {
     {
       quote: "Estaba frustrado tras perder dinero en websites y agencias que me ofrecían resultados y ninguna me entregó lo prometido. Contraté a C3 y desde la primera semana me entregaron resultados. La agencia anterior ni siquiera pudo verificar mi perfil, no tenía mi número de teléfono correcto. C3 optimizó todo mi perfil de Google, renovó mi website y desde entonces mis números no paran de crecer.",
       name: "Jose Valdovinos",
-      business: "Valdovinos Services",
+      business: "JV Roofing INC",
       location: "California",
       results: [
         "Resultados desde la primera semana",
