@@ -1,6 +1,7 @@
 import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Award, ShieldCheck, TrendingUp } from "lucide-react";
+import googleBusinessProfile from "@/assets/logos/google-business-profile.webp";
+import smvcLogo from "@/assets/logos/smvc.png";
+import sello20Anos from "@/assets/logos/sello-20-anios-experiencia.webp";
 
 const LogosSection = () => {
   return (
@@ -16,29 +17,34 @@ const LogosSection = () => {
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <Card className="p-6 flex flex-col items-center justify-center text-center hover:shadow-xl transition-all border-2">
-              <Award className="h-16 w-16 text-primary mb-4" />
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <Card className="p-8 flex flex-col items-center justify-center text-center hover:shadow-xl transition-all border-2 min-h-[280px]">
+              <img 
+                src={smvcLogo} 
+                alt="Santa Maria Valley Chamber" 
+                className="h-32 w-auto mb-6 object-contain"
+              />
               <h4 className="font-bold text-lg mb-2">Cámara de Comercio</h4>
               <p className="text-sm text-muted-foreground">Miembro Certificado</p>
             </Card>
 
-            <Card className="p-6 flex flex-col items-center justify-center text-center hover:shadow-xl transition-all border-2">
-              <ShieldCheck className="h-16 w-16 text-primary mb-4" />
-              <Badge className="mb-3 text-base px-4 py-2">Google Partner</Badge>
-              <p className="text-sm text-muted-foreground">Especialistas Certificados</p>
+            <Card className="p-8 flex flex-col items-center justify-center text-center hover:shadow-xl transition-all border-2 min-h-[280px]">
+              <img 
+                src={googleBusinessProfile} 
+                alt="Google Business Profile Partner" 
+                className="h-32 w-auto mb-6 object-contain"
+              />
+              <p className="text-sm text-muted-foreground font-semibold">Especialistas Certificados</p>
             </Card>
 
-            <Card className="p-6 flex flex-col items-center justify-center text-center hover:shadow-xl transition-all border-2">
-              <TrendingUp className="h-16 w-16 text-primary mb-4" />
-              <h4 className="font-bold text-lg mb-2">SEO Local Expert</h4>
-              <p className="text-sm text-muted-foreground">Resultados Comprobados</p>
-            </Card>
-
-            <Card className="p-6 flex flex-col items-center justify-center text-center hover:shadow-xl transition-all border-2">
-              <Award className="h-16 w-16 text-primary mb-4" />
-              <h4 className="font-bold text-lg mb-2">Small Business</h4>
-              <p className="text-sm text-muted-foreground">Enfoque Especializado</p>
+            <Card className="p-8 flex flex-col items-center justify-center text-center hover:shadow-xl transition-all border-2 min-h-[280px]">
+              <img 
+                src={sello20Anos} 
+                alt="20 años de experiencia" 
+                className="h-32 w-auto mb-6 object-contain"
+              />
+              <h4 className="font-bold text-lg mb-2">Experiencia Comprobada</h4>
+              <p className="text-sm text-muted-foreground">Más de 20 años en el mercado</p>
             </Card>
           </div>
         </div>

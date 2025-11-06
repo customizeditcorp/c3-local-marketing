@@ -42,12 +42,21 @@ const PricingSection = () => {
             <div className="bg-gradient-to-r from-primary to-primary/90 text-primary-foreground p-10 sm:p-16 text-center">
               <h3 className="text-3xl sm:text-4xl font-bold mb-6">Sistema Imán Local™ Completo</h3>
               <div className="mb-6">
-                <div className="flex items-baseline justify-center gap-2">
-                  <span className="text-6xl sm:text-7xl lg:text-8xl font-bold">$2,800</span>
+                <div className="flex items-baseline justify-center gap-3 mb-2">
+                  <span className="text-3xl sm:text-4xl font-bold line-through opacity-70">$4,000</span>
                 </div>
-                <p className="text-xl sm:text-2xl mt-4 font-semibold">Pago único - Todo incluido</p>
+                <div className="flex items-baseline justify-center gap-2 mb-6">
+                  <span className="text-6xl sm:text-7xl lg:text-8xl font-bold">$3,300</span>
+                </div>
+                <div className="space-y-4 max-w-2xl mx-auto">
+                  <p className="text-xl sm:text-2xl font-semibold border-t border-primary-foreground/30 pt-6">Opciones de Pago:</p>
+                  <div className="space-y-3 text-lg sm:text-xl">
+                    <p className="font-semibold">✓ Pago completo: $3,135 (5% descuento)</p>
+                    <p className="font-semibold">✓ 3 pagos mensuales: $1,100 cada uno</p>
+                  </div>
+                </div>
               </div>
-              <p className="text-lg sm:text-xl opacity-95">90 días de implementación completa</p>
+              <p className="text-lg sm:text-xl opacity-95 mt-6">90 días de implementación completa</p>
             </div>
 
             <div className="p-8 sm:p-12 lg:p-16">
@@ -90,7 +99,7 @@ const PricingSection = () => {
                   <p className="font-bold text-xl">⏰ CONDICIÓN ESPECIAL:</p>
                   <p>Solo disponible para los primeros 10 negocios de servicios que inicien este mes.</p>
                   <p className="text-base">
-                    <strong>¿Por qué esta limitación?</strong> Solo podemos manejar la implementación de 10 negocios simultáneamente para garantizar calidad y atención personalizada. Después de estos 10 espacios, el precio base aumenta a $3,800.
+                    <strong>¿Por qué esta limitación?</strong> Solo podemos manejar la implementación de 10 negocios simultáneamente para garantizar calidad y atención personalizada. Después de estos 10 espacios, el precio vuelve a $4,000.
                   </p>
                 </AlertDescription>
               </Alert>

@@ -1,7 +1,17 @@
 import { Card } from "@/components/ui/card";
-import { Star } from "lucide-react";
+import { useEffect } from "react";
 
 const ReviewsSection = () => {
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://elfsightcdn.com/platform.js';
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
   return (
     <section className="py-20 sm:py-32 bg-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -16,54 +26,7 @@ const ReviewsSection = () => {
 
         <div className="max-w-5xl mx-auto">
           <Card className="p-8 sm:p-12 border-2">
-            <div className="flex items-center justify-center gap-2 mb-8">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="h-10 w-10 fill-primary text-primary" />
-              ))}
-            </div>
-            
-            <div className="text-center mb-10">
-              <p className="text-5xl sm:text-6xl font-bold mb-2">5.0</p>
-              <p className="text-xl text-muted-foreground font-semibold">Basado en reseñas de Google</p>
-            </div>
-
-            <div className="space-y-6">
-              <div className="border-l-4 border-primary pl-6 py-4">
-                <div className="flex items-center gap-2 mb-3">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-5 w-5 fill-primary text-primary" />
-                  ))}
-                </div>
-                <p className="text-lg italic mb-3 leading-relaxed">
-                  "Excelente servicio, muy profesional y atento a los detalles. Transformaron completamente nuestra presencia digital."
-                </p>
-                <p className="font-bold">- Cliente de Google Business</p>
-              </div>
-
-              <div className="border-l-4 border-primary pl-6 py-4">
-                <div className="flex items-center gap-2 mb-3">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-5 w-5 fill-primary text-primary" />
-                  ))}
-                </div>
-                <p className="text-lg italic mb-3 leading-relaxed">
-                  "El equipo de C3 superó nuestras expectativas. Ahora recibimos llamadas de clientes que nos encuentran en Google."
-                </p>
-                <p className="font-bold">- Cliente de Google Business</p>
-              </div>
-
-              <div className="border-l-4 border-primary pl-6 py-4">
-                <div className="flex items-center gap-2 mb-3">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-5 w-5 fill-primary text-primary" />
-                  ))}
-                </div>
-                <p className="text-lg italic mb-3 leading-relaxed">
-                  "Inversión que valió totalmente la pena. El sistema funciona solo y ya estamos viendo resultados reales."
-                </p>
-                <p className="font-bold">- Cliente de Google Business</p>
-              </div>
-            </div>
+            <div className="elfsight-app-ca4a2a87-be2a-4c74-8b7e-2f02e19c2c53" data-elfsight-app-lazy></div>
           </Card>
         </div>
       </div>
