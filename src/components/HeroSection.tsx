@@ -1,24 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Phone, ArrowDown } from "lucide-react";
-import { Card } from "@/components/ui/card";
-import { useEffect } from "react";
 import heroImage from "@/assets/generated/02_luis_tablet_gbp_CORRECTED.png";
 import badge100 from "@/assets/generated/12_badge_100_tuyo.png";
 import badge90 from "@/assets/generated/13_badge_90_dias.png";
 import badgeSin from "@/assets/generated/14_badge_sin_ataduras.png";
 
 const HeroSection = () => {
-  useEffect(() => {
-    const script = document.createElement('script');
-    script.src = 'https://elfsightcdn.com/platform.js';
-    script.async = true;
-    document.body.appendChild(script);
-
-    return () => {
-      const scripts = document.querySelectorAll('script[src="https://elfsightcdn.com/platform.js"]');
-      scripts.forEach(s => s.remove());
-    };
-  }, []);
   const scrollToHowItWorks = () => {
     const element = document.getElementById('como-funciona');
     element?.scrollIntoView({ behavior: 'smooth' });
@@ -77,13 +64,6 @@ const HeroSection = () => {
                 alt="Profesional mostrando Google Business Profile" 
                 className="relative w-full h-auto rounded-3xl shadow-2xl hover:shadow-primary/20 transition-shadow"
               />
-            </div>
-
-            {/* Google Reviews Widget */}
-            <div className="mt-12">
-              <Card className="p-6 sm:p-8 border-2">
-                <div className="elfsight-app-ca4a2a87-be2a-4c74-8b7e-2f02e19c2c53" data-elfsight-app-lazy></div>
-              </Card>
             </div>
           </div>
         </div>
