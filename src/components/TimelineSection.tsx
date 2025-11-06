@@ -69,9 +69,9 @@ const TimelineSection = () => {
         <div className="space-y-16 sm:space-y-24 max-w-6xl mx-auto">
           {timeline.map((phase, index) => (
             <Card key={index} className="overflow-hidden border-2 hover:shadow-2xl transition-all">
-              <div className={`grid lg:grid-cols-2 gap-0 ${index % 2 === 1 ? 'lg:grid-flow-dense' : ''}`}>
+              <div className="grid lg:grid-cols-2 gap-0">
                 {/* Content */}
-                <div className="p-8 sm:p-12 lg:p-16 bg-background">
+                <div className={`p-8 sm:p-12 lg:p-16 bg-background ${index % 2 === 1 ? 'lg:order-2' : ''}`}>
                   <div className="flex items-center gap-5 mb-8">
                     <Badge className={`${phase.badgeColor} text-base sm:text-lg px-5 py-2 font-bold`}>
                       {phase.month}
@@ -101,7 +101,7 @@ const TimelineSection = () => {
                 </div>
                 
                 {/* Image */}
-                <div className={`${index % 2 === 1 ? 'lg:col-start-1' : ''} min-h-[500px] lg:min-h-[600px] bg-muted`}>
+                <div className={`min-h-[500px] lg:min-h-[600px] bg-muted ${index % 2 === 1 ? 'lg:order-1' : ''}`}>
                   <img 
                     src={phase.image} 
                     alt={`Timeline ${phase.title}`}

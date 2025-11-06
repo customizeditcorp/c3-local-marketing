@@ -16,6 +16,17 @@ const TestimonialsSection = () => {
   }, []);
   const testimonials = [
     {
+      quote: "Tenía mi perfil de Google Business pero no podía acceder. Un amigo me ayudó al inicio pero después no pude actualizarlo. No podía pedir reviews, mi teléfono estaba desactualizado, mis redes tampoco eran correctas. C3 recuperó mi perfil, lo optimizamos juntos y ahora está verificado y funcionando perfecto.",
+      name: "Loe Sepulveda",
+      business: "Cali Painting",
+      location: "California",
+      results: [
+        "Perfil recuperado y verificado",
+        "Toda la información actualizada",
+        "Sistema de reviews activado"
+      ]
+    },
+    {
       quote: "Antes perdía contratos porque no aparecía en Google. Ahora mi perfil está verificado y mi website se ve tan profesional como la competencia grande.",
       name: "Juan Martínez",
       business: "Martinez Landscaping",

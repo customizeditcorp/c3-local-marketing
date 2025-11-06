@@ -42,7 +42,7 @@ const SolutionSection = () => {
 
           <div className="bg-gradient-to-br from-primary/10 to-secondary/10 rounded-2xl p-8 border-2 border-primary/30">
             <p className="text-xl sm:text-2xl font-bold mb-4">
-              Especializados en <span className="text-primary">Home Business Services</span>
+              Especializados en <span className="text-primary">Home Service Business</span>
             </p>
             <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
               {['Roofing', 'Landscaping', 'HVAC', 'Plumbing', 'Electrical', 'Construction', 'Painting', 'Remodeling'].map((service, i) => (
