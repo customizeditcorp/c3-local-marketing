@@ -12,11 +12,11 @@ const Navbar = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20 sm:h-24">
           <div className="flex-shrink-0">
-            <div className="bg-gradient-to-br from-primary to-primary/80 rounded-xl p-3 shadow-lg hover:shadow-xl transition-shadow">
+            <div className="bg-gradient-to-br from-primary to-primary/80 rounded-xl p-4 sm:p-5 shadow-lg hover:shadow-xl transition-shadow">
               <img 
                 src={c3Logo} 
                 alt="C3 Marketing" 
-                className="h-10 sm:h-12 w-auto"
+                className="h-14 sm:h-16 lg:h-20 w-auto"
               />
             </div>
           </div>
