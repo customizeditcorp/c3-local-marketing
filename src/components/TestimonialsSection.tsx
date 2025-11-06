@@ -130,6 +130,9 @@ const TestimonialsSection = () => {
 
         {/* Google Reviews Widget */}
         <div className="max-w-5xl mx-auto mt-16">
+          <h3 className="text-3xl sm:text-4xl font-bold mb-8 text-center">
+            Lo Que Dicen Nuestros Clientes
+          </h3>
           <Card className="p-8 sm:p-12 border-2">
             <div className="elfsight-app-ca4a2a87-be2a-4c74-8b7e-2f02e19c2c53" data-elfsight-app-lazy></div>
           </Card>
