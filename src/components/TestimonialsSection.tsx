@@ -39,36 +39,41 @@ const TestimonialsSection = () => {
   ];
 
   return (
-    <section className="py-12 sm:py-20 bg-background">
+    <section className="py-20 sm:py-32 bg-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-8 sm:mb-16 text-center">
-          Resultados Reales de Negocios Como el Tuyo
-        </h2>
+        <div className="max-w-4xl mx-auto text-center mb-16 sm:mb-20">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+            Resultados <span className="text-primary">Reales</span> de Negocios Como el Tuyo
+          </h2>
+          <p className="text-xl text-muted-foreground">
+            De invisible a imparable, así como lo harás tú
+          </p>
+        </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
           {testimonials.map((testimonial, index) => (
-            <Card key={index} className="p-6 sm:p-8 hover:shadow-lg transition-shadow">
-              <Quote className="h-10 w-10 text-primary/20 mb-4" />
+            <Card key={index} className="p-8 sm:p-10 hover:shadow-2xl hover:scale-105 transition-all border-2 hover:border-primary/50 bg-gradient-to-br from-background to-muted/20">
+              <Quote className="h-14 w-14 text-primary/30 mb-6" />
               
-              <p className="text-base sm:text-lg mb-6 italic text-muted-foreground">
+              <p className="text-base sm:text-lg mb-8 italic text-foreground leading-relaxed font-medium">
                 "{testimonial.quote}"
               </p>
               
-              <div className="mb-4">
-                <p className="font-bold text-base sm:text-lg">{testimonial.name}</p>
-                <p className="text-sm sm:text-base text-muted-foreground">{testimonial.business}</p>
-                <p className="text-sm flex items-center gap-1 text-muted-foreground mt-1">
+              <div className="mb-6">
+                <p className="font-bold text-lg sm:text-xl mb-1">{testimonial.name}</p>
+                <p className="text-base text-muted-foreground font-semibold">{testimonial.business}</p>
+                <p className="text-sm flex items-center gap-2 text-muted-foreground mt-2">
                   <MapPin className="h-4 w-4" />
                   {testimonial.location}
                 </p>
               </div>
               
-              <div className="border-t pt-4">
-                <p className="font-semibold mb-2 text-sm sm:text-base">Resultado:</p>
-                <ul className="space-y-1">
+              <div className="border-t-2 border-primary/20 pt-6">
+                <p className="font-bold mb-4 text-base sm:text-lg">Resultado:</p>
+                <ul className="space-y-3">
                   {testimonial.results.map((result, i) => (
-                    <li key={i} className="text-sm flex items-start gap-2">
-                      <span className="text-primary">•</span>
+                    <li key={i} className="text-sm sm:text-base flex items-start gap-3 leading-relaxed">
+                      <span className="text-primary text-xl leading-none">•</span>
                       <span>{result}</span>
                     </li>
                   ))}

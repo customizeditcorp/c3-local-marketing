@@ -55,48 +55,53 @@ const TimelineSection = () => {
   ];
 
   return (
-    <section className="py-12 sm:py-20 bg-muted">
+    <section className="py-20 sm:py-32 bg-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-8 sm:mb-16 text-center">
-          Tu Transformación en 90 Días
-        </h2>
+        <div className="max-w-4xl mx-auto text-center mb-16 sm:mb-20">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+            Tu <span className="text-primary">Transformación</span> en <span className="text-secondary">90 Días</span>
+          </h2>
+          <p className="text-xl text-muted-foreground">
+            De invisible a imparable, paso a paso
+          </p>
+        </div>
 
-        <div className="space-y-8 sm:space-y-16 max-w-6xl mx-auto">
+        <div className="space-y-16 sm:space-y-24 max-w-6xl mx-auto">
           {timeline.map((phase, index) => (
-            <Card key={index} className="overflow-hidden">
-              <div className={`grid lg:grid-cols-2 gap-6 sm:gap-8 ${index % 2 === 1 ? 'lg:grid-flow-dense' : ''}`}>
+            <Card key={index} className="overflow-hidden border-2 hover:shadow-2xl transition-all">
+              <div className={`grid lg:grid-cols-2 gap-0 ${index % 2 === 1 ? 'lg:grid-flow-dense' : ''}`}>
                 {/* Content */}
-                <div className="p-6 sm:p-8 lg:p-10">
-                  <div className="flex items-center gap-4 mb-4 sm:mb-6">
-                    <Badge className={`${phase.badgeColor} text-sm sm:text-base px-3 sm:px-4 py-1 sm:py-2`}>
+                <div className="p-8 sm:p-12 lg:p-16 bg-background">
+                  <div className="flex items-center gap-5 mb-8">
+                    <Badge className={`${phase.badgeColor} text-base sm:text-lg px-5 py-2 font-bold`}>
                       {phase.month}
                     </Badge>
-                    <span className="text-sm sm:text-base text-muted-foreground">Días {phase.badge}</span>
+                    <span className="text-base sm:text-lg text-muted-foreground font-semibold">Días {phase.badge}</span>
                   </div>
                   
-                  <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 sm:mb-6">
+                  <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-8 leading-tight">
                     {phase.title}
                   </h3>
                   
-                  <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
-                    <p className="font-semibold text-base sm:text-lg">Lo que {index === 2 ? 'entregas' : index === 1 ? 'optimizamos' : 'construimos'}:</p>
-                    <ul className="space-y-2 sm:space-y-3">
+                  <div className="space-y-6 mb-10">
+                    <p className="font-bold text-xl">Lo que {index === 2 ? 'entregas' : index === 1 ? 'optimizamos' : 'construimos'}:</p>
+                    <ul className="space-y-4">
                       {phase.items.map((item, i) => (
-                        <li key={i} className="flex items-start gap-3">
-                          <Check className="h-5 w-5 sm:h-6 sm:w-6 text-primary flex-shrink-0 mt-0.5" />
-                          <span className="text-sm sm:text-base">{item}</span>
+                        <li key={i} className="flex items-start gap-4">
+                          <Check className="h-7 w-7 text-primary flex-shrink-0 mt-0.5 stroke-[2.5]" />
+                          <span className="text-base sm:text-lg leading-relaxed">{item}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
                   
-                  <Card className={`p-4 sm:p-6 ${phase.resultColor}`}>
-                    <p className="text-sm sm:text-base lg:text-lg font-semibold">{phase.result}</p>
+                  <Card className={`p-6 sm:p-8 ${phase.resultColor} border-2`}>
+                    <p className="text-lg sm:text-xl font-bold leading-relaxed">{phase.result}</p>
                   </Card>
                 </div>
                 
                 {/* Image */}
-                <div className={`${index % 2 === 1 ? 'lg:col-start-1' : ''}`}>
+                <div className={`${index % 2 === 1 ? 'lg:col-start-1' : ''} min-h-[400px]`}>
                   <img 
                     src={phase.image} 
                     alt={`Timeline ${phase.title}`}

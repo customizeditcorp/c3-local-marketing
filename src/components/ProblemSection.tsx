@@ -56,56 +56,61 @@ const ProblemSection = () => {
   ];
 
   return (
-    <section className="py-12 sm:py-20 bg-muted">
+    <section className="py-20 sm:py-32 bg-muted/50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 text-center">
-          ¿Por Qué Pierdes Clientes Cada Mes?
-        </h2>
-        
-        <p className="text-lg sm:text-xl text-center mb-8 sm:mb-12 max-w-3xl mx-auto text-muted-foreground">
-          La realidad dolorosa: estás perdiendo trabajos y contratos porque los clientes ya no contratan al primer número que encuentran.
-        </p>
+        {/* Bold Title */}
+        <div className="max-w-4xl mx-auto text-center mb-16 sm:mb-20">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+            ¿Por Qué <span className="text-primary">Pierdes Clientes</span> Cada Mes?
+          </h2>
+          
+          <p className="text-xl sm:text-2xl text-muted-foreground leading-relaxed">
+            La realidad dolorosa: estás perdiendo trabajos y contratos porque los clientes ya no contratan al primer número que encuentran.
+          </p>
+        </div>
 
         {/* Customer Decision Process */}
-        <div className="mb-8 sm:mb-12">
-          <h3 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-center">
+        <div className="mb-20">
+          <h3 className="text-3xl sm:text-4xl font-bold mb-10 text-center">
             El Nuevo Proceso de Decisión del Cliente
           </h3>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-10">
             {steps.map((step, index) => (
-              <Card key={index} className="p-6 hover:shadow-lg transition-shadow">
-                <step.icon className="h-10 w-10 sm:h-12 sm:w-12 text-primary mb-4" />
-                <h4 className="text-lg sm:text-xl font-bold mb-2">{step.title}</h4>
-                <p className="text-sm sm:text-base text-muted-foreground">{step.description}</p>
+              <Card key={index} className="p-8 hover:shadow-xl hover:scale-105 transition-all border-2 hover:border-primary/50">
+                <step.icon className="h-16 w-16 text-primary mb-6 stroke-[1.5]" />
+                <h4 className="text-xl sm:text-2xl font-bold mb-4 leading-tight">{step.title}</h4>
+                <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">{step.description}</p>
               </Card>
             ))}
           </div>
 
-          <Alert className="border-primary bg-primary/5 max-w-4xl mx-auto">
-            <AlertDescription className="text-base sm:text-lg font-semibold text-center">
+          <Alert className="border-primary bg-primary/5 max-w-4xl mx-auto border-2 p-8">
+            <AlertDescription className="text-lg sm:text-xl font-bold text-center leading-relaxed">
               💔 Si tu negocio no aparece o se ve desactualizado digitalmente, simplemente quedas fuera de la competencia.
             </AlertDescription>
           </Alert>
         </div>
 
         {/* Hidden Costs */}
-        <h3 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-center">
-          Los Costos Ocultos
-        </h3>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-          {costs.map((cost, index) => (
-            <Card key={index} className="p-6">
-              <h4 className="text-xl sm:text-2xl font-bold mb-4 text-primary">{cost.title}</h4>
-              <ul className="space-y-2">
-                {cost.points.map((point, i) => (
-                  <li key={i} className="flex items-start text-sm sm:text-base">
-                    <span className="text-primary mr-2">•</span>
-                    <span>{point}</span>
-                  </li>
-                ))}
-              </ul>
-            </Card>
-          ))}
+        <div className="max-w-5xl mx-auto">
+          <h3 className="text-3xl sm:text-4xl font-bold mb-10 text-center">
+            Los Costos Ocultos
+          </h3>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {costs.map((cost, index) => (
+              <Card key={index} className="p-8 border-2 hover:shadow-xl transition-shadow">
+                <h4 className="text-2xl sm:text-3xl font-bold mb-6 text-primary">{cost.title}</h4>
+                <ul className="space-y-4">
+                  {cost.points.map((point, i) => (
+                    <li key={i} className="flex items-start text-base sm:text-lg leading-relaxed">
+                      <span className="text-primary mr-3 text-2xl leading-none">•</span>
+                      <span>{point}</span>
+                    </li>
+                  ))}
+                </ul>
+              </Card>
+            ))}
+          </div>
         </div>
       </div>
     </section>

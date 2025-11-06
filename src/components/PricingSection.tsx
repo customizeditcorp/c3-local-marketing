@@ -25,74 +25,78 @@ const PricingSection = () => {
   ];
 
   return (
-    <section id="precio" className="py-12 sm:py-20 bg-background scroll-mt-20">
+    <section id="precio" className="py-20 sm:py-32 bg-background scroll-mt-20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 text-center">
-          Inversión Única
-        </h2>
-        
-        <p className="text-lg sm:text-xl text-center mb-8 sm:mb-12 max-w-3xl mx-auto text-muted-foreground">
-          Sin mensualidades eternas. Un solo pago, todo es tuyo.
-        </p>
+        <div className="max-w-4xl mx-auto text-center mb-16 sm:mb-20">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
+            Inversión <span className="text-primary">Única</span>
+          </h2>
+          
+          <p className="text-xl sm:text-2xl text-muted-foreground">
+            Sin mensualidades eternas. Un solo pago, todo es tuyo.
+          </p>
+        </div>
 
-        <div className="max-w-4xl mx-auto">
-          <Card className="overflow-hidden border-2 border-primary">
-            <div className="bg-primary text-primary-foreground p-6 sm:p-8 text-center">
-              <h3 className="text-2xl sm:text-3xl font-bold mb-4">Sistema Imán Local™ Completo</h3>
-              <div className="mb-4">
-                <span className="text-4xl sm:text-5xl lg:text-6xl font-bold">$2,800</span>
-                <p className="text-lg sm:text-xl mt-2">Pago único - Todo incluido</p>
+        <div className="max-w-5xl mx-auto">
+          <Card className="overflow-hidden border-4 border-primary shadow-2xl">
+            <div className="bg-gradient-to-r from-primary to-primary/90 text-primary-foreground p-10 sm:p-16 text-center">
+              <h3 className="text-3xl sm:text-4xl font-bold mb-6">Sistema Imán Local™ Completo</h3>
+              <div className="mb-6">
+                <div className="flex items-baseline justify-center gap-2">
+                  <span className="text-6xl sm:text-7xl lg:text-8xl font-bold">$2,800</span>
+                </div>
+                <p className="text-xl sm:text-2xl mt-4 font-semibold">Pago único - Todo incluido</p>
               </div>
-              <p className="text-base sm:text-lg opacity-90">90 días de implementación completa</p>
+              <p className="text-lg sm:text-xl opacity-95">90 días de implementación completa</p>
             </div>
 
-            <div className="p-6 sm:p-8 lg:p-10">
+            <div className="p-8 sm:p-12 lg:p-16">
               {/* What's Included */}
-              <div className="mb-8">
-                <h4 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">Qué Incluye:</h4>
-                <ul className="space-y-3 sm:space-y-4">
+              <div className="mb-12">
+                <h4 className="text-2xl sm:text-3xl font-bold mb-8">Qué Incluye:</h4>
+                <ul className="space-y-5">
                   {includes.map((item, index) => (
-                    <li key={index} className="flex items-start gap-3">
-                      <Check className="h-5 w-5 sm:h-6 sm:w-6 text-primary flex-shrink-0 mt-0.5" />
-                      <span className="text-sm sm:text-base">{item}</span>
+                    <li key={index} className="flex items-start gap-4">
+                      <Check className="h-7 w-7 text-primary flex-shrink-0 mt-0.5" />
+                      <span className="text-base sm:text-lg leading-relaxed">{item}</span>
                     </li>
                   ))}
                 </ul>
               </div>
 
               {/* What's NOT Included */}
-              <div className="mb-8">
-                <h4 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">Servicios Opcionales:</h4>
-                <ul className="space-y-3 sm:space-y-4">
+              <div className="mb-12">
+                <h4 className="text-2xl sm:text-3xl font-bold mb-8">Servicios Opcionales:</h4>
+                <ul className="space-y-5">
                   {notIncluded.map((item, index) => (
-                    <li key={index} className="flex items-start gap-3">
-                      <AlertCircle className="h-5 w-5 sm:h-6 sm:w-6 text-muted-foreground flex-shrink-0 mt-0.5" />
-                      <span className="text-sm sm:text-base text-muted-foreground">{item}</span>
+                    <li key={index} className="flex items-start gap-4">
+                      <AlertCircle className="h-7 w-7 text-muted-foreground flex-shrink-0 mt-0.5" />
+                      <span className="text-base sm:text-lg text-muted-foreground leading-relaxed">{item}</span>
                     </li>
                   ))}
                 </ul>
               </div>
 
               {/* Hosting Note */}
-              <div className="bg-muted p-4 sm:p-6 rounded-lg mb-8">
-                <p className="text-sm sm:text-base text-muted-foreground">
+              <div className="bg-muted p-6 sm:p-8 rounded-xl mb-12">
+                <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
                   <strong>Nota de Hosting:</strong> + Hosting Squarespace: ~$16-23/mes (pago directo al proveedor - eres dueño desde día 1)
                 </p>
               </div>
 
               {/* Urgency */}
-              <Alert className="bg-secondary/10 border-secondary mb-6 sm:mb-8">
-                <AlertDescription className="text-sm sm:text-base">
-                  <p className="font-bold mb-2">⏰ CONDICIÓN ESPECIAL:</p>
-                  <p className="mb-3">Solo disponible para los primeros 10 negocios de servicios que inicien este mes.</p>
-                  <p className="text-sm">
+              <Alert className="bg-secondary/10 border-secondary border-2 mb-10 p-8">
+                <AlertDescription className="text-base sm:text-lg space-y-4">
+                  <p className="font-bold text-xl">⏰ CONDICIÓN ESPECIAL:</p>
+                  <p>Solo disponible para los primeros 10 negocios de servicios que inicien este mes.</p>
+                  <p className="text-base">
                     <strong>¿Por qué esta limitación?</strong> Solo podemos manejar la implementación de 10 negocios simultáneamente para garantizar calidad y atención personalizada. Después de estos 10 espacios, el precio base aumenta a $3,800.
                   </p>
                 </AlertDescription>
               </Alert>
 
               {/* CTA */}
-              <Button size="lg" className="w-full text-base sm:text-lg py-6">
+              <Button size="lg" className="w-full text-xl py-8 shadow-lg hover:shadow-xl hover:scale-105 transition-all">
                 Agendar Llamada de Diagnóstico Gratuita
               </Button>
             </div>

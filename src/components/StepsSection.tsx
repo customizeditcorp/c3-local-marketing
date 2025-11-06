@@ -69,53 +69,58 @@ const StepsSection = () => {
   ];
 
   return (
-    <section className="py-12 sm:py-20 bg-muted">
+    <section className="py-20 sm:py-32 bg-muted/50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-8 sm:mb-16 text-center">
-          Los 4 Pasos del Sistema Imán Local™
-        </h2>
+        <div className="max-w-4xl mx-auto text-center mb-16 sm:mb-20">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+            Los 4 Pasos del <span className="text-primary">Sistema Imán Local™</span>
+          </h2>
+          <p className="text-xl text-muted-foreground">
+            Una metodología probada que transforma tu negocio
+          </p>
+        </div>
 
-        <div className="space-y-8 sm:space-y-16 max-w-6xl mx-auto">
+        <div className="space-y-16 sm:space-y-24 max-w-6xl mx-auto">
           {steps.map((step, index) => (
-            <Card key={index} className="overflow-hidden">
-              <div className={`grid lg:grid-cols-2 gap-6 sm:gap-8 ${index % 2 === 1 ? 'lg:grid-flow-dense' : ''}`}>
+            <Card key={index} className="overflow-hidden border-2 hover:shadow-2xl transition-all">
+              <div className={`grid lg:grid-cols-2 gap-0 ${index % 2 === 1 ? 'lg:grid-flow-dense' : ''}`}>
                 {/* Content */}
-                <div className="p-6 sm:p-8 lg:p-10 relative">
-                  <div className="text-8xl sm:text-9xl font-bold text-muted/20 absolute top-0 right-4 sm:right-8 select-none">
+                <div className="p-8 sm:p-12 lg:p-16 relative bg-background">
+                  <div className="text-[120px] sm:text-[140px] font-bold text-muted/10 absolute top-0 right-8 select-none leading-none">
                     {step.number}
                   </div>
                   
                   <div className="relative z-10">
-                    <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4">
+                    <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 leading-tight">
                       {step.title}
                     </h3>
                     
-                    <p className="text-base sm:text-lg lg:text-xl mb-6 sm:mb-8 text-primary font-semibold">
+                    <p className="text-xl sm:text-2xl mb-8 text-secondary font-semibold leading-relaxed">
                       {step.description}
                     </p>
                     
-                    <div className="mb-6 sm:mb-8">
-                      <p className="font-semibold mb-3 sm:mb-4 text-base sm:text-lg">Qué hacemos:</p>
-                      <ul className="space-y-2 sm:space-y-3">
+                    <div className="mb-8">
+                      <p className="font-bold mb-5 text-lg">Qué hacemos:</p>
+                      <ul className="space-y-4">
                         {step.items.map((item, i) => (
-                          <li key={i} className="flex items-start gap-3">
-                            <span className="text-primary mt-1">•</span>
-                            <span className="text-sm sm:text-base">{item}</span>
+                          <li key={i} className="flex items-start gap-4">
+                            <span className="text-primary mt-1 text-2xl leading-none">•</span>
+                            <span className="text-base sm:text-lg leading-relaxed">{item}</span>
                           </li>
                         ))}
                       </ul>
                     </div>
                     
-                    <div className="bg-primary/10 border-l-4 border-primary p-4 rounded">
-                      <p className="text-sm sm:text-base lg:text-lg font-semibold">
-                        {step.result}
+                    <div className="bg-gradient-to-r from-primary/10 to-secondary/10 border-l-4 border-primary p-6 rounded-lg">
+                      <p className="text-lg sm:text-xl font-bold">
+                        ✓ {step.result}
                       </p>
                     </div>
                   </div>
                 </div>
                 
                 {/* Image */}
-                <div className={`${index % 2 === 1 ? 'lg:col-start-1' : ''}`}>
+                <div className={`${index % 2 === 1 ? 'lg:col-start-1' : ''} min-h-[400px]`}>
                   <img 
                     src={step.image} 
                     alt={`Paso ${step.number}: ${step.title}`}

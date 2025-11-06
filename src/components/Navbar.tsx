@@ -8,22 +8,22 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white shadow-md border-b-2 border-primary/10">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 sm:h-20">
+        <div className="flex items-center justify-between h-20 sm:h-24">
           <div className="flex-shrink-0">
-            <div className="bg-primary rounded-lg p-2">
+            <div className="bg-gradient-to-br from-primary to-primary/80 rounded-xl p-3 shadow-lg hover:shadow-xl transition-shadow">
               <img 
                 src={c3Logo} 
                 alt="C3 Marketing" 
-                className="h-8 sm:h-10 w-auto"
+                className="h-10 sm:h-12 w-auto"
               />
             </div>
           </div>
           <Button 
             onClick={scrollToContact}
-            size="sm"
-            className="text-sm sm:text-base"
+            size="lg"
+            className="text-base sm:text-lg font-bold px-6 sm:px-8 shadow-lg hover:shadow-xl hover:scale-105 transition-all"
           >
             Agenda tu Auditoría Gratuita
           </Button>
