@@ -60,6 +60,28 @@ const TestimonialsSection = () => {
       ]
     },
     {
+      quote: "C3 lleva más de 6 años manejando mi presencia digital. Me recuperaron mi perfil de Google, lo verificaron y optimizaron más de 500 fotos que yo subía repetidas porque Google no me las aprobaba. Ahora tengo mi website y mi perfil funcionando perfectamente, recibiendo proyectos constantemente gracias a mi fuerte presencia digital.",
+      name: "Octavio Claudio",
+      business: "Bajascape LLC",
+      location: "California",
+      results: [
+        "Más de 6 años de relación exitosa",
+        "Perfil optimizado con 500+ fotos",
+        "Recibe proyectos constantemente"
+      ]
+    },
+    {
+      quote: "Teníamos nuestro perfil activo por años pero sin ningún acceso. C3 recuperó todos nuestros accesos, verificó nuestro negocio, optimizó el perfil y nos creó nuestra página web. Las visitas al perfil y a la web se dispararon completamente.",
+      name: "Destiny Castro",
+      business: "Transmission Exchange",
+      location: "California",
+      results: [
+        "Accesos recuperados al 100%",
+        "Perfil verificado y optimizado",
+        "Visitas al perfil y web se dispararon"
+      ]
+    },
+    {
       quote: "Lo mejor es que todo es mío. No estoy pagando rentas eternas por algo que nunca voy a poseer. Invertí una vez y ahora tengo mi sistema trabajando 24/7.",
       name: "Miguel Hernández",
       business: "Hernández Construction",
