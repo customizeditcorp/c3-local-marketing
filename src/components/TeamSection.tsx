@@ -3,7 +3,7 @@ import carlosImage from "@/assets/team/team_carlos_cordero.png";
 import juanImage from "@/assets/team/team_juan_arroyo.png";
 import mariaImage from "@/assets/team/team_maria_cordero.png";
 import luisImage from "@/assets/team/team_luis_arroyo.png";
-import { Linkedin, Mail } from "lucide-react";
+import { Mail } from "lucide-react";
 
 const TeamSection = () => {
   const team = [
@@ -84,14 +84,6 @@ const TeamSection = () => {
                 </p>
 
                 <div className="flex gap-3 pt-4 border-t border-border/50">
-                  <a 
-                    href={member.linkedin}
-                    className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
-                    aria-label={`LinkedIn de ${member.name}`}
-                  >
-                    <Linkedin className="h-4 w-4" />
-                    <span className="hidden sm:inline">LinkedIn</span>
-                  </a>
                   <a 
                     href={`mailto:${member.email}`}
                     className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
