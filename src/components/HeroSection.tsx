@@ -1,9 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { Phone, ArrowDown } from "lucide-react";
-import heroImage from "@/assets/generated/02_luis_tablet_gbp_CORRECTED.png";
-import badge100 from "@/assets/generated/12_badge_100_tuyo.png";
-import badge90 from "@/assets/generated/13_badge_90_dias.png";
-import badgeSin from "@/assets/generated/14_badge_sin_ataduras.png";
+import heroImage from "@/assets/generated/hero_luis_consulting.png";
+import badge100 from "@/assets/generated/12_badge_100_tuyo_new.png";
+import badge90 from "@/assets/generated/13_badge_90_dias_new.png";
+import badgeSin from "@/assets/generated/14_badge_sin_ataduras_new.png";
 
 const HeroSection = () => {
   const scrollToHowItWorks = () => {
