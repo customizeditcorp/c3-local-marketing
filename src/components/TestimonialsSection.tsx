@@ -95,30 +95,30 @@ const TestimonialsSection = () => {
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {testimonials.map((testimonial, index) => (
-            <Card key={index} className="p-8 sm:p-10 hover:shadow-2xl hover:scale-105 transition-all border-2 hover:border-primary/50 bg-gradient-to-br from-background to-muted/20">
-              <Quote className="h-14 w-14 text-primary/30 mb-6" />
+            <Card key={index} className="p-6 sm:p-7 hover:shadow-2xl hover:scale-105 transition-all border-2 hover:border-primary/50 bg-gradient-to-br from-background to-muted/20">
+              <Quote className="h-10 w-10 text-primary/30 mb-4" />
               
-              <p className="text-base sm:text-lg mb-8 italic text-foreground leading-relaxed font-medium">
+              <p className="text-sm sm:text-base mb-6 italic text-foreground leading-relaxed font-medium">
                 "{testimonial.quote}"
               </p>
               
-              <div className="mb-6">
-                <p className="font-bold text-lg sm:text-xl mb-1">{testimonial.name}</p>
-                <p className="text-base text-muted-foreground font-semibold">{testimonial.business}</p>
-                <p className="text-sm flex items-center gap-2 text-muted-foreground mt-2">
-                  <MapPin className="h-4 w-4" />
+              <div className="mb-5">
+                <p className="font-bold text-base sm:text-lg mb-1">{testimonial.name}</p>
+                <p className="text-sm text-muted-foreground font-semibold">{testimonial.business}</p>
+                <p className="text-xs flex items-center gap-2 text-muted-foreground mt-2">
+                  <MapPin className="h-3 w-3" />
                   {testimonial.location}
                 </p>
               </div>
               
-              <div className="border-t-2 border-primary/20 pt-6">
-                <p className="font-bold mb-4 text-base sm:text-lg">Resultado:</p>
-                <ul className="space-y-3">
+              <div className="border-t-2 border-primary/20 pt-5">
+                <p className="font-bold mb-3 text-sm sm:text-base">Resultado:</p>
+                <ul className="space-y-2">
                   {testimonial.results.map((result, i) => (
-                    <li key={i} className="text-sm sm:text-base flex items-start gap-3 leading-relaxed">
-                      <span className="text-primary text-xl leading-none">•</span>
+                    <li key={i} className="text-xs sm:text-sm flex items-start gap-2 leading-relaxed">
+                      <span className="text-primary text-lg leading-none">•</span>
                       <span>{result}</span>
                     </li>
                   ))}
@@ -130,7 +130,7 @@ const TestimonialsSection = () => {
 
         {/* Google Reviews Widget */}
         <div className="max-w-5xl mx-auto mt-16">
-          <h3 className="text-3xl sm:text-4xl font-bold mb-8 text-center">
+          <h3 className="text-3xl sm:text-4xl font-bold mb-16 text-center">
             Lo Que Dicen Nuestros Clientes
           </h3>
           <Card className="p-8 sm:p-12 border-2">
