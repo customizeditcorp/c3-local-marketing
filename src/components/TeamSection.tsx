@@ -2,7 +2,7 @@ import { Card } from "@/components/ui/card";
 import carlosImage from "@/assets/team/team_carlos_cordero.png";
 import juanImage from "@/assets/team/team_juan_arroyo.png";
 import mariaImage from "@/assets/team/team_maria_cordero.png";
-import luisImage from "@/assets/generated/hero_luis_consulting.png";
+import luisImage from "@/assets/team/team_luis_arroyo.png";
 import { Mail } from "lucide-react";
 
 const TeamSection = () => {
