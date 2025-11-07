@@ -64,11 +64,11 @@ const TeamSection = () => {
               className="group overflow-hidden hover:shadow-2xl transition-all hover:scale-105 border-2 hover:border-primary/50"
             >
               <div className="relative overflow-hidden">
-                <div className="aspect-square overflow-hidden bg-gradient-to-br from-primary/5 to-secondary/5">
+                <div className={`${member.name === 'Luis Arroyo' ? 'aspect-[4/5]' : 'aspect-square'} overflow-hidden bg-gradient-to-br from-primary/5 to-secondary/5`}>
                   <img 
                     src={member.image} 
                     alt={member.name} 
-                    className={`w-full h-full object-cover ${member.name === 'Luis Arroyo' ? 'object-left' : 'object-center'} group-hover:scale-110 transition-transform duration-500`}
+                    className={`w-full h-full object-cover ${member.name === 'Luis Arroyo' ? 'object-top' : 'object-center'} group-hover:scale-110 transition-transform duration-500`}
                   />
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
