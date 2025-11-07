@@ -14,14 +14,14 @@ const HeroSection = () => {
   return (
     <section className="pt-28 sm:pt-36 pb-16 sm:pb-24 min-h-screen flex items-center">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-[60%_40%] gap-12 lg:gap-16 items-center">
+        <div className="grid lg:grid-cols-[55%_45%] gap-12 lg:gap-16 items-center">
           {/* Content - Asymmetric Layout */}
           <div className="order-2 lg:order-1 space-y-8">
             {/* Badges - More Prominent */}
             <div className="flex flex-wrap gap-6 justify-center lg:justify-start">
-              <img src={badge100} alt="100% Tuyo" className="h-20 sm:h-24 lg:h-28 w-auto drop-shadow-lg hover:scale-105 transition-transform" />
-              <img src={badge90} alt="90 Días" className="h-20 sm:h-24 lg:h-28 w-auto drop-shadow-lg hover:scale-105 transition-transform" />
-              <img src={badgeSin} alt="Sin Ataduras" className="h-20 sm:h-24 lg:h-28 w-auto drop-shadow-lg hover:scale-105 transition-transform" />
+              <img src={badge100} alt="100% Tuyo" className="h-20 sm:h-24 lg:h-28 w-auto drop-shadow-[0_8px_16px_rgba(0,0,0,0.3)] hover:scale-105 transition-transform" />
+              <img src={badge90} alt="90 Días" className="h-20 sm:h-24 lg:h-28 w-auto drop-shadow-[0_8px_16px_rgba(0,0,0,0.3)] hover:scale-105 transition-transform" />
+              <img src={badgeSin} alt="Sin Ataduras" className="h-20 sm:h-24 lg:h-28 w-auto drop-shadow-[0_8px_16px_rgba(0,0,0,0.3)] hover:scale-105 transition-transform" />
             </div>
 
             {/* Bold Typography with Stronger Hierarchy */}
