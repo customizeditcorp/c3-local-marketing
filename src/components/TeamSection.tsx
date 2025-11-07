@@ -2,6 +2,7 @@ import { Card } from "@/components/ui/card";
 import carlosImage from "@/assets/team/team_carlos_cordero.png";
 import juanImage from "@/assets/team/team_juan_arroyo.png";
 import mariaImage from "@/assets/team/team_maria_cordero.png";
+import luisImage from "@/assets/team/team_luis_arroyo.png";
 import { Linkedin, Mail } from "lucide-react";
 
 const TeamSection = () => {
@@ -32,6 +33,15 @@ const TeamSection = () => {
       description: "Especialista en optimización de Google Business Profile y estrategias de retención de clientes para negocios locales.",
       linkedin: "#",
       email: "maria@c3marketing.com"
+    },
+    {
+      name: "Luis Arroyo",
+      role: "Asesor Comercial",
+      specialty: "Implementador IA",
+      image: luisImage,
+      description: "Experto en implementación de soluciones de inteligencia artificial y automatización para negocios locales. Asesor comercial especializado.",
+      linkedin: "#",
+      email: "luis@c3marketing.com"
     }
   ];
 
@@ -47,7 +57,7 @@ const TeamSection = () => {
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10 max-w-6xl mx-auto">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10 max-w-7xl mx-auto">
           {team.map((member, index) => (
             <Card 
               key={index} 
