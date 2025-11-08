@@ -1,9 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { Phone, ArrowDown } from "lucide-react";
+import { Phone, ArrowDown, Shield, Calendar, Zap } from "lucide-react";
 import heroImage from "@/assets/generated/hero_luis_consulting.png";
-import badge100 from "@/assets/generated/12_badge_100_tuyo.png";
-import badge90 from "@/assets/generated/13_badge_90_dias.png";
-import badgeSin from "@/assets/generated/14_badge_sin_ataduras.png";
 
 const HeroSection = () => {
   const scrollToHowItWorks = () => {
@@ -17,11 +14,20 @@ const HeroSection = () => {
         <div className="grid lg:grid-cols-[55%_45%] gap-12 lg:gap-16 items-center">
           {/* Content - Asymmetric Layout */}
           <div className="order-2 lg:order-1 space-y-8">
-            {/* Badges - More Prominent */}
-            <div className="flex flex-wrap gap-6 justify-center lg:justify-start">
-              <img src={badge100} alt="100% Tuyo" className="h-20 sm:h-24 lg:h-28 w-auto drop-shadow-[0_8px_16px_rgba(0,0,0,0.3)] hover:scale-105 transition-transform" />
-              <img src={badge90} alt="90 Días" className="h-20 sm:h-24 lg:h-28 w-auto drop-shadow-[0_8px_16px_rgba(0,0,0,0.3)] hover:scale-105 transition-transform" />
-              <img src={badgeSin} alt="Sin Ataduras" className="h-20 sm:h-24 lg:h-28 w-auto drop-shadow-[0_8px_16px_rgba(0,0,0,0.3)] hover:scale-105 transition-transform" />
+            {/* Feature Pills */}
+            <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
+              <div className="flex items-center gap-3 px-6 py-3 bg-primary/10 border-2 border-primary/20 rounded-full hover:bg-primary/15 transition-all hover:scale-105">
+                <Shield className="h-5 w-5 text-primary" />
+                <span className="font-bold text-foreground">100% Tuyo</span>
+              </div>
+              <div className="flex items-center gap-3 px-6 py-3 bg-secondary/10 border-2 border-secondary/20 rounded-full hover:bg-secondary/15 transition-all hover:scale-105">
+                <Calendar className="h-5 w-5 text-secondary" />
+                <span className="font-bold text-foreground">90 Días</span>
+              </div>
+              <div className="flex items-center gap-3 px-6 py-3 bg-accent/10 border-2 border-accent/20 rounded-full hover:bg-accent/15 transition-all hover:scale-105">
+                <Zap className="h-5 w-5 text-accent" />
+                <span className="font-bold text-foreground">Sin Ataduras</span>
+              </div>
             </div>
 
             {/* Bold Typography with Stronger Hierarchy */}
