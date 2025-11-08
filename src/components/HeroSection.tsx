@@ -39,9 +39,10 @@ const HeroSection = () => {
               Presencia digital completa que atrae clientes locales 24/7, ads-ready desde día 1, 100% tuyo
             </h2>
             
-            <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed text-center lg:text-left max-w-2xl">
-              ¿Pierdes contratos cada mes porque no apareces en Google o no te ves profesional? El Sistema Imán Local™ convierte tu negocio de servicios en un imán de clientes locales en solo 90 días.
-            </p>
+            <div className="text-lg sm:text-xl text-muted-foreground leading-relaxed text-center lg:text-left max-w-2xl space-y-4">
+              <p>¿Pierdes contratos cada mes porque no apareces en Google o no te ves profesional?</p>
+              <p className="font-semibold text-foreground">El Sistema Imán Local™ convierte tu negocio de servicios en un imán de clientes locales en solo 90 días.</p>
+            </div>
 
             {/* CTAs - Larger and More Prominent */}
             <div className="flex flex-col sm:flex-row gap-5 justify-center lg:justify-start pt-4">

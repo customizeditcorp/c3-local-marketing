@@ -36,9 +36,10 @@ const SolutionSection = () => {
             El sistema que convierte tu negocio en un imán de clientes locales
           </p>
           
-          <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed mb-8">
-            No vendemos "servicios de marketing digital" genéricos. Implementamos un sistema específico probado con más de 10 negocios de servicios hispanos en California.
-          </p>
+          <div className="text-lg sm:text-xl text-muted-foreground leading-relaxed mb-8 space-y-3">
+            <p>No vendemos "servicios de marketing digital" genéricos.</p>
+            <p className="font-semibold text-foreground">Implementamos un sistema específico probado con más de 10 negocios de servicios hispanos en California.</p>
+          </div>
 
           <div className="bg-gradient-to-br from-primary/10 to-secondary/10 rounded-2xl p-8 border-2 border-primary/30">
             <p className="text-xl sm:text-2xl font-bold mb-4">
