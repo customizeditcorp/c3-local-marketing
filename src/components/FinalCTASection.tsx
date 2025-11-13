@@ -2,7 +2,11 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Phone, Check } from "lucide-react";
 
-const FinalCTASection = () => {
+interface FinalCTASectionProps {
+  onOpenForm: () => void;
+}
+
+const FinalCTASection = ({ onOpenForm }: FinalCTASectionProps) => {
   const callPoints = [
     "Analizamos tu situación específica",
     "Identificamos tus obstáculos actuales",
@@ -30,6 +34,7 @@ const FinalCTASection = () => {
           <Button 
             size="lg" 
             className="w-full sm:w-auto text-xl sm:text-2xl px-12 sm:px-16 py-8 sm:py-10 mb-16 shadow-2xl hover:shadow-primary/30 hover:scale-105 transition-all"
+            onClick={onOpenForm}
           >
             <Phone className="mr-4 h-8 w-8" />
             📞 Agendar Llamada de Diagnóstico Gratuita
