@@ -2,7 +2,11 @@ import { Button } from "@/components/ui/button";
 import { Phone, ArrowDown, Shield, Calendar, Zap } from "lucide-react";
 import heroImage from "@/assets/generated/hero_luis_consulting.png";
 
-const HeroSection = () => {
+interface HeroSectionProps {
+  onOpenForm: () => void;
+}
+
+const HeroSection = ({ onOpenForm }: HeroSectionProps) => {
   const scrollToHowItWorks = () => {
     const element = document.getElementById('como-funciona');
     element?.scrollIntoView({ behavior: 'smooth' });
@@ -46,7 +50,11 @@ const HeroSection = () => {
 
             {/* CTAs - Larger and More Prominent */}
             <div className="flex flex-col sm:flex-row gap-5 justify-center lg:justify-start pt-4">
-              <Button size="lg" className="w-full sm:w-auto text-lg px-10 py-7 shadow-lg hover:shadow-xl hover:scale-105 transition-all">
+              <Button 
+                size="lg" 
+                className="w-full sm:w-auto text-lg px-10 py-7 shadow-lg hover:shadow-xl hover:scale-105 transition-all"
+                onClick={onOpenForm}
+              >
                 <Phone className="mr-3 h-6 w-6" />
                 Agendar Llamada de Diagnóstico Gratuita
               </Button>
