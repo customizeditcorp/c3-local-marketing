@@ -16,20 +16,9 @@ import FinalCTASection from "@/components/FinalCTASection";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import DiagnosisForm from "@/components/DiagnosisForm";
-import FormConfigPanel from "@/components/FormConfigPanel";
 
 const Index = () => {
   const [isFormOpen, setIsFormOpen] = useState(false);
-  const [ghlWebhookUrl, setGhlWebhookUrl] = useState("");
-
-  // Load webhook URL from localStorage
-  useState(() => {
-    const savedConfig = localStorage.getItem("sistemaimanlocal_config");
-    if (savedConfig) {
-      const config = JSON.parse(savedConfig);
-      setGhlWebhookUrl(config.ghlWebhookUrl || "");
-    }
-  });
 
   return (
     <div className="min-h-screen">
@@ -49,11 +38,9 @@ const Index = () => {
       <FinalCTASection onOpenForm={() => setIsFormOpen(true)} />
       <Footer />
       <WhatsAppButton />
-      <FormConfigPanel />
       {isFormOpen && (
         <DiagnosisForm 
           onClose={() => setIsFormOpen(false)} 
-          ghlWebhookUrl={ghlWebhookUrl}
         />
       )}
     </div>
