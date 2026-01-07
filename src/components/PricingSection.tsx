@@ -3,7 +3,11 @@ import { Button } from "@/components/ui/button";
 import { Check, AlertCircle } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 
-const PricingSection = () => {
+interface PricingSectionProps {
+  onOpenForm: () => void;
+}
+
+const PricingSection = ({ onOpenForm }: PricingSectionProps) => {
   const includes = [
     "Google Business Profile verificado y optimizado",
     "Website profesional (5-7 páginas) en Squarespace",
@@ -105,7 +109,11 @@ const PricingSection = () => {
               </Alert>
 
               {/* CTA */}
-              <Button size="lg" className="w-full text-xl py-8 shadow-lg hover:shadow-xl hover:scale-105 transition-all">
+              <Button 
+                size="lg" 
+                onClick={onOpenForm}
+                className="w-full text-xl py-8 shadow-lg hover:shadow-xl hover:scale-105 transition-all"
+              >
                 Agendar Llamada de Diagnóstico Gratuita
               </Button>
             </div>

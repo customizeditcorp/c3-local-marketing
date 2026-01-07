@@ -31,7 +31,7 @@ const Index = () => {
       <StepsSection />
       <VideoTestimonialSection />
       <TeamSection />
-      <PricingSection />
+      <PricingSection onOpenForm={() => setIsFormOpen(true)} />
       <TestimonialsSection />
       <LogosSection />
       <FAQSection />
