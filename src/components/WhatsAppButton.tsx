@@ -22,7 +22,7 @@ const WhatsAppButton = () => {
     });
     
     // WhatsApp number (replace with actual number)
-    const phoneNumber = "18056878786"; // Replace with actual number
+    const phoneNumber = "18056084843";
     const message = encodeURIComponent("Hola! Me interesa el Sistema Imán Local™. ¿Podemos agendar una llamada?");
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
     
