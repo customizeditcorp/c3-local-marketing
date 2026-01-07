@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 350.63 350.63">
+  <defs>
+    <style>
+      .cls-1, .cls-2, .cls-3, .cls-4, .cls-5 {
+        font-style: italic;
+      }
+
+      .cls-1, .cls-2, .cls-3, .cls-5 {
+        font-family: Gotham-BoldItalic, Gotham;
+      }
+
+      .cls-2 {
+        letter-spacing: -.05em;
+      }
+
+      .cls-3 {
+        letter-spacing: -.01em;
+      }
+
+      .cls-6 {
+        font-weight: 700;
+      }
+
+      .cls-6, .cls-7, .cls-4 {
+        fill: #fff;
+      }
+
+      .cls-6, .cls-4 {
+        font-size: 41.54px;
+      }
+
+      .cls-4 {
+        font-family: Gotham-BlackItalic, Gotham;
+        font-weight: 800;
+      }
+
+      .cls-8 {
+        fill: #ef4125;
+      }
+
+      .cls-9 {
+        font-family: Gotham-Bold, Gotham;
+      }
+
+      .cls-10 {
+        letter-spacing: -.02em;
+      }
+
+      .cls-5 {
+        letter-spacing: 0em;
+      }
+    </style>
+  </defs>
+  <rect class="cls-8" x="0" y="0" width="350.63" height="350.63" transform="translate(350.63 0) rotate(90)"/>
+  <g>
+    <g>
+      <path class="cls-7" d="M136.86,157.53c-6.4.22-11.5-4.04-11.78-11.98-.34-9.9,6.32-20.05,17.16-20.43,4.43-.15,8.11,1.62,10.28,5.4l21.45-10.24c-4.34-10.86-15.02-17.43-29.29-16.93-31.15,1.08-45.48,25.54-44.8,45.25.68,19.39,15.13,31.18,35.35,30.48,15.37-.54,25.67-7.19,32.56-16.94l-17.17-12.62c-3.75,4.98-8.2,7.83-13.77,8.02Z"/>
+      <path class="cls-7" d="M240.23,74.26h-60.11l-5.47,20.34h29.05l-20.89,13.63.33,11.62h9.94c7.15,0,9.27,2.01,9.27,5.14,0,3.91-4.36,7.6-11.51,7.6-4.18,0-8.34-.15-11.61-2.33l-21.99,10.5c4.71,5.81,14.62,13.39,34.38,13.39,12.51,0,22.35-3.46,28.6-9.72,5.03-5.03,7.6-11.51,7.6-19.44,0-8.49-5.25-15.53-15.2-18.55l22.68-14.19,4.92-17.99Z"/>
+    </g>
+    <g>
+      <text class="cls-6" transform="translate(17.67 226.31)"><tspan class="cls-2" x="0" y="0">L</tspan><tspan class="cls-5" x="23.93" y="0">ocal</tspan><tspan class="cls-9" x="111.25" y="0"> </tspan><tspan class="cls-1" x="123.71" y="0">Busine</tspan><tspan class="cls-3" x="263.62" y="0">s</tspan><tspan class="cls-1" x="283.98" y="0">s</tspan></text>
+      <text class="cls-4" transform="translate(63.95 263.36)"><tspan x="0" y="0">Mar</tspan><tspan class="cls-10" x="78.51" y="0">k</tspan><tspan x="102.36" y="0">eting</tspan></text>
+    </g>
+  </g>
+</svg>
