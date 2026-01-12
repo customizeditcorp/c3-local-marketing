@@ -6,7 +6,15 @@ const WhatsAppButton = () => {
   const { toast } = useToast();
   
   const handleWhatsAppClick = () => {
-    // Track conversion
+    // Track Facebook Pixel Contact event
+    if (typeof window !== 'undefined' && (window as any).fbq) {
+      (window as any).fbq('track', 'Contact', {
+        content_name: 'WhatsApp Click',
+        content_category: 'Sistema Imán Local'
+      });
+    }
+    
+    // Track Google conversion
     if (typeof window !== 'undefined' && (window as any).gtag) {
       (window as any).gtag('event', 'conversion', {
         'send_to': 'AW-CONVERSION_ID/CONVERSION_LABEL',

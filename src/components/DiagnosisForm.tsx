@@ -7,6 +7,14 @@ interface DiagnosisFormProps {
 
 const DiagnosisForm = ({ onClose }: DiagnosisFormProps) => {
   useEffect(() => {
+    // Track Facebook Pixel Lead event when form opens
+    if (typeof window !== 'undefined' && (window as any).fbq) {
+      (window as any).fbq('track', 'Lead', {
+        content_name: 'Diagnóstico Gratuito',
+        content_category: 'Sistema Imán Local'
+      });
+    }
+
     // Load GHL form embed script
     const script = document.createElement('script');
     script.src = 'https://lnk.c3localmarketing.com/js/form_embed.js';
