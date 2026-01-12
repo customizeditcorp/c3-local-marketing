@@ -1,13 +1,48 @@
+import { useEffect, useRef } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Check, AlertCircle } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { trackEvent, useAnalytics } from "@/hooks/use-analytics";
 
 interface PricingSectionProps {
   onOpenForm: () => void;
 }
 
 const PricingSection = ({ onOpenForm }: PricingSectionProps) => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const hasTrackedView = useRef(false);
+  const { trackCTAClick } = useAnalytics();
+
+  // Track when user views pricing section
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !hasTrackedView.current) {
+            trackEvent('view_content', { 
+              content_name: 'Pricing Section',
+              value: 3300 
+            });
+            hasTrackedView.current = true;
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  const handleCTAClick = () => {
+    trackCTAClick('Agendar Diagnóstico', 'Pricing Section');
+    onOpenForm();
+  };
+
   const includes = [
     "Google Business Profile verificado y optimizado",
     "Website profesional (5-7 páginas) en Squarespace",
@@ -29,7 +64,7 @@ const PricingSection = ({ onOpenForm }: PricingSectionProps) => {
   ];
 
   return (
-    <section id="precio" className="py-20 sm:py-32 bg-background scroll-mt-20">
+    <section ref={sectionRef} id="precio" className="py-20 sm:py-32 bg-background scroll-mt-20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center mb-16 sm:mb-20">
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
@@ -111,7 +146,7 @@ const PricingSection = ({ onOpenForm }: PricingSectionProps) => {
               {/* CTA */}
               <Button 
                 size="lg" 
-                onClick={onOpenForm}
+                onClick={handleCTAClick}
                 className="w-full text-xl py-8 shadow-lg hover:shadow-xl hover:scale-105 transition-all"
               >
                 Agendar Llamada de Diagnóstico Gratuita
