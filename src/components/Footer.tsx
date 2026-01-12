@@ -8,7 +8,8 @@ const Footer = () => {
     { label: "Beneficios", href: "#beneficios" },
     { label: "Precio", href: "#precio" },
     { label: "FAQ", href: "#faq" },
-    { label: "Agendar Llamada", href: "#cta-final" }
+    { label: "Agendar Llamada", href: "#cta-final" },
+    { label: "Contacto", href: "/contact", isPage: true }
   ];
 
   const legalLinks = [
@@ -81,13 +82,23 @@ const Footer = () => {
             <ul className="space-y-4">
               {quickLinks.map((link, index) => (
                 <li key={index}>
-                  <button
-                    onClick={() => scrollToSection(link.href)}
-                    className="hover:text-secondary hover:translate-x-2 transition-all text-left text-base sm:text-lg font-medium flex items-center gap-2"
-                  >
-                    <span className="text-secondary">→</span>
-                    {link.label}
-                  </button>
+                  {link.isPage ? (
+                    <Link
+                      to={link.href}
+                      className="hover:text-secondary hover:translate-x-2 transition-all text-left text-base sm:text-lg font-medium flex items-center gap-2"
+                    >
+                      <span className="text-secondary">→</span>
+                      {link.label}
+                    </Link>
+                  ) : (
+                    <button
+                      onClick={() => scrollToSection(link.href)}
+                      className="hover:text-secondary hover:translate-x-2 transition-all text-left text-base sm:text-lg font-medium flex items-center gap-2"
+                    >
+                      <span className="text-secondary">→</span>
+                      {link.label}
+                    </button>
+                  )}
                 </li>
               ))}
             </ul>
