@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import c3Logo from "@/assets/logos/c3Verticalorange200x200.svg";
 import { Mail, Globe, Phone, MapPin } from "lucide-react";
 
@@ -10,6 +11,11 @@ const Footer = () => {
     { label: "Agendar Llamada", href: "#cta-final" }
   ];
 
+  const legalLinks = [
+    { label: "Privacy Policy", href: "/privacy-policy" },
+    { label: "Terms of Service", href: "/terms-of-service" }
+  ];
+
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id.replace('#', ''));
     element?.scrollIntoView({ behavior: 'smooth' });
@@ -18,7 +24,7 @@ const Footer = () => {
   return (
     <footer className="bg-[hsl(0,0%,20%)] text-white py-16 sm:py-24 border-t-4 border-primary">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-12 sm:gap-16 mb-12">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-12 sm:gap-16 mb-12">
           {/* Column 1: Logo + Tagline */}
           <div>
             <div className="w-fit mb-6">
@@ -86,12 +92,35 @@ const Footer = () => {
               ))}
             </ul>
           </div>
+
+          {/* Column 4: Legal Links */}
+          <div>
+            <h3 className="text-2xl sm:text-3xl font-bold mb-8">Legal</h3>
+            <ul className="space-y-4">
+              {legalLinks.map((link, index) => (
+                <li key={index}>
+                  <Link
+                    to={link.href}
+                    className="hover:text-secondary hover:translate-x-2 transition-all text-left text-base sm:text-lg font-medium flex items-center gap-2"
+                  >
+                    <span className="text-secondary">→</span>
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
 
         {/* Copyright */}
         <div className="border-t-2 border-white/20 pt-10 text-center">
           <p className="text-base sm:text-lg text-white/90 font-medium">
             © 2025 C3 Marketing. Todos los derechos reservados.
+          </p>
+          <p className="text-sm text-white/60 mt-2">
+            <Link to="/privacy-policy" className="hover:text-secondary transition-colors">Privacy Policy</Link>
+            {" | "}
+            <Link to="/terms-of-service" className="hover:text-secondary transition-colors">Terms of Service</Link>
           </p>
         </div>
       </div>
