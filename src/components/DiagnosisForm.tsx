@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { X } from "lucide-react";
+import { trackEvent } from "@/hooks/use-analytics";
 
 interface DiagnosisFormProps {
   onClose: () => void;
@@ -7,13 +8,8 @@ interface DiagnosisFormProps {
 
 const DiagnosisForm = ({ onClose }: DiagnosisFormProps) => {
   useEffect(() => {
-    // Track Facebook Pixel Lead event when form opens
-    if (typeof window !== 'undefined' && (window as any).fbq) {
-      (window as any).fbq('track', 'Lead', {
-        content_name: 'Diagnóstico Gratuito',
-        content_category: 'Sistema Imán Local'
-      });
-    }
+    // Track unified Lead event (GA4 + Facebook Pixel)
+    trackEvent('lead', { content_name: 'Diagnóstico Gratuito' });
 
     // Load GHL form embed script
     const script = document.createElement('script');

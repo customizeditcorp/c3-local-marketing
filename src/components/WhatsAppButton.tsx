@@ -1,27 +1,15 @@
 import { MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
+import { useAnalytics } from "@/hooks/use-analytics";
 
 const WhatsAppButton = () => {
   const { toast } = useToast();
+  const { trackContact } = useAnalytics();
   
   const handleWhatsAppClick = () => {
-    // Track Facebook Pixel Contact event
-    if (typeof window !== 'undefined' && (window as any).fbq) {
-      (window as any).fbq('track', 'Contact', {
-        content_name: 'WhatsApp Click',
-        content_category: 'Sistema Imán Local'
-      });
-    }
-    
-    // Track Google conversion
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag('event', 'conversion', {
-        'send_to': 'AW-CONVERSION_ID/CONVERSION_LABEL',
-        'event_category': 'Contact',
-        'event_label': 'WhatsApp Click'
-      });
-    }
+    // Track unified event (GA4 + Facebook Pixel)
+    trackContact('WhatsApp Click');
     
     // Show toast confirmation
     toast({

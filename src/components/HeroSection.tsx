@@ -1,15 +1,24 @@
 import { Button } from "@/components/ui/button";
 import { Phone, ArrowDown, Shield, Calendar, Zap } from "lucide-react";
 import heroImage from "@/assets/generated/hero_luis_consulting.png";
+import { useAnalytics } from "@/hooks/use-analytics";
 
 interface HeroSectionProps {
   onOpenForm: () => void;
 }
 
 const HeroSection = ({ onOpenForm }: HeroSectionProps) => {
+  const { trackCTAClick } = useAnalytics();
+
   const scrollToHowItWorks = () => {
+    trackCTAClick('Ver Cómo Funciona', 'Hero Section');
     const element = document.getElementById('como-funciona');
     element?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handleCTAClick = () => {
+    trackCTAClick('Agendar Diagnóstico', 'Hero Section');
+    onOpenForm();
   };
 
   return (
@@ -53,7 +62,7 @@ const HeroSection = ({ onOpenForm }: HeroSectionProps) => {
               <Button 
                 size="lg" 
                 className="w-full sm:w-auto text-lg px-10 py-7 shadow-lg hover:shadow-xl hover:scale-105 transition-all"
-                onClick={onOpenForm}
+                onClick={handleCTAClick}
               >
                 <Phone className="mr-3 h-6 w-6" />
                 Agendar Llamada de Diagnóstico Gratuita
