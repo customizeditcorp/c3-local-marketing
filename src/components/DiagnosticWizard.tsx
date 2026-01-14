@@ -1,16 +1,22 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { ArrowRight, ArrowLeft, Check } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { Progress } from "@/components/ui/progress";
 import { useAnalytics } from "@/hooks/use-analytics";
+import { MapPinOff, TrendingUp, Crown, User, Users, Building2, Clock, CalendarClock, Infinity, FileText, Layers, Database } from "lucide-react";
 
-type GoogleStatus = "verificacion" | "growth" | "ads" | null;
-type ClientManagement = "needsSoftware" | "multipleApps" | "hasCRM" | null;
+type GoogleStatus = 'invisible' | 'noVende' | 'dominar' | null;
+type OperationSize = 'solo' | 'cuadrilla' | 'flota' | null;
+type Expectation = 'urgente' | 'proceso' | 'legado' | null;
+type ClientManagement = 'papel' | 'apps' | 'crm' | null;
 
 interface WizardState {
   googleStatus: GoogleStatus;
+  operationSize: OperationSize;
+  expectation: Expectation;
   clientManagement: ClientManagement;
   name: string;
   phone: string;
@@ -19,241 +25,298 @@ interface WizardState {
 
 const DiagnosticWizard = () => {
   const navigate = useNavigate();
-  const { trackCTAClick } = useAnalytics();
+  const { trackLead } = useAnalytics();
   const [currentStep, setCurrentStep] = useState(1);
   const [state, setState] = useState<WizardState>({
     googleStatus: null,
+    operationSize: null,
+    expectation: null,
     clientManagement: null,
-    name: "",
-    phone: "",
-    email: ""
+    name: '',
+    phone: '',
+    email: ''
   });
 
-  const totalSteps = 3;
+  const totalSteps = 5;
   const progress = (currentStep / totalSteps) * 100;
 
+  // Step 1: Google Status Options
   const googleOptions = [
-    { value: "verificacion" as const, label: "No aparezco o estoy suspendido" },
-    { value: "growth" as const, label: "Aparezco pero el teléfono no suena" },
-    { value: "ads" as const, label: "Tengo equipos y quiero escalar" }
+    { value: 'invisible' as GoogleStatus, label: 'No aparezco / Suspendido', icon: MapPinOff },
+    { value: 'noVende' as GoogleStatus, label: 'Aparezco pero no vendo', icon: TrendingUp },
+    { value: 'dominar' as GoogleStatus, label: 'Quiero dominar la zona', icon: Crown }
   ];
 
-  const clientOptions = [
-    { value: "needsSoftware" as const, label: "Cuaderno, papel y memoria" },
-    { value: "multipleApps" as const, label: "Varias apps sueltas (Excel, Zelle, Notas)" },
-    { value: "hasCRM" as const, label: "Tengo un CRM profesional" }
+  // Step 2: Operation Size Options
+  const sizeOptions = [
+    { value: 'solo' as OperationSize, label: 'Solo yo / Voy empezando', icon: User },
+    { value: 'cuadrilla' as OperationSize, label: 'Tengo 1-3 empleados / Cuadrilla', icon: Users },
+    { value: 'flota' as OperationSize, label: 'Múltiples cuadrillas / Flota', icon: Building2 }
   ];
 
-  const handleGoogleSelect = (value: GoogleStatus) => {
-    setState(prev => ({ ...prev, googleStatus: value }));
-  };
+  // Step 3: Expectation Options
+  const expectationOptions = [
+    { value: 'urgente' as Expectation, label: 'Ayer / Urgente', icon: Clock },
+    { value: 'proceso' as Expectation, label: '30-90 días (Entiendo el proceso)', icon: CalendarClock },
+    { value: 'legado' as Expectation, label: 'Largo plazo (Construir legado)', icon: Infinity }
+  ];
 
-  const handleClientSelect = (value: ClientManagement) => {
-    setState(prev => ({ ...prev, clientManagement: value }));
-  };
+  // Step 4: Client Management Options
+  const managementOptions = [
+    { value: 'papel' as ClientManagement, label: 'Papel y Lápiz', icon: FileText },
+    { value: 'apps' as ClientManagement, label: 'Varias Apps sueltas', icon: Layers },
+    { value: 'crm' as ClientManagement, label: 'CRM Profesional', icon: Database }
+  ];
 
   const handleNext = () => {
     if (currentStep < totalSteps) {
-      setCurrentStep(prev => prev + 1);
+      setCurrentStep(currentStep + 1);
     }
   };
 
   const handleBack = () => {
     if (currentStep > 1) {
-      setCurrentStep(prev => prev - 1);
+      setCurrentStep(currentStep - 1);
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    trackCTAClick('Ver mi Reporte', 'Diagnostic Wizard');
-
-    // Determine recommendation
-    const needsSoftware = state.clientManagement === "needsSoftware" || state.clientManagement === "multipleApps";
-    const plan = needsSoftware ? "control" : state.googleStatus;
+  const handleSubmit = () => {
+    trackLead('Diagnostic Wizard');
 
     // TODO: Send to GoHighLevel Webhook
-    // const webhookUrl = "YOUR_GHL_WEBHOOK_URL";
-    // fetch(webhookUrl, {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify({
-    //     name: state.name,
-    //     phone: state.phone,
-    //     email: state.email,
-    //     googleStatus: state.googleStatus,
-    //     clientManagement: state.clientManagement,
-    //     recommendedPlan: plan
-    //   })
-    // });
+    // const webhookData = {
+    //   name: state.name,
+    //   email: state.email,
+    //   phone: state.phone,
+    //   googleStatus: state.googleStatus,
+    //   operationSize: state.operationSize,
+    //   expectation: state.expectation,
+    //   clientManagement: state.clientManagement
+    // };
+    // fetch('YOUR_GHL_WEBHOOK_URL', { method: 'POST', body: JSON.stringify(webhookData) });
 
-    // Navigate to results
-    navigate(`/resultados?plan=${plan}&google=${state.googleStatus}&software=${needsSoftware}`);
+    // Navigate to results with all parameters
+    navigate(`/resultados?google=${state.googleStatus}&size=${state.operationSize}&expectation=${state.expectation}&management=${state.clientManagement}`);
   };
 
-  const canProceedStep1 = state.googleStatus !== null;
-  const canProceedStep2 = state.clientManagement !== null;
-  const canSubmit = state.name.trim() !== "" && state.phone.trim() !== "" && state.email.trim() !== "";
+  const canProceed = () => {
+    switch (currentStep) {
+      case 1: return state.googleStatus !== null;
+      case 2: return state.operationSize !== null;
+      case 3: return state.expectation !== null;
+      case 4: return state.clientManagement !== null;
+      case 5: return state.name && state.phone && state.email;
+      default: return false;
+    }
+  };
 
   return (
-    <div className="bg-card rounded-2xl shadow-soft-lg p-6 sm:p-8 lg:p-10 max-w-2xl mx-auto">
-      {/* Progress Bar */}
-      <div className="mb-8">
-        <div className="flex justify-between text-sm text-muted-foreground mb-2">
-          <span>Paso {currentStep} de {totalSteps}</span>
-          <span>{Math.round(progress)}%</span>
+    <Card className="max-w-2xl mx-auto border-0 shadow-soft-lg">
+      <CardContent className="p-6 sm:p-8">
+        {/* Progress Bar */}
+        <div className="mb-8">
+          <div className="flex justify-between text-sm text-muted-foreground mb-2">
+            <span>Paso {currentStep} de {totalSteps}</span>
+            <span>{Math.round(progress)}%</span>
+          </div>
+          <Progress value={progress} className="h-2 bg-muted [&>div]:bg-primary" />
         </div>
-        <div className="h-2 bg-muted rounded-full overflow-hidden">
-          <div 
-            className="h-full bg-primary transition-all duration-500 ease-out rounded-full"
-            style={{ width: `${progress}%` }}
-          />
-        </div>
-      </div>
 
-      {/* Step 1: Google Status */}
-      {currentStep === 1 && (
-        <div className="space-y-6">
-          <h3 className="text-2xl font-bold text-foreground text-center">
-            ¿Cuál es tu situación actual en Google?
-          </h3>
-          <div className="space-y-3">
-            {googleOptions.map((option) => (
-              <button
-                key={option.value}
-                onClick={() => handleGoogleSelect(option.value)}
-                className={`w-full p-5 rounded-xl border-2 text-left transition-all ${
-                  state.googleStatus === option.value
-                    ? "border-primary bg-primary/5"
-                    : "border-border hover:border-primary/50 hover:bg-muted"
-                }`}
-              >
-                <div className="flex items-center justify-between">
-                  <span className="font-medium text-foreground">{option.label}</span>
-                  {state.googleStatus === option.value && (
-                    <Check className="h-5 w-5 text-primary" />
-                  )}
-                </div>
-              </button>
-            ))}
+        {/* Step 1: Google Status */}
+        {currentStep === 1 && (
+          <div className="space-y-6">
+            <h3 className="text-xl sm:text-2xl font-bold text-foreground text-center">
+              ¿Cuál es tu situación en Google?
+            </h3>
+            <div className="grid gap-4">
+              {googleOptions.map((option) => (
+                <button
+                  key={option.value}
+                  onClick={() => setState({ ...state, googleStatus: option.value })}
+                  className={`flex items-center gap-4 p-4 rounded-xl border-2 transition-all text-left ${
+                    state.googleStatus === option.value
+                      ? 'border-primary bg-primary/5'
+                      : 'border-border hover:border-primary/50'
+                  }`}
+                >
+                  <div className={`p-3 rounded-lg ${
+                    state.googleStatus === option.value ? 'bg-primary text-white' : 'bg-muted'
+                  }`}>
+                    <option.icon className="h-6 w-6" />
+                  </div>
+                  <span className="font-semibold">{option.label}</span>
+                </button>
+              ))}
+            </div>
           </div>
-          <div className="flex justify-end pt-4">
-            <Button 
-              onClick={handleNext} 
-              disabled={!canProceedStep1}
-              className="px-8"
-            >
-              Siguiente
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-          </div>
-        </div>
-      )}
+        )}
 
-      {/* Step 2: Client Management */}
-      {currentStep === 2 && (
-        <div className="space-y-6">
-          <h3 className="text-2xl font-bold text-foreground text-center">
-            ¿Cómo gestionas tus clientes hoy?
-          </h3>
-          <div className="space-y-3">
-            {clientOptions.map((option) => (
-              <button
-                key={option.value}
-                onClick={() => handleClientSelect(option.value)}
-                className={`w-full p-5 rounded-xl border-2 text-left transition-all ${
-                  state.clientManagement === option.value
-                    ? "border-primary bg-primary/5"
-                    : "border-border hover:border-primary/50 hover:bg-muted"
-                }`}
-              >
-                <div className="flex items-center justify-between">
-                  <span className="font-medium text-foreground">{option.label}</span>
-                  {state.clientManagement === option.value && (
-                    <Check className="h-5 w-5 text-primary" />
-                  )}
-                </div>
-              </button>
-            ))}
+        {/* Step 2: Operation Size */}
+        {currentStep === 2 && (
+          <div className="space-y-6">
+            <h3 className="text-xl sm:text-2xl font-bold text-foreground text-center">
+              ¿Cuál es el tamaño de tu operación?
+            </h3>
+            <div className="grid gap-4">
+              {sizeOptions.map((option) => (
+                <button
+                  key={option.value}
+                  onClick={() => setState({ ...state, operationSize: option.value })}
+                  className={`flex items-center gap-4 p-4 rounded-xl border-2 transition-all text-left ${
+                    state.operationSize === option.value
+                      ? 'border-primary bg-primary/5'
+                      : 'border-border hover:border-primary/50'
+                  }`}
+                >
+                  <div className={`p-3 rounded-lg ${
+                    state.operationSize === option.value ? 'bg-primary text-white' : 'bg-muted'
+                  }`}>
+                    <option.icon className="h-6 w-6" />
+                  </div>
+                  <span className="font-semibold">{option.label}</span>
+                </button>
+              ))}
+            </div>
           </div>
-          <div className="flex justify-between pt-4">
+        )}
+
+        {/* Step 3: Expectations */}
+        {currentStep === 3 && (
+          <div className="space-y-6">
+            <h3 className="text-xl sm:text-2xl font-bold text-foreground text-center">
+              ¿Qué tan rápido necesitas ver resultados masivos?
+            </h3>
+            <div className="grid gap-4">
+              {expectationOptions.map((option) => (
+                <button
+                  key={option.value}
+                  onClick={() => setState({ ...state, expectation: option.value })}
+                  className={`flex items-center gap-4 p-4 rounded-xl border-2 transition-all text-left ${
+                    state.expectation === option.value
+                      ? 'border-primary bg-primary/5'
+                      : 'border-border hover:border-primary/50'
+                  }`}
+                >
+                  <div className={`p-3 rounded-lg ${
+                    state.expectation === option.value ? 'bg-primary text-white' : 'bg-muted'
+                  }`}>
+                    <option.icon className="h-6 w-6" />
+                  </div>
+                  <span className="font-semibold">{option.label}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Step 4: Client Management */}
+        {currentStep === 4 && (
+          <div className="space-y-6">
+            <h3 className="text-xl sm:text-2xl font-bold text-foreground text-center">
+              ¿Cómo gestionas tus clientes?
+            </h3>
+            <div className="grid gap-4">
+              {managementOptions.map((option) => (
+                <button
+                  key={option.value}
+                  onClick={() => setState({ ...state, clientManagement: option.value })}
+                  className={`flex items-center gap-4 p-4 rounded-xl border-2 transition-all text-left ${
+                    state.clientManagement === option.value
+                      ? 'border-primary bg-primary/5'
+                      : 'border-border hover:border-primary/50'
+                  }`}
+                >
+                  <div className={`p-3 rounded-lg ${
+                    state.clientManagement === option.value ? 'bg-primary text-white' : 'bg-muted'
+                  }`}>
+                    <option.icon className="h-6 w-6" />
+                  </div>
+                  <span className="font-semibold">{option.label}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Step 5: Lead Generation */}
+        {currentStep === 5 && (
+          <div className="space-y-6">
+            <div className="text-center mb-4">
+              <h3 className="text-xl sm:text-2xl font-bold text-foreground">
+                Analizando resultados...
+              </h3>
+              <p className="text-muted-foreground mt-2">
+                Ingresa tus datos para ver tu plan personalizado
+              </p>
+            </div>
+            <div className="space-y-4">
+              <div>
+                <Label htmlFor="name">Nombre</Label>
+                <Input
+                  id="name"
+                  type="text"
+                  placeholder="Tu nombre completo"
+                  value={state.name}
+                  onChange={(e) => setState({ ...state, name: e.target.value })}
+                  className="mt-1"
+                />
+              </div>
+              <div>
+                <Label htmlFor="phone">Teléfono</Label>
+                <Input
+                  id="phone"
+                  type="tel"
+                  placeholder="(555) 123-4567"
+                  value={state.phone}
+                  onChange={(e) => setState({ ...state, phone: e.target.value })}
+                  className="mt-1"
+                />
+              </div>
+              <div>
+                <Label htmlFor="email">Email</Label>
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="tu@email.com"
+                  value={state.email}
+                  onChange={(e) => setState({ ...state, email: e.target.value })}
+                  className="mt-1"
+                />
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Navigation Buttons */}
+        <div className="flex justify-between mt-8">
+          {currentStep > 1 ? (
             <Button variant="outline" onClick={handleBack}>
-              <ArrowLeft className="mr-2 h-4 w-4" />
               Atrás
             </Button>
+          ) : (
+            <div />
+          )}
+          
+          {currentStep < totalSteps ? (
             <Button 
               onClick={handleNext} 
-              disabled={!canProceedStep2}
-              className="px-8"
+              disabled={!canProceed()}
+              className="ml-auto"
             >
               Siguiente
-              <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
-          </div>
-        </div>
-      )}
-
-      {/* Step 3: Lead Capture */}
-      {currentStep === 3 && (
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <h3 className="text-2xl font-bold text-foreground text-center">
-            ¿A dónde enviamos tu reporte?
-          </h3>
-          <div className="space-y-4">
-            <div>
-              <Label htmlFor="name" className="text-foreground">Nombre</Label>
-              <Input
-                id="name"
-                type="text"
-                placeholder="Tu nombre completo"
-                value={state.name}
-                onChange={(e) => setState(prev => ({ ...prev, name: e.target.value }))}
-                className="mt-2"
-                required
-              />
-            </div>
-            <div>
-              <Label htmlFor="phone" className="text-foreground">Teléfono</Label>
-              <Input
-                id="phone"
-                type="tel"
-                placeholder="(555) 123-4567"
-                value={state.phone}
-                onChange={(e) => setState(prev => ({ ...prev, phone: e.target.value }))}
-                className="mt-2"
-                required
-              />
-            </div>
-            <div>
-              <Label htmlFor="email" className="text-foreground">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="tu@email.com"
-                value={state.email}
-                onChange={(e) => setState(prev => ({ ...prev, email: e.target.value }))}
-                className="mt-2"
-                required
-              />
-            </div>
-          </div>
-          <div className="flex justify-between pt-4">
-            <Button variant="outline" type="button" onClick={handleBack}>
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Atrás
-            </Button>
+          ) : (
             <Button 
-              type="submit"
-              disabled={!canSubmit}
-              className="px-8 bg-primary hover:bg-primary/90"
+              onClick={handleSubmit} 
+              disabled={!canProceed()}
+              className="ml-auto"
             >
-              Ver mi Reporte
-              <ArrowRight className="ml-2 h-4 w-4" />
+              Ver mi Plan
             </Button>
-          </div>
-        </form>
-      )}
-    </div>
+          )}
+        </div>
+      </CardContent>
+    </Card>
   );
 };
 
