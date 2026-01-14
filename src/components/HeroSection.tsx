@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Phone, ArrowDown, Shield, Calendar, Zap } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import heroImage from "@/assets/generated/hero_luis_consulting.png";
 import { useAnalytics } from "@/hooks/use-analytics";
 
@@ -10,83 +10,66 @@ interface HeroSectionProps {
 const HeroSection = ({ onOpenForm }: HeroSectionProps) => {
   const { trackCTAClick } = useAnalytics();
 
-  const scrollToHowItWorks = () => {
-    trackCTAClick('Ver Cómo Funciona', 'Hero Section');
-    const element = document.getElementById('como-funciona');
-    element?.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  const handleCTAClick = () => {
-    trackCTAClick('Agendar Diagnóstico', 'Hero Section');
-    onOpenForm();
+  const scrollToDiagnostic = () => {
+    trackCTAClick('Diagnosticar mi Negocio', 'Hero Section');
+    const element = document.getElementById('diagnostico');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      onOpenForm();
+    }
   };
 
   return (
     <section className="pt-28 sm:pt-36 pb-16 sm:pb-24 min-h-screen flex items-center">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-[55%_45%] gap-12 lg:gap-16 items-center">
-          {/* Content - Asymmetric Layout */}
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          {/* Content */}
           <div className="order-2 lg:order-1 space-y-8">
-            {/* Feature Pills */}
-            <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
-              <div className="flex items-center gap-3 px-6 py-3 bg-primary/10 border-2 border-primary/20 rounded-full hover:bg-primary/15 transition-all hover:scale-105">
-                <Shield className="h-5 w-5 text-primary" />
-                <span className="font-bold text-foreground">100% Tuyo</span>
-              </div>
-              <div className="flex items-center gap-3 px-6 py-3 bg-secondary/10 border-2 border-secondary/20 rounded-full hover:bg-secondary/15 transition-all hover:scale-105">
-                <Calendar className="h-5 w-5 text-secondary" />
-                <span className="font-bold text-foreground">90 Días</span>
-              </div>
-              <div className="flex items-center gap-3 px-6 py-3 bg-accent/10 border-2 border-accent/20 rounded-full hover:bg-accent/15 transition-all hover:scale-105">
-                <Zap className="h-5 w-5 text-accent" />
-                <span className="font-bold text-foreground">Sin Ataduras</span>
+            {/* Badge */}
+            <div className="flex justify-center lg:justify-start">
+              <div className="inline-flex items-center px-5 py-2 border-2 border-primary rounded-full">
+                <span className="text-sm font-bold text-primary tracking-wide">SISTEMA IMÁN LOCAL™</span>
               </div>
             </div>
 
-            {/* Bold Typography with Stronger Hierarchy */}
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight text-center lg:text-left">
-              De <span className="text-primary">Invisible</span> a <span className="text-secondary">Visible</span> en 90 Días
+            {/* H1 */}
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-center lg:text-left text-foreground">
+              Existes en la vida real.{" "}
+              <span className="text-primary">Haz que Google te reconozca.</span>
             </h1>
             
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-foreground/90 leading-snug text-center lg:text-left">
-              Presencia digital completa que atrae clientes locales 24/7, ads-ready desde día 1, 100% tuyo
-            </h2>
-            
-            <div className="text-lg sm:text-xl text-muted-foreground leading-relaxed text-center lg:text-left max-w-2xl space-y-4">
-              <p>¿Pierdes contratos cada mes porque no apareces en Google o no te ves profesional?</p>
-              <p className="font-semibold text-foreground">El Sistema Imán Local™ convierte tu negocio de servicios en un imán de clientes locales en solo 90 días.</p>
-            </div>
+            {/* Subtitle */}
+            <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed text-center lg:text-left max-w-xl">
+              Dejas de perder contratos por ser invisible. Verificamos, optimizamos y te entregamos el control total de tu presencia digital. Sin rentas mensuales eternas.
+            </p>
 
-            {/* CTAs - Larger and More Prominent */}
-            <div className="flex flex-col sm:flex-row gap-5 justify-center lg:justify-start pt-4">
+            {/* Microcopy */}
+            <p className="text-base font-semibold text-foreground text-center lg:text-left">
+              100% Tuyo desde el Día 1.
+            </p>
+
+            {/* CTA */}
+            <div className="flex justify-center lg:justify-start pt-2">
               <Button 
                 size="lg" 
-                className="w-full sm:w-auto text-lg px-10 py-7 shadow-lg hover:shadow-xl hover:scale-105 transition-all"
-                onClick={handleCTAClick}
+                className="text-lg px-10 py-7 shadow-soft-lg hover:shadow-xl hover:scale-[1.02] transition-all rounded-xl"
+                onClick={scrollToDiagnostic}
               >
-                <Phone className="mr-3 h-6 w-6" />
-                Agendar Llamada de Diagnóstico Gratuita
-              </Button>
-              <Button 
-                size="lg" 
-                variant="outline" 
-                className="w-full sm:w-auto text-lg px-10 py-7 border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground shadow-md hover:shadow-lg hover:scale-105 transition-all"
-                onClick={scrollToHowItWorks}
-              >
-                Ver Cómo Funciona
-                <ArrowDown className="ml-3 h-6 w-6" />
+                Diagnosticar mi Negocio Gratis
+                <ArrowRight className="ml-3 h-5 w-5" />
               </Button>
             </div>
           </div>
 
-          {/* Image - Larger with Better Shadow */}
+          {/* Image */}
           <div className="order-1 lg:order-2">
             <div className="relative">
-              <div className="absolute inset-0 bg-primary/10 blur-3xl rounded-full transform -rotate-6"></div>
+              <div className="absolute inset-0 bg-primary/5 blur-3xl rounded-full transform scale-110"></div>
               <img 
                 src={heroImage} 
-                alt="Profesional mostrando Google Business Profile" 
-                className="relative w-full h-auto rounded-3xl shadow-2xl hover:shadow-primary/20 transition-shadow"
+                alt="Profesional mostrando Google Business Profile optimizado" 
+                className="relative w-full h-auto rounded-2xl shadow-soft-lg"
               />
             </div>
           </div>

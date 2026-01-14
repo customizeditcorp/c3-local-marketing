@@ -1,16 +1,16 @@
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
-import ProblemSection from "@/components/ProblemSection";
+import TrustGridSection from "@/components/TrustGridSection";
+import DiagnosticSection from "@/components/DiagnosticSection";
 import SolutionSection from "@/components/SolutionSection";
+import SoftwareSection from "@/components/SoftwareSection";
 import TimelineSection from "@/components/TimelineSection";
 import BenefitsSection from "@/components/BenefitsSection";
-import StepsSection from "@/components/StepsSection";
-import PricingSection from "@/components/PricingSection";
-import TestimonialsSection from "@/components/TestimonialsSection";
 import VideoTestimonialSection from "@/components/VideoTestimonialSection";
 import TeamSection from "@/components/TeamSection";
-import LogosSection from "@/components/LogosSection";
+import PricingSection from "@/components/PricingSection";
+import TestimonialsSection from "@/components/TestimonialsSection";
 import FAQSection from "@/components/FAQSection";
 import FinalCTASection from "@/components/FinalCTASection";
 import Footer from "@/components/Footer";
@@ -24,16 +24,16 @@ const Index = () => {
     <div className="min-h-screen">
       <Navbar />
       <HeroSection onOpenForm={() => setIsFormOpen(true)} />
-      <ProblemSection />
+      <TrustGridSection />
+      <DiagnosticSection />
       <SolutionSection />
+      <SoftwareSection />
       <TimelineSection />
       <BenefitsSection />
-      <StepsSection />
       <VideoTestimonialSection />
       <TeamSection />
       <PricingSection onOpenForm={() => setIsFormOpen(true)} />
       <TestimonialsSection />
-      <LogosSection />
       <FAQSection />
       <FinalCTASection onOpenForm={() => setIsFormOpen(true)} />
       <Footer />
