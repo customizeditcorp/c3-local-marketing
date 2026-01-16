@@ -25,7 +25,7 @@ const TeamSection = () => {
             <div className="flex items-center justify-center gap-4 sm:gap-6">
               {team.map((member, index) => (
                 <div key={index} className="flex flex-col items-center gap-2">
-                  <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden border-2 border-primary/20 shadow-md">
+                  <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-full overflow-hidden border-2 border-primary/20 shadow-md">
                     <img 
                       src={member.image} 
                       alt={member.name} 
@@ -48,7 +48,7 @@ const TeamSection = () => {
               className="px-6 py-3 text-base sm:text-lg font-bold border-2 border-primary/30 bg-primary/5"
             >
               <span className="text-primary text-xl sm:text-2xl mr-2">20+</span>
-              Years of Combined Experience
+              Años de Experiencia Combinada
             </Badge>
           </div>
         </div>
