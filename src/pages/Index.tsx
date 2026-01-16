@@ -5,7 +5,6 @@ import VideoTestimonialSection from "@/components/VideoTestimonialSection";
 import DiagnosticSection from "@/components/DiagnosticSection";
 import SoftwareSection from "@/components/SoftwareSection";
 import TeamSection from "@/components/TeamSection";
-import PricingSection from "@/components/PricingSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import FAQSection from "@/components/FAQSection";
 import FinalCTASection from "@/components/FinalCTASection";
@@ -17,15 +16,14 @@ const Index = () => {
     <div className="min-h-screen">
       <Navbar />
       <HeroSection />
-      <TrustGridSection />
       <VideoTestimonialSection />
+      <TrustGridSection />
       <DiagnosticSection />
       <SoftwareSection />
-      <TeamSection />
-      <PricingSection onOpenForm={() => {}} />
       <TestimonialsSection />
+      <TeamSection />
       <FAQSection />
-      <FinalCTASection onOpenForm={() => {}} />
+      <FinalCTASection />
       <Footer />
       <WhatsAppButton />
     </div>
