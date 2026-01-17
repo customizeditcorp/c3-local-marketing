@@ -31,7 +31,7 @@ import smvcLogo from "@/assets/logos/smvc.png";
 const diagnosticParamsSchema = z.object({
   google: z.enum(['invisible', 'noVende', 'dominar', 'nuevo']).nullable().optional(),
   size: z.enum(['solo', 'cuadrilla', 'flota']).nullable().optional(),
-  expectation: z.enum(['urgente', 'proceso', 'legado']).nullable().optional(),
+  expectation: z.enum(['urgente', 'proceso', 'legado', 'noSeguro']).nullable().optional(),
   management: z.enum(['papel', 'apps', 'crm']).nullable().optional(),
   business: z.string().max(100).nullable().optional(),
 });
@@ -172,19 +172,27 @@ const determineRecommendation = (
   size: string | null,
   expectation: string | null,
   management: string | null
-): { primary: string; requiresAudit: boolean; showPaymentPlan: boolean } => {
+): { primary: string; requiresAudit: boolean; showPaymentPlan: boolean; needsGuidance: boolean } => {
   // PASO 1: Detectar si necesita Auditoría NAP
   const requiresAudit = google === 'invisible';
   
   // PASO 2: Detectar si es contratista nuevo (recién obtuvo licencia)
   const isNewContractor = google === 'nuevo';
   
-  // PASO 3: Determinar plan principal según perfil
+  // PASO 3: Detectar si necesita orientación (no está seguro)
+  const needsGuidance = expectation === 'noSeguro';
+  
+  // PASO 4: Determinar plan principal según perfil
   let primary = 'presencia'; // Default
   let showPaymentPlan = false;
   
+  // Si necesita orientación, sugerimos una llamada pero mostramos plan básico
+  if (needsGuidance) {
+    // Default a presencia pero marcamos que necesita orientación
+    primary = 'presencia';
+  }
   // Contratista nuevo → Presencia Digital siempre
-  if (isNewContractor) {
+  else if (isNewContractor) {
     primary = 'presencia';
   }
   // Solo / Empezando → Presencia Digital (One-Time)
@@ -206,7 +214,7 @@ const determineRecommendation = (
     primary = 'dominio';
   }
   
-  return { primary, requiresAudit, showPaymentPlan };
+  return { primary, requiresAudit, showPaymentPlan, needsGuidance };
 };
 
 const CALENDAR_URL = '#cta-final'; // Replace with actual Calendly/GHL URL
@@ -367,7 +375,7 @@ const DiagnosticResults = () => {
   }, [searchParams]);
 
   const { google, size, expectation, management, businessName } = validatedParams;
-  const { primary, requiresAudit, showPaymentPlan } = determineRecommendation(google, size, expectation, management);
+  const { primary, requiresAudit, showPaymentPlan, needsGuidance } = determineRecommendation(google, size, expectation, management);
   const currentPlan = planData[primary];
   const auditPlan = planData.auditoria;
 
@@ -432,6 +440,34 @@ const DiagnosticResults = () => {
                         <span className="text-2xl font-bold text-yellow-900">{auditPlan.price}</span>
                         <span className="text-sm text-yellow-700">{auditPlan.priceNote}</span>
                       </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            )}
+
+            {/* Guidance Alert - When user is unsure */}
+            {needsGuidance && (
+              <Card className="border-2 border-blue-500 bg-blue-50 mb-6">
+                <CardContent className="p-6">
+                  <div className="flex flex-col sm:flex-row items-start gap-4">
+                    <div className="flex-shrink-0 p-3 bg-blue-100 rounded-lg">
+                      <Lightbulb className="h-6 w-6 text-blue-600" />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="font-bold text-blue-900 text-lg mb-2">
+                        💡 ¿No estás seguro por dónde empezar?
+                      </h3>
+                      <p className="text-blue-800 mb-4">
+                        Entendemos que el marketing digital puede ser confuso. Agenda una llamada de 15 minutos <strong>sin costo</strong> con nuestro equipo para analizar tu situación específica y recibir orientación personalizada.
+                      </p>
+                      <Button 
+                        onClick={openCalendar}
+                        className="bg-blue-600 hover:bg-blue-700 text-white"
+                      >
+                        <Phone className="h-4 w-4 mr-2" />
+                        Agendar Llamada de Orientación
+                      </Button>
                     </div>
                   </div>
                 </CardContent>
