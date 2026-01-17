@@ -572,40 +572,15 @@ const DiagnosticResults = () => {
                     </cite>
                   </blockquote>
                   
-                  {/* Calendar Embed Placeholder */}
-                  <div className="bg-muted/50 rounded-xl p-8 border-2 border-dashed border-border text-center min-h-[400px] flex flex-col items-center justify-center">
-                    <Calendar className="h-16 w-16 text-primary/30 mb-4" />
-                    <p className="text-muted-foreground font-medium mb-2">
-                      Calendario de Citas
-                    </p>
-                    <p className="text-sm text-muted-foreground mb-4">
-                      Aquí se integrará tu calendario de Calendly o GHL
-                    </p>
-                    {/* Temporary CTA buttons while calendar is not embedded */}
-                    <div className="space-y-3 w-full max-w-sm">
-                      <Button 
-                        size="lg" 
-                        className="w-full text-lg py-6"
-                        onClick={() => {
-                          // TODO: Replace with actual calendar URL
-                          window.open('https://calendly.com', '_blank');
-                        }}
-                      >
-                        <Calendar className="h-5 w-5 mr-2" />
-                        Reservar Mi Llamada Gratis
-                      </Button>
-                      <Button 
-                        size="lg" 
-                        variant="outline"
-                        className="w-full"
-                        asChild
-                      >
-                        <a href="tel:+1234567890">
-                          <Phone className="h-4 w-4 mr-2" />
-                          Llamar Ahora
-                        </a>
-                      </Button>
-                    </div>
+                  {/* GHL Calendar Embed */}
+                  <div className="rounded-xl overflow-hidden border border-border bg-background">
+                    <iframe
+                      src="https://lnk.c3localmarketing.com/widget/bookings/carlos-cordero-personal-calendar-acqiob9im"
+                      style={{ width: '100%', height: '700px', border: 'none' }}
+                      scrolling="no"
+                      title="Agenda tu llamada de estrategia"
+                      loading="lazy"
+                    />
                   </div>
                   
                   {/* Trust badge */}
