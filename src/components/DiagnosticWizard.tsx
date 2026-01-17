@@ -6,11 +6,11 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Progress } from "@/components/ui/progress";
 import { useAnalytics } from "@/hooks/use-analytics";
-import { MapPinOff, TrendingUp, Crown, User, Users, Building2, Clock, CalendarClock, Infinity, FileText, Layers, Database, Loader2, Sparkles } from "lucide-react";
+import { MapPinOff, TrendingUp, Crown, User, Users, Building2, Clock, CalendarClock, Infinity, FileText, Layers, Database, Loader2, Sparkles, HelpCircle } from "lucide-react";
 
 type GoogleStatus = 'invisible' | 'noVende' | 'dominar' | 'nuevo' | null;
 type OperationSize = 'solo' | 'cuadrilla' | 'flota' | null;
-type Expectation = 'urgente' | 'proceso' | 'legado' | null;
+type Expectation = 'urgente' | 'proceso' | 'legado' | 'noSeguro' | null;
 type ClientManagement = 'papel' | 'apps' | 'crm' | null;
 
 interface WizardState {
@@ -80,7 +80,8 @@ const DiagnosticWizard = () => {
   const expectationOptions = [
     { value: 'urgente' as Expectation, label: 'Ayer / Urgente', icon: Clock },
     { value: 'proceso' as Expectation, label: '30-90 días (Entiendo el proceso)', icon: CalendarClock },
-    { value: 'legado' as Expectation, label: 'Largo plazo (Construir legado)', icon: Infinity }
+    { value: 'legado' as Expectation, label: 'Largo plazo (Construir legado)', icon: Infinity },
+    { value: 'noSeguro' as Expectation, label: 'No estoy seguro / Necesito orientación', icon: HelpCircle }
   ];
 
   // Step 4: Client Management Options
