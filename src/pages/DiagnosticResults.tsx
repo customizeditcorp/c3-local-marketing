@@ -572,11 +572,11 @@ const DiagnosticResults = () => {
                     </cite>
                   </blockquote>
                   
-                  {/* GHL Calendar Embed */}
+                  {/* GHL Calendar Embed - Responsive height */}
                   <div className="rounded-xl overflow-hidden border border-border bg-background">
                     <iframe
                       src="https://lnk.c3localmarketing.com/widget/bookings/carlos-cordero-personal-calendar-acqiob9im"
-                      style={{ width: '100%', height: '700px', border: 'none' }}
+                      className="w-full border-none h-[500px] sm:h-[600px] lg:h-[700px]"
                       scrolling="no"
                       title="Agenda tu llamada de estrategia"
                       loading="lazy"
