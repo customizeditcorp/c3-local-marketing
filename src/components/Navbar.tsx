@@ -1,8 +1,19 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { Calendar } from "lucide-react";
 import c3Logo from "@/assets/logos/c3Verticalorange200x200.svg";
+import googlePartner from "@/assets/logos/google-business-profile.webp";
+import certificadoGbp from "@/assets/logos/certificado-gbp.png";
+import sello20Anios from "@/assets/logos/sello-20-anios-experiencia.webp";
 
 const Navbar = () => {
+  const scrollToCalendar = () => {
+    const calendarSection = document.getElementById('calendar-section');
+    if (calendarSection) {
+      calendarSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white shadow-soft">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -14,11 +25,33 @@ const Navbar = () => {
               className="h-12 sm:h-16 w-auto"
             />
           </Link>
+          
+          {/* Certifications - Hidden on mobile, visible on tablet+ */}
+          <div className="hidden md:flex items-center gap-3 lg:gap-4">
+            <img 
+              src={googlePartner} 
+              alt="Google Business Profile Partner" 
+              className="h-8 lg:h-10 w-auto opacity-80 hover:opacity-100 transition-opacity"
+            />
+            <img 
+              src={certificadoGbp} 
+              alt="Certificado Google Business Profile" 
+              className="h-8 lg:h-10 w-auto opacity-80 hover:opacity-100 transition-opacity"
+            />
+            <img 
+              src={sello20Anios} 
+              alt="20 Años de Experiencia" 
+              className="h-8 lg:h-10 w-auto opacity-80 hover:opacity-100 transition-opacity"
+            />
+          </div>
+
           <Button 
-            variant="outline"
-            className="border-primary text-primary hover:bg-primary hover:text-white font-semibold"
+            onClick={scrollToCalendar}
+            className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold gap-2"
           >
-            Acceso Clientes
+            <Calendar className="h-4 w-4" />
+            <span className="hidden sm:inline">Agendar Llamada</span>
+            <span className="sm:hidden">Agendar</span>
           </Button>
         </div>
       </div>
