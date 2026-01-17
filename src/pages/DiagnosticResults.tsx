@@ -1,7 +1,7 @@
 import { useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Check, AlertTriangle, Lightbulb, Clock, Target, Phone, LayoutGrid } from "lucide-react";
+import { Check, AlertTriangle, Lightbulb, Clock, Target, Phone, LayoutGrid, Calendar, ChevronDown, Shield } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { z } from "zod";
@@ -14,6 +14,18 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+
+// Logos
+import certificadoGBP from "@/assets/logos/certificado-gbp.png";
+import sello20Anios from "@/assets/logos/sello-20-anios-experiencia.webp";
+import jvRoofingLogo from "@/assets/logos/jv-roofing-logo.png";
+import smvcLogo from "@/assets/logos/smvc.png";
 
 // Zod schema for validating URL query parameters
 const diagnosticParamsSchema = z.object({
@@ -189,6 +201,26 @@ const determineRecommendation = (
 
 const CALENDAR_URL = '#cta-final'; // Replace with actual Calendly/GHL URL
 
+// Pricing FAQs for objections
+const pricingFAQs = [
+  {
+    question: "¿Qué pasa si quiero cancelar?",
+    answer: "Puedes cancelar en cualquier momento. Sin penalidades, sin ataduras. Solo pedimos un aviso de 30 días."
+  },
+  {
+    question: "¿Quién es dueño de los activos digitales?",
+    answer: "TÚ eres dueño al 100% desde el día 1. Recibes todas las credenciales: dominio, hosting, Google Business, redes sociales, CRM. Todo."
+  },
+  {
+    question: "¿Cuándo veré resultados?",
+    answer: "Resultados iniciales (primeras llamadas, reseñas) en 30-45 días. Resultados sólidos y consistentes en 90 días."
+  },
+  {
+    question: "¿Incluye garantía?",
+    answer: "Si no recibes tus activos digitales como prometimos, ofrecemos reembolso proporcional. Tu inversión está protegida."
+  }
+];
+
 // Component for comparing plans in a modal
 const PlansComparisonModal = ({ currentPlanKey }: { currentPlanKey: string }) => {
   const [open, setOpen] = useState(false);
@@ -221,7 +253,7 @@ const PlansComparisonModal = ({ currentPlanKey }: { currentPlanKey: string }) =>
                       Recomendado
                     </div>
                   )}
-                  <CardHeader className="pb-2 pt-6">
+                  <CardHeader className="sticky top-0 z-10 bg-card pb-2 pt-6 border-b">
                     <CardTitle className="text-base font-bold text-center">
                       {plan.title}
                     </CardTitle>
@@ -326,9 +358,7 @@ const DiagnosticResults = () => {
   const auditPlan = planData.auditoria;
 
   const openCalendar = () => {
-    // TODO: Replace with actual calendar URL
-    // window.open('YOUR_CALENDLY_OR_GHL_URL', '_blank');
-    const element = document.getElementById('cta-final');
+    const element = document.getElementById('calendar-section');
     element?.scrollIntoView({ behavior: 'smooth' });
   };
 
@@ -399,6 +429,21 @@ const DiagnosticResults = () => {
                       {currentPlan.priceNote}
                     </p>
                   )}
+                  
+                  {/* Authority Badges */}
+                  <div className="flex items-center justify-center gap-4 mt-4 pt-4 border-t border-border/30">
+                    <img 
+                      src={sello20Anios} 
+                      alt="20+ Años de Experiencia" 
+                      className="h-12 w-auto opacity-90"
+                    />
+                    <div className="h-8 w-px bg-border" />
+                    <img 
+                      src={certificadoGBP} 
+                      alt="Google Business Profile Certificado" 
+                      className="h-10 w-auto opacity-90"
+                    />
+                  </div>
                 </div>
               </CardHeader>
               
@@ -471,30 +516,6 @@ const DiagnosticResults = () => {
                   </div>
                 </div>
 
-                {/* Dual CTA */}
-                <div className="space-y-3 pt-4">
-                  <Button 
-                    size="lg" 
-                    className="w-full text-lg py-6"
-                    onClick={openCalendar}
-                  >
-                    Quiero mi {currentPlan.title}
-                  </Button>
-                  <p className="text-xs text-center text-muted-foreground">
-                    (Agenda tu llamada de estrategia)
-                  </p>
-                  
-                  <Button 
-                    size="lg" 
-                    variant="outline"
-                    className="w-full text-base py-5"
-                    onClick={openCalendar}
-                  >
-                    <Phone className="h-4 w-4 mr-2" />
-                    ¿Tienes dudas? Agenda una llamada gratis
-                  </Button>
-                </div>
-
                 {/* Disclaimer */}
                 <p className="text-center text-sm text-muted-foreground pt-2">
                   🔒 Sin compromiso. Sin presión de venta. Conversación honesta sobre tu situación.
@@ -507,8 +528,118 @@ const DiagnosticResults = () => {
               <PlansComparisonModal currentPlanKey={primary} />
             </div>
 
+            {/* ========== CALENDAR SECTION ========== */}
+            <div id="calendar-section" className="mt-12 scroll-mt-24">
+              <Card className="border-2 border-primary/20 shadow-soft-lg overflow-hidden">
+                <CardHeader className="text-center pb-4 bg-gradient-to-b from-primary/5 to-transparent">
+                  <div className="inline-flex items-center px-3 py-1 bg-primary/10 rounded-full text-sm font-medium text-primary mb-4 mx-auto">
+                    <Calendar className="h-4 w-4 mr-1" />
+                    Siguiente Paso
+                  </div>
+                  <CardTitle className="text-2xl sm:text-3xl font-bold text-foreground">
+                    Agenda Tu Llamada de Estrategia
+                  </CardTitle>
+                  <p className="text-muted-foreground mt-2">
+                    30 minutos para definir tu plan de acción personalizado
+                  </p>
+                </CardHeader>
+                
+                <CardContent className="p-6 space-y-6">
+                  {/* Social Proof - Logos */}
+                  <div className="flex items-center justify-center gap-6 py-4 border-b border-border/50">
+                    <img 
+                      src={jvRoofingLogo} 
+                      alt="JV Roofing" 
+                      className="h-10 w-auto opacity-70 hover:opacity-100 transition-opacity"
+                    />
+                    <img 
+                      src={smvcLogo} 
+                      alt="SMVC" 
+                      className="h-10 w-auto opacity-70 hover:opacity-100 transition-opacity"
+                    />
+                    <span className="text-sm text-muted-foreground font-medium">
+                      +15 negocios locales
+                    </span>
+                  </div>
+                  
+                  {/* Testimonial */}
+                  <blockquote className="text-center py-4">
+                    <p className="text-lg italic text-muted-foreground">
+                      "De invisible a referente local en tiempo récord. Ahora mis clientes me encuentran en Google antes que a la competencia."
+                    </p>
+                    <cite className="block mt-3 text-sm font-semibold text-foreground not-italic">
+                      — Juan V., JV Roofing Services
+                    </cite>
+                  </blockquote>
+                  
+                  {/* Calendar Embed Placeholder */}
+                  <div className="bg-muted/50 rounded-xl p-8 border-2 border-dashed border-border text-center min-h-[400px] flex flex-col items-center justify-center">
+                    <Calendar className="h-16 w-16 text-primary/30 mb-4" />
+                    <p className="text-muted-foreground font-medium mb-2">
+                      Calendario de Citas
+                    </p>
+                    <p className="text-sm text-muted-foreground mb-4">
+                      Aquí se integrará tu calendario de Calendly o GHL
+                    </p>
+                    {/* Temporary CTA buttons while calendar is not embedded */}
+                    <div className="space-y-3 w-full max-w-sm">
+                      <Button 
+                        size="lg" 
+                        className="w-full text-lg py-6"
+                        onClick={() => {
+                          // TODO: Replace with actual calendar URL
+                          window.open('https://calendly.com', '_blank');
+                        }}
+                      >
+                        <Calendar className="h-5 w-5 mr-2" />
+                        Reservar Mi Llamada Gratis
+                      </Button>
+                      <Button 
+                        size="lg" 
+                        variant="outline"
+                        className="w-full"
+                        asChild
+                      >
+                        <a href="tel:+1234567890">
+                          <Phone className="h-4 w-4 mr-2" />
+                          Llamar Ahora
+                        </a>
+                      </Button>
+                    </div>
+                  </div>
+                  
+                  {/* Trust badge */}
+                  <p className="text-center text-sm text-muted-foreground flex items-center justify-center gap-2">
+                    <Shield className="h-4 w-4 text-primary" />
+                    Sin compromiso. Sin presión de venta. 100% confidencial.
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* ========== PRICING FAQ SECTION ========== */}
+            <div className="mt-12">
+              <h3 className="text-xl font-bold text-center mb-6 flex items-center justify-center gap-2">
+                <ChevronDown className="h-5 w-5 text-primary" />
+                Preguntas Frecuentes Sobre Precio
+              </h3>
+              
+              <Accordion type="single" collapsible className="w-full">
+                {pricingFAQs.map((faq, index) => (
+                  <AccordionItem key={index} value={`faq-${index}`} className="border rounded-lg mb-2 px-4">
+                    <AccordionTrigger className="text-left font-medium hover:no-underline">
+                      {faq.question}
+                    </AccordionTrigger>
+                    <AccordionContent className="text-muted-foreground">
+                      {faq.answer}
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </div>
+
             {/* Trust elements */}
-            <div className="flex flex-wrap justify-center gap-4 mt-6 text-sm text-muted-foreground">
+            <div className="flex flex-wrap justify-center gap-4 mt-8 text-sm text-muted-foreground">
               <span className="flex items-center gap-1">
                 <Check className="h-4 w-4 text-primary" />
                 100% de propiedad tuya
