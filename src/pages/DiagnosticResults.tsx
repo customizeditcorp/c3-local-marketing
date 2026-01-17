@@ -627,10 +627,10 @@ const DiagnosticResults = () => {
                   {/* GHL Calendar Embed - Responsive height */}
                   <div className="rounded-xl overflow-hidden border border-border bg-background">
                     <iframe
-                      src="https://lnk.c3localmarketing.com/widget/booking/Bp7r7yoVEoNujxhh4rWY"
+                      src="https://lnk.c3localmarketing.com/widget/booking/niXmOF5syJl2P16WGpex"
                       className="w-full border-none h-[500px] sm:h-[600px] lg:h-[700px]"
                       scrolling="no"
-                      id="Bp7r7yoVEoNujxhh4rWY_1768623277590"
+                      id="niXmOF5syJl2P16WGpex_1768623651908"
                       title="Agenda tu llamada de estrategia"
                       loading="lazy"
                     />
