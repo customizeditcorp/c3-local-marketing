@@ -1,11 +1,19 @@
 import { useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Check, AlertTriangle, Lightbulb, Clock, Target, Phone } from "lucide-react";
+import { Check, AlertTriangle, Lightbulb, Clock, Target, Phone, LayoutGrid } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { z } from "zod";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 // Zod schema for validating URL query parameters
 const diagnosticParamsSchema = z.object({
@@ -35,9 +43,40 @@ interface PlanDetails {
   description: string;
   helpMessage: string;
   features: string[];
+  inheritedFeatures?: string[]; // Features inherited from lower tier plan
+  inheritedFrom?: string; // Key of the plan from which features are inherited
   duration: string;
   targetProfile: string;
+  tier: number; // 0=audit, 1=presencia, 2=cimientos, 3=expansion, 4=dominio
 }
+
+// Core features for each plan (without "Todo lo de X" text)
+const cimientosFeatures = [
+  'Instalación Pixel, Analytics, Stripe',
+  '4 Posts Google Business Profile/mes',
+  'Respuesta a Reviews',
+  'Gestión de 1 Canal de Ads (Meta O Google)',
+  'Reporte mensual de resultados',
+  'Migración CRM básica'
+];
+
+const expansionFeatures = [
+  '4 Posts Estáticos + 4 Videos (Reels/TikTok)',
+  '3 Redes Sociales (IG/FB/TikTok)',
+  '2 Canales de Ads (Meta + Google)',
+  '8 Posts GBP/mes + SEO Local',
+  'App C3, CRM Completo, Chatbot Básico',
+  '30 min Asesoría/mes'
+];
+
+const dominioFeatures = [
+  'Campañas Bimensuales (Temporadas)',
+  '1 Landing Page por campaña + 1 Funnel',
+  'Email Marketing (Secuencias) + SMS',
+  'Review System automatizado',
+  'Chatbot Avanzado + ChatGPT Team Seat',
+  '60 min Asesoría Estratégica/mes'
+];
 
 const planData: Record<string, PlanDetails> = {
   auditoria: {
@@ -53,7 +92,8 @@ const planData: Record<string, PlanDetails> = {
       'Tiempo estimado: 35-45 días hábiles'
     ],
     duration: '35-45 días',
-    targetProfile: 'Negocios con inconsistencias NAP'
+    targetProfile: 'Negocios con inconsistencias NAP',
+    tier: 0
   },
   presencia: {
     title: 'Presencia Digital',
@@ -70,7 +110,8 @@ const planData: Record<string, PlanDetails> = {
       '100% de propiedad al finalizar'
     ],
     duration: '3 meses (proyecto finito)',
-    targetProfile: 'Contratista Nuevo (0-1 año)'
+    targetProfile: 'Contratista Nuevo (0-1 año)',
+    tier: 1
   },
   cimientos: {
     title: 'Programa Cimientos',
@@ -78,16 +119,10 @@ const planData: Record<string, PlanDetails> = {
     priceNote: 'Subsidio de entrada: $499 → $299 → $449 → $599',
     description: 'Mantenimiento técnico, reputación y tráfico constante para tu negocio en marcha.',
     helpMessage: 'Ya tienes presencia pero necesitas mantenimiento profesional y campañas activas. Este plan mantiene tu negocio visible sin que tú hagas nada.',
-    features: [
-      'Instalación Pixel, Analytics, Stripe',
-      '4 Posts Google Business Profile/mes',
-      'Respuesta a Reviews',
-      'Gestión de 1 Canal de Ads (Meta O Google)',
-      'Reporte mensual de resultados',
-      'Migración CRM básica'
-    ],
+    features: cimientosFeatures,
     duration: '6 meses mínimo',
-    targetProfile: 'Solopreneur ($10k-$20k/mes)'
+    targetProfile: 'Solopreneur ($10k-$20k/mes)',
+    tier: 2
   },
   expansion: {
     title: 'Plan Expansión Total',
@@ -95,17 +130,12 @@ const planData: Record<string, PlanDetails> = {
     priceNote: 'Beca de implementación: $599 x 3 meses, luego $1,299',
     description: 'Omnicanalidad, video y automatización para negocios establecidos.',
     helpMessage: 'Tienes equipo y capacidad de crecer, pero tu marketing no lo refleja. Este plan te da presencia en 3 redes + video + CRM completo.',
-    features: [
-      'Todo lo de Cimientos MÁS:',
-      '4 Posts Estáticos + 4 Videos (Reels/TikTok)',
-      '3 Redes Sociales (IG/FB/TikTok)',
-      '2 Canales de Ads (Meta + Google)',
-      '8 Posts GBP/mes + SEO Local',
-      'App C3, CRM Completo, Chatbot Básico',
-      '30 min Asesoría/mes'
-    ],
+    features: expansionFeatures,
+    inheritedFeatures: cimientosFeatures,
+    inheritedFrom: 'cimientos',
     duration: '6 meses mínimo',
-    targetProfile: 'Negocio Establecido ($20k-$50k/mes)'
+    targetProfile: 'Negocio Establecido ($20k-$50k/mes)',
+    tier: 3
   },
   dominio: {
     title: 'Plan Dominio Estratégico',
@@ -113,19 +143,17 @@ const planData: Record<string, PlanDetails> = {
     priceNote: 'Inversión escalonada: $600 → $1,299 x 3 → $2,599',
     description: 'Estrategia por temporadas, embudos de venta y marketing masivo para líderes locales.',
     helpMessage: 'Eres un líder en tu zona con capacidad de escalar. Este plan te convierte en la referencia de tu industria con campañas estacionales y funnels avanzados.',
-    features: [
-      'Todo lo de Expansión MÁS:',
-      'Campañas Bimensuales (Temporadas)',
-      '1 Landing Page por campaña + 1 Funnel',
-      'Email Marketing (Secuencias) + SMS',
-      'Review System automatizado',
-      'Chatbot Avanzado + ChatGPT Team Seat',
-      '60 min Asesoría Estratégica/mes'
-    ],
+    features: dominioFeatures,
+    inheritedFeatures: [...cimientosFeatures, ...expansionFeatures],
+    inheritedFrom: 'expansion',
     duration: '12 meses mínimo',
-    targetProfile: 'Líder Local ($50k+/mes)'
+    targetProfile: 'Líder Local ($50k+/mes)',
+    tier: 4
   }
 };
+
+// Plan keys in order for comparison table
+const planOrder = ['presencia', 'cimientos', 'expansion', 'dominio'] as const;
 
 const determineRecommendation = (
   google: string | null,
@@ -160,6 +188,102 @@ const determineRecommendation = (
 };
 
 const CALENDAR_URL = '#cta-final'; // Replace with actual Calendly/GHL URL
+
+// Component for comparing plans in a modal
+const PlansComparisonModal = ({ currentPlanKey }: { currentPlanKey: string }) => {
+  const [open, setOpen] = useState(false);
+  
+  return (
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger asChild>
+        <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-primary">
+          <LayoutGrid className="h-4 w-4 mr-2" />
+          Comparar Planes
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="max-w-4xl max-h-[90vh]">
+        <DialogHeader>
+          <DialogTitle className="text-xl">Comparación de Planes</DialogTitle>
+        </DialogHeader>
+        <ScrollArea className="max-h-[70vh] pr-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 pb-4">
+            {planOrder.map((planKey) => {
+              const plan = planData[planKey];
+              const isRecommended = planKey === currentPlanKey;
+              
+              return (
+                <Card 
+                  key={planKey} 
+                  className={`relative ${isRecommended ? 'border-2 border-primary ring-2 ring-primary/20' : 'border'}`}
+                >
+                  {isRecommended && (
+                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground text-xs font-semibold px-3 py-1 rounded-full">
+                      Recomendado
+                    </div>
+                  )}
+                  <CardHeader className="pb-2 pt-6">
+                    <CardTitle className="text-base font-bold text-center">
+                      {plan.title}
+                    </CardTitle>
+                    <p className="text-2xl font-bold text-center text-primary mt-2">
+                      {plan.price}
+                    </p>
+                    {plan.priceNote && (
+                      <p className="text-xs text-center text-muted-foreground">
+                        {plan.priceNote}
+                      </p>
+                    )}
+                  </CardHeader>
+                  <CardContent className="pt-2">
+                    <p className="text-xs text-muted-foreground text-center mb-4">
+                      {plan.targetProfile}
+                    </p>
+                    
+                    {/* Inherited features first (if any) */}
+                    {plan.inheritedFeatures && plan.inheritedFrom && (
+                      <div className="mb-3 pb-3 border-b border-dashed">
+                        <p className="text-xs font-medium text-muted-foreground mb-2">
+                          Incluye de {planData[plan.inheritedFrom].title}:
+                        </p>
+                        <ul className="space-y-1.5">
+                          {plan.inheritedFeatures.slice(0, 3).map((feature, idx) => (
+                            <li key={idx} className="flex items-start gap-2 text-xs text-muted-foreground">
+                              <Check className="h-3 w-3 text-muted-foreground flex-shrink-0 mt-0.5" />
+                              <span>{feature}</span>
+                            </li>
+                          ))}
+                          {plan.inheritedFeatures.length > 3 && (
+                            <li className="text-xs text-muted-foreground italic pl-5">
+                              +{plan.inheritedFeatures.length - 3} más...
+                            </li>
+                          )}
+                        </ul>
+                      </div>
+                    )}
+                    
+                    {/* Plan's own features */}
+                    <ul className="space-y-1.5">
+                      {plan.features.map((feature, idx) => (
+                        <li key={idx} className="flex items-start gap-2 text-xs">
+                          <Check className="h-3 w-3 text-primary flex-shrink-0 mt-0.5" />
+                          <span>{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    
+                    <div className="mt-4 pt-3 border-t text-center">
+                      <span className="text-xs text-muted-foreground">{plan.duration}</span>
+                    </div>
+                  </CardContent>
+                </Card>
+              );
+            })}
+          </div>
+        </ScrollArea>
+      </DialogContent>
+    </Dialog>
+  );
+};
 
 const DiagnosticResults = () => {
   const [searchParams] = useSearchParams();
@@ -283,17 +407,42 @@ const DiagnosticResults = () => {
                   {currentPlan.description}
                 </p>
                 
-                {/* Features List */}
-                <ul className="space-y-3">
-                  {currentPlan.features.map((feature, index) => (
-                    <li key={index} className="flex items-start gap-3">
-                      <div className="flex-shrink-0 h-6 w-6 rounded-full bg-primary/10 flex items-center justify-center mt-0.5">
-                        <Check className="h-4 w-4 text-primary" />
-                      </div>
-                      <span className="text-foreground">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
+                {/* Inherited Features - Expanded inline */}
+                {currentPlan.inheritedFeatures && currentPlan.inheritedFrom && (
+                  <div className="bg-muted/50 rounded-xl p-4 border border-border/50">
+                    <p className="text-sm font-medium text-muted-foreground mb-3 flex items-center gap-2">
+                      <Check className="h-4 w-4 text-primary" />
+                      Incluye todo de <span className="font-semibold text-foreground">{planData[currentPlan.inheritedFrom].title}</span>:
+                    </p>
+                    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                      {currentPlan.inheritedFeatures.map((feature, index) => (
+                        <li key={index} className="flex items-start gap-2 text-sm text-muted-foreground">
+                          <Check className="h-4 w-4 text-primary/60 flex-shrink-0 mt-0.5" />
+                          <span>{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {/* Plan's Own Features List */}
+                <div>
+                  {currentPlan.inheritedFrom && (
+                    <p className="text-sm font-medium text-primary mb-3">
+                      + Características exclusivas de {currentPlan.title}:
+                    </p>
+                  )}
+                  <ul className="space-y-3">
+                    {currentPlan.features.map((feature, index) => (
+                      <li key={index} className="flex items-start gap-3">
+                        <div className="flex-shrink-0 h-6 w-6 rounded-full bg-primary/10 flex items-center justify-center mt-0.5">
+                          <Check className="h-4 w-4 text-primary" />
+                        </div>
+                        <span className="text-foreground">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
 
                 {/* How it helps section */}
                 <div className="bg-blue-50 border border-blue-200 rounded-xl p-5">
@@ -353,8 +502,13 @@ const DiagnosticResults = () => {
               </CardContent>
             </Card>
 
+            {/* Compare Plans Button */}
+            <div className="flex justify-center mt-6">
+              <PlansComparisonModal currentPlanKey={primary} />
+            </div>
+
             {/* Trust elements */}
-            <div className="flex flex-wrap justify-center gap-4 mt-8 text-sm text-muted-foreground">
+            <div className="flex flex-wrap justify-center gap-4 mt-6 text-sm text-muted-foreground">
               <span className="flex items-center gap-1">
                 <Check className="h-4 w-4 text-primary" />
                 100% de propiedad tuya
