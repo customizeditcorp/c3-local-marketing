@@ -3,7 +3,6 @@ import HeroSection from "@/components/HeroSection";
 import TrustGridSection from "@/components/TrustGridSection";
 import VideoTestimonialSection from "@/components/VideoTestimonialSection";
 import DiagnosticSection from "@/components/DiagnosticSection";
-import SoftwareSection from "@/components/SoftwareSection";
 import TeamSection from "@/components/TeamSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import FAQSection from "@/components/FAQSection";
@@ -19,7 +18,6 @@ const Index = () => {
       <VideoTestimonialSection />
       <TrustGridSection />
       <DiagnosticSection />
-      <SoftwareSection />
       <TestimonialsSection />
       <TeamSection />
       <FAQSection />
