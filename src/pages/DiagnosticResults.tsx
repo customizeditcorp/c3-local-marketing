@@ -4,7 +4,30 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Check, AlertTriangle, Lightbulb, Clock, Target, Phone } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { z } from "zod";
+import { useMemo } from "react";
 
+// Zod schema for validating URL query parameters
+const diagnosticParamsSchema = z.object({
+  google: z.enum(['invisible', 'noVende', 'dominar']).nullable().optional(),
+  size: z.enum(['solo', 'cuadrilla', 'flota']).nullable().optional(),
+  expectation: z.enum(['urgente', 'proceso', 'legado']).nullable().optional(),
+  management: z.enum(['papel', 'apps', 'crm']).nullable().optional(),
+  business: z.string().max(100).nullable().optional(),
+});
+
+// Sanitize business name to prevent any potential issues
+const sanitizeBusinessName = (name: string | null | undefined): string | null => {
+  if (!name) return null;
+  // Decode, trim, and limit length
+  try {
+    const decoded = decodeURIComponent(name);
+    return decoded.trim().slice(0, 100);
+  } catch {
+    // If decoding fails, return null
+    return null;
+  }
+};
 interface PlanDetails {
   title: string;
   price: string;
@@ -141,12 +164,39 @@ const CALENDAR_URL = '#cta-final'; // Replace with actual Calendly/GHL URL
 const DiagnosticResults = () => {
   const [searchParams] = useSearchParams();
   
-  const google = searchParams.get('google');
-  const size = searchParams.get('size');
-  const expectation = searchParams.get('expectation');
-  const management = searchParams.get('management');
-  const businessName = searchParams.get('business');
+  // Parse and validate all query parameters with Zod
+  const validatedParams = useMemo(() => {
+    const rawParams = {
+      google: searchParams.get('google'),
+      size: searchParams.get('size'),
+      expectation: searchParams.get('expectation'),
+      management: searchParams.get('management'),
+      business: searchParams.get('business'),
+    };
+    
+    const result = diagnosticParamsSchema.safeParse(rawParams);
+    
+    if (result.success) {
+      return {
+        google: result.data.google ?? null,
+        size: result.data.size ?? null,
+        expectation: result.data.expectation ?? null,
+        management: result.data.management ?? null,
+        businessName: sanitizeBusinessName(result.data.business),
+      };
+    }
+    
+    // If validation fails, return safe defaults
+    return {
+      google: null,
+      size: null,
+      expectation: null,
+      management: null,
+      businessName: null,
+    };
+  }, [searchParams]);
 
+  const { google, size, expectation, management, businessName } = validatedParams;
   const { primary, requiresAudit } = determineRecommendation(google, size, expectation, management);
   const currentPlan = planData[primary];
   const auditPlan = planData.auditoria;
@@ -176,7 +226,7 @@ const DiagnosticResults = () => {
               </h1>
               {businessName && (
                 <p className="text-lg text-muted-foreground mt-2">
-                  para <span className="font-semibold text-foreground">{decodeURIComponent(businessName)}</span>
+                  para <span className="font-semibold text-foreground">{businessName}</span>
                 </p>
               )}
             </div>
