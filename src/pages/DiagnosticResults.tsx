@@ -5,7 +5,7 @@ import { Check, AlertTriangle, Lightbulb, Clock, Target, Phone, LayoutGrid, Cale
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { z } from "zod";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import {
   Dialog,
   DialogContent,
@@ -371,6 +371,20 @@ const DiagnosticResults = () => {
   const currentPlan = planData[primary];
   const auditPlan = planData.auditoria;
 
+  // Load GHL form embed script
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://lnk.c3localmarketing.com/js/form_embed.js';
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      if (document.body.contains(script)) {
+        document.body.removeChild(script);
+      }
+    };
+  }, []);
+
   const openCalendar = () => {
     const element = document.getElementById('calendar-section');
     element?.scrollIntoView({ behavior: 'smooth' });
@@ -610,15 +624,15 @@ const DiagnosticResults = () => {
                     </cite>
                   </blockquote>
                   
-                  {/* GHL Calendar Embed - Responsive height with scrolling enabled */}
+                  {/* GHL Calendar Embed - Responsive height */}
                   <div className="rounded-xl overflow-hidden border border-border bg-background">
                     <iframe
-                      src="https://lnk.c3localmarketing.com/widget/bookings/carlos-cordero-personal-calendar-acqiob9im"
-                      className="w-full border-none h-[600px] sm:h-[700px] lg:h-[800px]"
-                      scrolling="yes"
+                      src="https://lnk.c3localmarketing.com/widget/booking/Bp7r7yoVEoNujxhh4rWY"
+                      className="w-full border-none h-[500px] sm:h-[600px] lg:h-[700px]"
+                      scrolling="no"
+                      id="Bp7r7yoVEoNujxhh4rWY_1768623277590"
                       title="Agenda tu llamada de estrategia"
                       loading="lazy"
-                      style={{ minHeight: '600px' }}
                     />
                   </div>
                   
