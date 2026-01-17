@@ -5,7 +5,7 @@ import { Check, AlertTriangle, Lightbulb, Clock, Target, Phone, LayoutGrid, Cale
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { z } from "zod";
-import { useMemo, useState, useEffect } from "react";
+import { useMemo, useState, useEffect, useLayoutEffect } from "react";
 import {
   Dialog,
   DialogContent,
@@ -378,6 +378,11 @@ const DiagnosticResults = () => {
   const { primary, requiresAudit, showPaymentPlan, needsGuidance } = determineRecommendation(google, size, expectation, management);
   const currentPlan = planData[primary];
   const auditPlan = planData.auditoria;
+
+  // Scroll to top on page load
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   // Load GHL form embed script
   useEffect(() => {
