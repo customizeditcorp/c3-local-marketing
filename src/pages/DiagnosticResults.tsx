@@ -29,7 +29,7 @@ import smvcLogo from "@/assets/logos/smvc.png";
 
 // Zod schema for validating URL query parameters
 const diagnosticParamsSchema = z.object({
-  google: z.enum(['invisible', 'noVende', 'dominar']).nullable().optional(),
+  google: z.enum(['invisible', 'noVende', 'dominar', 'nuevo']).nullable().optional(),
   size: z.enum(['solo', 'cuadrilla', 'flota']).nullable().optional(),
   expectation: z.enum(['urgente', 'proceso', 'legado']).nullable().optional(),
   management: z.enum(['papel', 'apps', 'crm']).nullable().optional(),
@@ -172,31 +172,41 @@ const determineRecommendation = (
   size: string | null,
   expectation: string | null,
   management: string | null
-): { primary: string; requiresAudit: boolean } => {
+): { primary: string; requiresAudit: boolean; showPaymentPlan: boolean } => {
   // PASO 1: Detectar si necesita Auditoría NAP
   const requiresAudit = google === 'invisible';
   
-  // PASO 2: Determinar plan principal según perfil
-  let primary = 'presencia'; // Default
+  // PASO 2: Detectar si es contratista nuevo (recién obtuvo licencia)
+  const isNewContractor = google === 'nuevo';
   
-  // Nuevo / Solo → Presencia Digital (One-Time)
-  if (size === 'solo') {
+  // PASO 3: Determinar plan principal según perfil
+  let primary = 'presencia'; // Default
+  let showPaymentPlan = false;
+  
+  // Contratista nuevo → Presencia Digital siempre
+  if (isNewContractor) {
     primary = 'presencia';
   }
-  // Cuadrilla pequeña con papel → Cimientos (Tier 1)
+  // Solo / Empezando → Presencia Digital (One-Time)
+  else if (size === 'solo') {
+    primary = 'presencia';
+  }
+  // Cuadrilla pequeña con papel → Cimientos (Tier 1) con opción de beca
   else if (size === 'cuadrilla' && management === 'papel') {
     primary = 'cimientos';
+    showPaymentPlan = true; // Mostrar opción de facilidades
   }
   // Cuadrilla con apps/crm → Expansión (Tier 2)
   else if (size === 'cuadrilla' && (management === 'apps' || management === 'crm')) {
     primary = 'expansion';
+    showPaymentPlan = true;
   }
   // Flota / Líder → Dominio (Tier 3)
   else if (size === 'flota') {
     primary = 'dominio';
   }
   
-  return { primary, requiresAudit };
+  return { primary, requiresAudit, showPaymentPlan };
 };
 
 const CALENDAR_URL = '#cta-final'; // Replace with actual Calendly/GHL URL
@@ -228,17 +238,21 @@ const PlansComparisonModal = ({ currentPlanKey }: { currentPlanKey: string }) =>
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-primary">
-          <LayoutGrid className="h-4 w-4 mr-2" />
-          Comparar Planes
+        <Button 
+          variant="outline" 
+          size="lg" 
+          className="border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground font-semibold px-6 py-3 gap-2"
+        >
+          <LayoutGrid className="h-5 w-5" />
+          Comparar Todos los Planes
         </Button>
       </DialogTrigger>
-      <DialogContent className="max-w-4xl max-h-[90vh]">
-        <DialogHeader>
-          <DialogTitle className="text-xl">Comparación de Planes</DialogTitle>
+      <DialogContent className="max-w-[95vw] sm:max-w-4xl max-h-[85vh] overflow-hidden">
+        <DialogHeader className="pb-4 border-b">
+          <DialogTitle className="text-xl sm:text-2xl font-bold">Comparación de Planes</DialogTitle>
         </DialogHeader>
-        <ScrollArea className="max-h-[70vh] pr-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 pb-4">
+        <ScrollArea className="h-[calc(85vh-120px)] pr-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pb-6 pt-4">
             {planOrder.map((planKey) => {
               const plan = planData[planKey];
               const isRecommended = planKey === currentPlanKey;
@@ -246,28 +260,28 @@ const PlansComparisonModal = ({ currentPlanKey }: { currentPlanKey: string }) =>
               return (
                 <Card 
                   key={planKey} 
-                  className={`relative ${isRecommended ? 'border-2 border-primary ring-2 ring-primary/20' : 'border'}`}
+                  className={`relative ${isRecommended ? 'border-2 border-primary ring-2 ring-primary/20 shadow-lg' : 'border'}`}
                 >
                   {isRecommended && (
-                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground text-xs font-semibold px-3 py-1 rounded-full">
-                      Recomendado
+                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground text-xs font-bold px-4 py-1.5 rounded-full whitespace-nowrap shadow-md">
+                      ✓ Recomendado
                     </div>
                   )}
-                  <CardHeader className="sticky top-0 z-10 bg-card pb-2 pt-6 border-b">
-                    <CardTitle className="text-base font-bold text-center">
+                  <CardHeader className="bg-card pb-3 pt-6 border-b">
+                    <CardTitle className="text-base sm:text-lg font-bold text-center">
                       {plan.title}
                     </CardTitle>
-                    <p className="text-2xl font-bold text-center text-primary mt-2">
+                    <p className="text-2xl sm:text-3xl font-bold text-center text-primary mt-2">
                       {plan.price}
                     </p>
                     {plan.priceNote && (
-                      <p className="text-xs text-center text-muted-foreground">
+                      <p className="text-xs text-center text-muted-foreground mt-1">
                         {plan.priceNote}
                       </p>
                     )}
                   </CardHeader>
-                  <CardContent className="pt-2">
-                    <p className="text-xs text-muted-foreground text-center mb-4">
+                  <CardContent className="pt-3">
+                    <p className="text-xs text-muted-foreground text-center mb-4 font-medium">
                       {plan.targetProfile}
                     </p>
                     
@@ -353,7 +367,7 @@ const DiagnosticResults = () => {
   }, [searchParams]);
 
   const { google, size, expectation, management, businessName } = validatedParams;
-  const { primary, requiresAudit } = determineRecommendation(google, size, expectation, management);
+  const { primary, requiresAudit, showPaymentPlan } = determineRecommendation(google, size, expectation, management);
   const currentPlan = planData[primary];
   const auditPlan = planData.auditoria;
 
@@ -430,18 +444,18 @@ const DiagnosticResults = () => {
                     </p>
                   )}
                   
-                  {/* Authority Badges */}
-                  <div className="flex items-center justify-center gap-4 mt-4 pt-4 border-t border-border/30">
+                  {/* Authority Badges - Larger */}
+                  <div className="flex items-center justify-center gap-6 mt-6 pt-6 border-t border-border/30">
                     <img 
                       src={sello20Anios} 
                       alt="20+ Años de Experiencia" 
-                      className="h-12 w-auto opacity-90"
+                      className="h-16 sm:h-20 w-auto opacity-90 hover:opacity-100 transition-opacity"
                     />
-                    <div className="h-8 w-px bg-border" />
+                    <div className="h-12 w-px bg-border" />
                     <img 
                       src={certificadoGBP} 
                       alt="Google Business Profile Certificado" 
-                      className="h-10 w-auto opacity-90"
+                      className="h-14 sm:h-16 w-auto opacity-90 hover:opacity-100 transition-opacity"
                     />
                   </div>
                 </div>
@@ -523,6 +537,30 @@ const DiagnosticResults = () => {
               </CardContent>
             </Card>
 
+            {/* Payment Plan CTA - Only for eligible plans */}
+            {showPaymentPlan && (
+              <Card className="mt-6 border-2 border-green-500/50 bg-gradient-to-r from-green-50 to-emerald-50">
+                <CardContent className="p-6 text-center">
+                  <div className="flex items-center justify-center gap-2 mb-3">
+                    <span className="text-2xl">💰</span>
+                    <h4 className="text-lg font-bold text-green-800">
+                      ¿Quieres comenzar con facilidades de pago?
+                    </h4>
+                  </div>
+                  <p className="text-green-700 mb-4">
+                    Pregunta por nuestro <span className="font-semibold">Programa de Becas</span> y opciones de pago escalonado en tu llamada de estrategia.
+                  </p>
+                  <Button 
+                    onClick={openCalendar}
+                    className="bg-green-600 hover:bg-green-700 text-white font-semibold gap-2"
+                  >
+                    <Phone className="h-4 w-4" />
+                    Consultar Facilidades de Pago
+                  </Button>
+                </CardContent>
+              </Card>
+            )}
+
             {/* Compare Plans Button */}
             <div className="flex justify-center mt-6">
               <PlansComparisonModal currentPlanKey={primary} />
@@ -572,14 +610,15 @@ const DiagnosticResults = () => {
                     </cite>
                   </blockquote>
                   
-                  {/* GHL Calendar Embed - Responsive height */}
+                  {/* GHL Calendar Embed - Responsive height with scrolling enabled */}
                   <div className="rounded-xl overflow-hidden border border-border bg-background">
                     <iframe
                       src="https://lnk.c3localmarketing.com/widget/bookings/carlos-cordero-personal-calendar-acqiob9im"
-                      className="w-full border-none h-[500px] sm:h-[600px] lg:h-[700px]"
-                      scrolling="no"
+                      className="w-full border-none h-[600px] sm:h-[700px] lg:h-[800px]"
+                      scrolling="yes"
                       title="Agenda tu llamada de estrategia"
                       loading="lazy"
+                      style={{ minHeight: '600px' }}
                     />
                   </div>
                   

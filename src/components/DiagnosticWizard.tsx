@@ -6,9 +6,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Progress } from "@/components/ui/progress";
 import { useAnalytics } from "@/hooks/use-analytics";
-import { MapPinOff, TrendingUp, Crown, User, Users, Building2, Clock, CalendarClock, Infinity, FileText, Layers, Database, Loader2 } from "lucide-react";
+import { MapPinOff, TrendingUp, Crown, User, Users, Building2, Clock, CalendarClock, Infinity, FileText, Layers, Database, Loader2, Sparkles } from "lucide-react";
 
-type GoogleStatus = 'invisible' | 'noVende' | 'dominar' | null;
+type GoogleStatus = 'invisible' | 'noVende' | 'dominar' | 'nuevo' | null;
 type OperationSize = 'solo' | 'cuadrilla' | 'flota' | null;
 type Expectation = 'urgente' | 'proceso' | 'legado' | null;
 type ClientManagement = 'papel' | 'apps' | 'crm' | null;
@@ -61,8 +61,9 @@ const DiagnosticWizard = () => {
     }
   }, [isCalculating]);
 
-  // Step 1: Google Status Options
+  // Step 1: Google Status Options (including new contractor option)
   const googleOptions = [
+    { value: 'nuevo' as GoogleStatus, label: 'Recién obtuve mi licencia / Voy empezando', icon: Sparkles },
     { value: 'invisible' as GoogleStatus, label: 'No aparezco / Suspendido', icon: MapPinOff },
     { value: 'noVende' as GoogleStatus, label: 'Aparezco pero no vendo', icon: TrendingUp },
     { value: 'dominar' as GoogleStatus, label: 'Quiero dominar la zona', icon: Crown }
