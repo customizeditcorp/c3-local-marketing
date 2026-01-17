@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Progress } from "@/components/ui/progress";
 import { useAnalytics } from "@/hooks/use-analytics";
-import { MapPinOff, TrendingUp, Crown, User, Users, Building2, Clock, CalendarClock, Infinity, FileText, Layers, Database } from "lucide-react";
+import { MapPinOff, TrendingUp, Crown, User, Users, Building2, Clock, CalendarClock, Infinity, FileText, Layers, Database, Loader2 } from "lucide-react";
 
 type GoogleStatus = 'invisible' | 'noVende' | 'dominar' | null;
 type OperationSize = 'solo' | 'cuadrilla' | 'flota' | null;
@@ -18,20 +18,31 @@ interface WizardState {
   operationSize: OperationSize;
   expectation: Expectation;
   clientManagement: ClientManagement;
+  businessName: string;
   name: string;
   phone: string;
   email: string;
 }
 
+const loadingMessages = [
+  "Analizando tus respuestas...",
+  "Revisando factores de riesgo...",
+  "Calculando estrategia ideal...",
+  "Preparando tu plan personalizado..."
+];
+
 const DiagnosticWizard = () => {
   const navigate = useNavigate();
   const { trackLead } = useAnalytics();
   const [currentStep, setCurrentStep] = useState(1);
+  const [isCalculating, setIsCalculating] = useState(false);
+  const [loadingMessageIndex, setLoadingMessageIndex] = useState(0);
   const [state, setState] = useState<WizardState>({
     googleStatus: null,
     operationSize: null,
     expectation: null,
     clientManagement: null,
+    businessName: '',
     name: '',
     phone: '',
     email: ''
@@ -39,6 +50,16 @@ const DiagnosticWizard = () => {
 
   const totalSteps = 5;
   const progress = (currentStep / totalSteps) * 100;
+
+  // Rotate loading messages
+  useEffect(() => {
+    if (isCalculating) {
+      const interval = setInterval(() => {
+        setLoadingMessageIndex((prev) => (prev + 1) % loadingMessages.length);
+      }, 1000);
+      return () => clearInterval(interval);
+    }
+  }, [isCalculating]);
 
   // Step 1: Google Status Options
   const googleOptions = [
@@ -80,11 +101,13 @@ const DiagnosticWizard = () => {
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+    setIsCalculating(true);
     trackLead('Diagnostic Wizard');
 
     // TODO: Send to GoHighLevel Webhook
     // const webhookData = {
+    //   businessName: state.businessName,
     //   name: state.name,
     //   email: state.email,
     //   phone: state.phone,
@@ -93,10 +116,21 @@ const DiagnosticWizard = () => {
     //   expectation: state.expectation,
     //   clientManagement: state.clientManagement
     // };
-    // fetch('YOUR_GHL_WEBHOOK_URL', { method: 'POST', body: JSON.stringify(webhookData) });
+    // await fetch('YOUR_GHL_WEBHOOK_URL', { method: 'POST', body: JSON.stringify(webhookData) });
+
+    // Animation delay (3 seconds)
+    await new Promise(resolve => setTimeout(resolve, 3000));
 
     // Navigate to results with all parameters
-    navigate(`/resultados?google=${state.googleStatus}&size=${state.operationSize}&expectation=${state.expectation}&management=${state.clientManagement}`);
+    const params = new URLSearchParams({
+      google: state.googleStatus || '',
+      size: state.operationSize || '',
+      expectation: state.expectation || '',
+      management: state.clientManagement || '',
+      business: state.businessName
+    });
+    
+    navigate(`/resultados?${params.toString()}`);
   };
 
   const canProceed = () => {
@@ -105,10 +139,34 @@ const DiagnosticWizard = () => {
       case 2: return state.operationSize !== null;
       case 3: return state.expectation !== null;
       case 4: return state.clientManagement !== null;
-      case 5: return state.name && state.phone && state.email;
+      case 5: return state.businessName && state.name && state.phone && state.email;
       default: return false;
     }
   };
+
+  // Calculating Animation Screen
+  if (isCalculating) {
+    return (
+      <Card className="max-w-2xl mx-auto border-0 shadow-soft-lg">
+        <CardContent className="p-8 sm:p-12">
+          <div className="text-center space-y-6">
+            <div className="relative mx-auto w-20 h-20">
+              <Loader2 className="w-20 h-20 text-primary animate-spin" />
+            </div>
+            <div className="space-y-2">
+              <h3 className="text-xl sm:text-2xl font-bold text-foreground">
+                {loadingMessages[loadingMessageIndex]}
+              </h3>
+              <p className="text-muted-foreground">
+                Esto tomará solo un momento...
+              </p>
+            </div>
+            <Progress value={((loadingMessageIndex + 1) / loadingMessages.length) * 100} className="h-2 bg-muted [&>div]:bg-primary" />
+          </div>
+        </CardContent>
+      </Card>
+    );
+  }
 
   return (
     <Card className="max-w-2xl mx-auto border-0 shadow-soft-lg">
@@ -243,7 +301,7 @@ const DiagnosticWizard = () => {
           <div className="space-y-6">
             <div className="text-center mb-4">
               <h3 className="text-xl sm:text-2xl font-bold text-foreground">
-                Analizando resultados...
+                ¡Último paso!
               </h3>
               <p className="text-muted-foreground mt-2">
                 Ingresa tus datos para ver tu plan personalizado
@@ -251,7 +309,18 @@ const DiagnosticWizard = () => {
             </div>
             <div className="space-y-4">
               <div>
-                <Label htmlFor="name">Nombre</Label>
+                <Label htmlFor="businessName">Nombre de tu Negocio</Label>
+                <Input
+                  id="businessName"
+                  type="text"
+                  placeholder="Ej: JV Roofing, Cali Painting..."
+                  value={state.businessName}
+                  onChange={(e) => setState({ ...state, businessName: e.target.value })}
+                  className="mt-1"
+                />
+              </div>
+              <div>
+                <Label htmlFor="name">Tu Nombre</Label>
                 <Input
                   id="name"
                   type="text"
