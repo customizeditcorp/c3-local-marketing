@@ -85,6 +85,11 @@ export const translations = {
       },
     },
     results: {
+      stepper: {
+        diagnosis: 'Diagnóstico',
+        results: 'Resultados',
+        call: 'Llamada',
+      },
       recommendedPlan: 'Tu Plan Recomendado',
       approveStarter: 'Aprobar mi Plan Starter',
       scheduleStrategy: 'Agendar Llamada de Estrategia',
@@ -107,11 +112,136 @@ export const translations = {
     faq: {
       title: 'Preguntas',
       titleHighlight: 'Frecuentes',
+      questions: [
+        {
+          question: "¿Para qué tipo de negocios funciona esto?",
+          answer: "El Sistema Imán Local™ está diseñado específicamente para negocios de servicios locales (home services):\n\n• Landscaping, plomería, HVAC, electricidad\n• Construcción, pintura, remodelación\n• Roofing y otros servicios del hogar\n\nSi tienes 4+ empleados y quieres dejar de depender solo de referencias, esto es para ti."
+        },
+        {
+          question: "¿Realmente seré dueño de todo?",
+          answer: "Sí, 100%. Al final de los 90 días recibes todas las credenciales:\n\n• Gmail corporativo\n• Squarespace (website)\n• Google Business Profile\n\nTodo está a tu nombre desde el principio. Si dejas de trabajar con nosotros, te quedas con todo funcionando."
+        },
+        {
+          question: "¿Por qué 90 días y no más rápido?",
+          answer: "Porque hacemos las cosas bien:\n\n• Verificación de Google Business Profile: 3-5 semanas (especialmente sin sede física)\n• Optimización SEO correcta: necesita tiempo de implementación\n• Diseño y contenido de calidad: no se puede apurar\n\n90 días es el tiempo real para resultados sólidos, no para cobrar mensualidades eternas."
+        },
+        {
+          question: "¿Qué pasa después de los 90 días?",
+          answer: "Tu sistema sigue trabajando 100% solo:\n\n• No hay mensualidades obligatorias\n• Solo pagas hosting de Squarespace (~$16-23/mes directo al proveedor)\n• Mantenimiento opcional disponible desde $300/mes (actualizar contenido, gestionar reseñas, etc.)\n\n¡Pero NO es obligatorio! Tu sistema funciona solo."
+        },
+        {
+          question: "¿Necesito saber de tecnología?",
+          answer: "No. Todo el proceso técnico lo manejamos nosotros.\n\nTú solo necesitas:\n• Aprobar diseños\n• Proveer fotos de tus servicios\n\nAl final te capacitamos para tareas básicas (responder reseñas, actualizar horarios), pero son cosas simples."
+        },
+        {
+          question: "¿Funciona si no tengo oficina física?",
+          answer: "Sí. Tenemos experiencia específica verificando negocios de área de servicio (sin dirección física visible). El proceso toma ~5 semanas vs ~3 semanas con oficina, pero funciona perfecto."
+        },
+        {
+          question: "¿Incluye publicidad en Google?",
+          answer: "El sistema te deja ads-ready desde día 1, pero la inversión en publicidad es adicional y opcional. Puedes empezar orgánico (gratis) o acelerar con ads cuando quieras (presupuesto sugerido: $500-1,000/mes)."
+        },
+        {
+          question: "¿Qué pasa si no estoy satisfecho?",
+          answer: "Durante los 90 días hacemos revisiones ilimitadas hasta tu aprobación. Al final, si no tienes acceso a todos tus activos digitales como prometimos, te reembolsamos la parte proporcional."
+        },
+        {
+          question: "¿Por qué solo 10 espacios al mes?",
+          answer: "Cada implementación requiere atención personalizada:\n\n• Brief detallado de tu negocio\n• Diseño custom (no plantillas)\n• Verificación manual de Google\n• Capacitación 1-on-1 al final\n\nPara mantener calidad, limitamos a 10 implementaciones simultáneas."
+        }
+      ],
+    },
+    team: {
+      subtitle: 'Respaldado por humanos expertos.',
+      yearsExperience: 'Años de Experiencia Combinada',
+    },
+    testimonials: {
+      title: 'Resultados',
+      titleHighlight: 'Reales',
+      subtitle: 'De invisible a imparable, así como lo harás tú',
+      items: [
+        {
+          quote: "C3 recuperó mi perfil, lo optimizamos juntos y ahora está verificado y funcionando perfecto.",
+          name: "Loe Sepulveda",
+          business: "Cali Painting",
+          result: "Perfil recuperado y verificado"
+        },
+        {
+          quote: "C3 me recuperó al 100% todos mis activos digitales que perdí con otras agencias.",
+          name: "Lorenzo",
+          business: "Lorenzo's Plumbing",
+          result: "100% de sus activos recuperados"
+        },
+        {
+          quote: "Unificaron 5 sedes bajo una misma cuenta. Ahora todo está ordenado para nuestra expansión.",
+          name: "AGS Recycling",
+          business: "AGS Recycling (5 Sedes)",
+          result: "5 sedes unificadas y verificadas"
+        },
+        {
+          quote: "Desde la primera semana me entregaron resultados. Mis números no paran de crecer.",
+          name: "Jose Valdovinos",
+          business: "JV Roofing INC",
+          result: "Resultados desde la primera semana"
+        },
+        {
+          quote: "Más de 6 años con C3. Recibo proyectos constantemente gracias a mi presencia digital.",
+          name: "Octavio Claudio",
+          business: "Bajascape LLC",
+          result: "Más de 6 años de relación exitosa"
+        },
+        {
+          quote: "Las visitas al perfil y a la web se dispararon completamente después de trabajar con C3.",
+          name: "Destiny Castro",
+          business: "Transmission Exchange",
+          result: "Visitas al perfil y web se dispararon"
+        }
+      ],
+    },
+    pricing: {
+      title: 'Inversión',
+      titleHighlight: 'Única',
+      subtitle: 'Sin mensualidades eternas. Un solo pago, todo es tuyo.',
+      planTitle: 'Sistema Imán Local™ Completo',
+      paymentOptions: 'Opciones de Pago:',
+      fullPayment: 'Pago completo: $3,135 (5% descuento)',
+      monthlyPayments: '3 pagos mensuales: $1,100 cada uno',
+      implementation: '90 días de implementación completa',
+      whatIncluded: 'Qué Incluye:',
+      optionalServices: 'Servicios Opcionales:',
+      hostingNote: 'Nota de Hosting:',
+      hostingText: '+ Hosting Squarespace: ~$16-23/mes (pago directo al proveedor - eres dueño desde día 1)',
+      urgencyTitle: '⏰ CONDICIÓN ESPECIAL:',
+      urgencyText: 'Solo disponible para los primeros 10 negocios de servicios que inicien este mes.',
+      urgencyReason: '¿Por qué esta limitación? Solo podemos manejar la implementación de 10 negocios simultáneamente para garantizar calidad y atención personalizada. Después de estos 10 espacios, el precio vuelve a $4,000.',
+      cta: 'Agendar Llamada de Diagnóstico Gratuita',
+      includes: [
+        "Google Business Profile verificado y optimizado",
+        "Website profesional (5-7 páginas) en Squarespace",
+        "Dominio .com (.org, .net disponibles)",
+        "Correo corporativo Gmail (5 cuentas)",
+        "Análisis de competencia completo",
+        "10 keywords estratégicas + SEO local",
+        "Configuración de LinkTree",
+        "Contenido profesional optimizado",
+        "Capacitación completa",
+        "Todas las credenciales (eres dueño 100%)"
+      ],
+      notIncluded: [
+        "Fotos profesionales (opcionales: +$500-1,000)",
+        "Videos promocionales (opcionales: +$800-1,500)",
+        "Gestión mensual de reviews (opcional: desde $300/mes)",
+        "Gestión de Google Ads (opcional: desde $500/mes + presupuesto publicitario)"
+      ],
     },
     footer: {
       copyright: '© 2025 C3 Marketing Hub. Todos los derechos reservados.',
       privacy: 'Privacidad',
       terms: 'Términos',
+    },
+    legal: {
+      backToHome: '← Volver al inicio',
+      lastUpdated: 'Última actualización: Enero 2025',
     },
   },
   en: {
@@ -200,6 +330,11 @@ export const translations = {
       },
     },
     results: {
+      stepper: {
+        diagnosis: 'Diagnosis',
+        results: 'Results',
+        call: 'Call',
+      },
       recommendedPlan: 'Your Recommended Plan',
       approveStarter: 'Approve My Starter Plan',
       scheduleStrategy: 'Schedule Strategy Call',
@@ -222,11 +357,136 @@ export const translations = {
     faq: {
       title: 'Frequently',
       titleHighlight: 'Asked Questions',
+      questions: [
+        {
+          question: "What type of businesses does this work for?",
+          answer: "The Local Magnet System™ is specifically designed for local service businesses (home services):\n\n• Landscaping, plumbing, HVAC, electrical\n• Construction, painting, remodeling\n• Roofing and other home services\n\nIf you have 4+ employees and want to stop depending only on referrals, this is for you."
+        },
+        {
+          question: "Will I really own everything?",
+          answer: "Yes, 100%. At the end of the 90 days you receive all credentials:\n\n• Corporate Gmail\n• Squarespace (website)\n• Google Business Profile\n\nEverything is in your name from the beginning. If you stop working with us, you keep everything working."
+        },
+        {
+          question: "Why 90 days and not faster?",
+          answer: "Because we do things right:\n\n• Google Business Profile verification: 3-5 weeks (especially without physical location)\n• Proper SEO optimization: needs implementation time\n• Quality design and content: cannot be rushed\n\n90 days is the real time for solid results, not for charging eternal monthly fees."
+        },
+        {
+          question: "What happens after the 90 days?",
+          answer: "Your system keeps working 100% on its own:\n\n• No mandatory monthly fees\n• You only pay Squarespace hosting (~$16-23/month direct to provider)\n• Optional maintenance available from $300/month (update content, manage reviews, etc.)\n\nBut it's NOT mandatory! Your system works on its own."
+        },
+        {
+          question: "Do I need to know about technology?",
+          answer: "No. We handle all the technical process.\n\nYou only need to:\n• Approve designs\n• Provide photos of your services\n\nAt the end we train you for basic tasks (respond to reviews, update hours), but they're simple things."
+        },
+        {
+          question: "Does it work if I don't have a physical office?",
+          answer: "Yes. We have specific experience verifying service area businesses (without visible physical address). The process takes ~5 weeks vs ~3 weeks with an office, but it works perfectly."
+        },
+        {
+          question: "Does it include Google advertising?",
+          answer: "The system leaves you ads-ready from day 1, but the advertising investment is additional and optional. You can start organic (free) or accelerate with ads when you want (suggested budget: $500-1,000/month)."
+        },
+        {
+          question: "What if I'm not satisfied?",
+          answer: "During the 90 days we do unlimited revisions until your approval. At the end, if you don't have access to all your digital assets as promised, we refund the proportional part."
+        },
+        {
+          question: "Why only 10 spots per month?",
+          answer: "Each implementation requires personalized attention:\n\n• Detailed brief of your business\n• Custom design (no templates)\n• Manual Google verification\n• 1-on-1 training at the end\n\nTo maintain quality, we limit to 10 simultaneous implementations."
+        }
+      ],
+    },
+    team: {
+      subtitle: 'Backed by human experts.',
+      yearsExperience: 'Years of Combined Experience',
+    },
+    testimonials: {
+      title: 'Real',
+      titleHighlight: 'Results',
+      subtitle: 'From invisible to unstoppable, just like you will be',
+      items: [
+        {
+          quote: "C3 recovered my profile, we optimized it together and now it's verified and working perfectly.",
+          name: "Loe Sepulveda",
+          business: "Cali Painting",
+          result: "Profile recovered and verified"
+        },
+        {
+          quote: "C3 recovered 100% of all my digital assets that I lost with other agencies.",
+          name: "Lorenzo",
+          business: "Lorenzo's Plumbing",
+          result: "100% of assets recovered"
+        },
+        {
+          quote: "They unified 5 locations under one account. Now everything is organized for our expansion.",
+          name: "AGS Recycling",
+          business: "AGS Recycling (5 Locations)",
+          result: "5 locations unified and verified"
+        },
+        {
+          quote: "From the first week they delivered results. My numbers don't stop growing.",
+          name: "Jose Valdovinos",
+          business: "JV Roofing INC",
+          result: "Results from the first week"
+        },
+        {
+          quote: "More than 6 years with C3. I receive projects constantly thanks to my digital presence.",
+          name: "Octavio Claudio",
+          business: "Bajascape LLC",
+          result: "More than 6 years of successful relationship"
+        },
+        {
+          quote: "Visits to the profile and website skyrocketed completely after working with C3.",
+          name: "Destiny Castro",
+          business: "Transmission Exchange",
+          result: "Profile and web visits skyrocketed"
+        }
+      ],
+    },
+    pricing: {
+      title: 'One-Time',
+      titleHighlight: 'Investment',
+      subtitle: 'No eternal monthly fees. One payment, everything is yours.',
+      planTitle: 'Complete Local Magnet System™',
+      paymentOptions: 'Payment Options:',
+      fullPayment: 'Full payment: $3,135 (5% discount)',
+      monthlyPayments: '3 monthly payments: $1,100 each',
+      implementation: '90 days of complete implementation',
+      whatIncluded: "What's Included:",
+      optionalServices: 'Optional Services:',
+      hostingNote: 'Hosting Note:',
+      hostingText: '+ Squarespace Hosting: ~$16-23/month (direct payment to provider - you own it from day 1)',
+      urgencyTitle: '⏰ SPECIAL CONDITION:',
+      urgencyText: 'Only available for the first 10 service businesses starting this month.',
+      urgencyReason: 'Why this limitation? We can only handle the implementation of 10 businesses simultaneously to guarantee quality and personalized attention. After these 10 spots, the price returns to $4,000.',
+      cta: 'Schedule Free Diagnosis Call',
+      includes: [
+        "Verified and optimized Google Business Profile",
+        "Professional website (5-7 pages) on Squarespace",
+        ".com domain (.org, .net available)",
+        "Corporate Gmail (5 accounts)",
+        "Complete competition analysis",
+        "10 strategic keywords + local SEO",
+        "LinkTree configuration",
+        "Optimized professional content",
+        "Complete training",
+        "All credentials (you own 100%)"
+      ],
+      notIncluded: [
+        "Professional photos (optional: +$500-1,000)",
+        "Promotional videos (optional: +$800-1,500)",
+        "Monthly review management (optional: from $300/month)",
+        "Google Ads management (optional: from $500/month + ad budget)"
+      ],
     },
     footer: {
       copyright: '© 2025 C3 Marketing Hub. All rights reserved.',
       privacy: 'Privacy',
       terms: 'Terms',
+    },
+    legal: {
+      backToHome: '← Back to Home',
+      lastUpdated: 'Last Updated: January 2025',
     },
   },
 } as const;
