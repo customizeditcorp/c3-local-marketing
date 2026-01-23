@@ -21,33 +21,47 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
+// Result components
+import ProfileHeader from "@/components/results/ProfileHeader";
+import DiagnosticSummaryCards from "@/components/results/DiagnosticSummaryCards";
+import EducationalInsight from "@/components/results/EducationalInsight";
+import StarterPriceBox from "@/components/results/StarterPriceBox";
+import PriceRampTimeline from "@/components/results/PriceRampTimeline";
+
 // Logos
 import certificadoGBP from "@/assets/logos/certificado-gbp.png";
 import sello20Anios from "@/assets/logos/sello-20-anios-experiencia.webp";
 import jvRoofingLogo from "@/assets/logos/jv-roofing-logo.png";
 import smvcLogo from "@/assets/logos/smvc.png";
 
-// Zod schema for validating URL query parameters
+// Zod schema for validating URL query parameters (updated with new params)
 const diagnosticParamsSchema = z.object({
   google: z.enum(['invisible', 'noVende', 'dominar', 'nuevo']).nullable().optional(),
-  size: z.enum(['solo', 'cuadrilla', 'flota']).nullable().optional(),
+  license: z.enum(['nuevo', 'estable', 'cambios']).nullable().optional(),
+  team: z.enum(['solo', 'pequeno', 'grande']).nullable().optional(),
+  revenue: z.enum(['menos10k', '10k-25k', '25k-60k', 'mas60k']).nullable().optional(),
   expectation: z.enum(['urgente', 'proceso', 'legado', 'noSeguro']).nullable().optional(),
   management: z.enum(['papel', 'apps', 'crm']).nullable().optional(),
+  digital: z.enum(['nada', 'acceso', 'perdido', 'malNAP']).nullable().optional(),
   business: z.string().max(100).nullable().optional(),
+  name: z.string().max(100).nullable().optional(),
 });
 
 // Sanitize business name to prevent any potential issues
 const sanitizeBusinessName = (name: string | null | undefined): string | null => {
   if (!name) return null;
-  // Decode, trim, and limit length
   try {
     const decoded = decodeURIComponent(name);
     return decoded.trim().slice(0, 100);
   } catch {
-    // If decoding fails, return null
     return null;
   }
 };
+
+// Profile types
+type ProfileType = 'INICIAL' | 'ESTABILIDAD' | 'CRECIMIENTO' | 'LIDER';
+type PriceType = 'ONE_TIME' | 'STANDARD_T1' | 'STARTER_TIER2' | 'STARTER_TIER3';
+
 interface PlanDetails {
   title: string;
   price: string;
@@ -55,14 +69,14 @@ interface PlanDetails {
   description: string;
   helpMessage: string;
   features: string[];
-  inheritedFeatures?: string[]; // Features inherited from lower tier plan
-  inheritedFrom?: string; // Key of the plan from which features are inherited
+  inheritedFeatures?: string[];
+  inheritedFrom?: string;
   duration: string;
   targetProfile: string;
-  tier: number; // 0=audit, 1=presencia, 2=cimientos, 3=expansion, 4=dominio
+  tier: number;
 }
 
-// Core features for each plan (without "Todo lo de X" text)
+// Core features for each plan
 const cimientosFeatures = [
   'Instalación Pixel, Analytics, Stripe',
   '4 Posts Google Business Profile/mes',
@@ -133,7 +147,7 @@ const planData: Record<string, PlanDetails> = {
     helpMessage: 'Ya tienes presencia pero necesitas mantenimiento profesional y campañas activas. Este plan mantiene tu negocio visible sin que tú hagas nada.',
     features: cimientosFeatures,
     duration: '6 meses mínimo',
-    targetProfile: 'Solopreneur ($10k-$20k/mes)',
+    targetProfile: 'Solopreneur ($10k-$25k/mes)',
     tier: 2
   },
   expansion: {
@@ -146,7 +160,7 @@ const planData: Record<string, PlanDetails> = {
     inheritedFeatures: cimientosFeatures,
     inheritedFrom: 'cimientos',
     duration: '6 meses mínimo',
-    targetProfile: 'Negocio Establecido ($20k-$50k/mes)',
+    targetProfile: 'Negocio Establecido ($25k-$60k/mes)',
     tier: 3
   },
   dominio: {
@@ -159,7 +173,7 @@ const planData: Record<string, PlanDetails> = {
     inheritedFeatures: [...cimientosFeatures, ...expansionFeatures],
     inheritedFrom: 'expansion',
     duration: '12 meses mínimo',
-    targetProfile: 'Líder Local ($50k+/mes)',
+    targetProfile: 'Líder Local ($60k+/mes)',
     tier: 4
   }
 };
@@ -167,57 +181,78 @@ const planData: Record<string, PlanDetails> = {
 // Plan keys in order for comparison table
 const planOrder = ['presencia', 'cimientos', 'expansion', 'dominio'] as const;
 
-const determineRecommendation = (
-  google: string | null,
-  size: string | null,
-  expectation: string | null,
-  management: string | null
-): { primary: string; requiresAudit: boolean; showPaymentPlan: boolean; needsGuidance: boolean } => {
-  // PASO 1: Detectar si necesita Auditoría NAP
-  const requiresAudit = google === 'invisible';
-  
-  // PASO 2: Detectar si es contratista nuevo (recién obtuvo licencia)
-  const isNewContractor = google === 'nuevo';
-  
-  // PASO 3: Detectar si necesita orientación (no está seguro)
-  const needsGuidance = expectation === 'noSeguro';
-  
-  // PASO 4: Determinar plan principal según perfil
-  let primary = 'presencia'; // Default
-  let showPaymentPlan = false;
-  
-  // Si necesita orientación, sugerimos una llamada pero mostramos plan básico
-  if (needsGuidance) {
-    // Default a presencia pero marcamos que necesita orientación
-    primary = 'presencia';
-  }
-  // Contratista nuevo → Presencia Digital siempre
-  else if (isNewContractor) {
-    primary = 'presencia';
-  }
-  // Solo / Empezando → Presencia Digital (One-Time)
-  else if (size === 'solo') {
-    primary = 'presencia';
-  }
-  // Cuadrilla pequeña con papel → Cimientos (Tier 1) con opción de beca
-  else if (size === 'cuadrilla' && management === 'papel') {
-    primary = 'cimientos';
-    showPaymentPlan = true; // Mostrar opción de facilidades
-  }
-  // Cuadrilla con apps/crm → Expansión (Tier 2)
-  else if (size === 'cuadrilla' && (management === 'apps' || management === 'crm')) {
-    primary = 'expansion';
-    showPaymentPlan = true;
-  }
-  // Flota / Líder → Dominio (Tier 3)
-  else if (size === 'flota') {
-    primary = 'dominio';
-  }
-  
-  return { primary, requiresAudit, showPaymentPlan, needsGuidance };
+// Revenue labels for display
+const revenueLabels: Record<string, string> = {
+  'menos10k': 'menos de $10,000/mes',
+  '10k-25k': '$10,000 - $25,000/mes',
+  '25k-60k': '$25,000 - $60,000/mes',
+  'mas60k': 'más de $60,000/mes'
 };
 
-const CALENDAR_URL = '#cta-final'; // Replace with actual Calendly/GHL URL
+// NEW: Determine recommendation based on financial capacity (5-10% rule)
+const determineRecommendation = (
+  google: string | null,
+  license: string | null,
+  team: string | null,
+  revenue: string | null,
+  expectation: string | null,
+  management: string | null,
+  digital: string | null
+): { 
+  primary: string; 
+  profile: ProfileType;
+  priceType: PriceType;
+  requiresAudit: boolean; 
+  napRisk: boolean;
+  needsGuidance: boolean;
+} => {
+  // STEP 1: Detect NAP Risk (digital health issues)
+  const napRisk = digital === 'perdido' || digital === 'malNAP';
+  const requiresAudit = google === 'invisible' || napRisk;
+  
+  // STEP 2: Detect if user needs guidance
+  const needsGuidance = expectation === 'noSeguro';
+  
+  // STEP 3: Determine profile and plan based on REVENUE (CRITICAL VARIABLE)
+  let primary = 'presencia';
+  let profile: ProfileType = 'INICIAL';
+  let priceType: PriceType = 'ONE_TIME';
+  
+  // CASE Z: Pre-Revenue (< $10k/month) → One-Time Project
+  if (revenue === 'menos10k') {
+    primary = 'presencia';
+    profile = 'INICIAL';
+    priceType = 'ONE_TIME';
+  }
+  // CASE A: Solopreneur ($10k-$25k) → Tier 1 Cimientos (Standard)
+  else if (revenue === '10k-25k') {
+    primary = 'cimientos';
+    profile = 'ESTABILIDAD';
+    priceType = 'STANDARD_T1';
+  }
+  // CASE B: Growth ($25k-$60k) OR Small Team → Tier 2 with Starter
+  else if (revenue === '25k-60k' || team === 'pequeno') {
+    primary = 'expansion';
+    profile = 'CRECIMIENTO';
+    priceType = 'STARTER_TIER2';
+  }
+  // CASE C: Leader (> $60k) OR Large Team → Tier 3 with Ramp
+  else if (revenue === 'mas60k' || team === 'grande') {
+    primary = 'dominio';
+    profile = 'LIDER';
+    priceType = 'STARTER_TIER3';
+  }
+  // FALLBACK: New contractor or solo → Presencia
+  else if (google === 'nuevo' || team === 'solo') {
+    primary = 'presencia';
+    profile = 'INICIAL';
+    priceType = 'ONE_TIME';
+  }
+  
+  return { primary, profile, priceType, requiresAudit, napRisk, needsGuidance };
+};
+
+const CALENDAR_URL = '#cta-final';
 
 // Pricing FAQs for objections
 const pricingFAQs = [
@@ -236,6 +271,10 @@ const pricingFAQs = [
   {
     question: "¿Incluye garantía?",
     answer: "Si no recibes tus activos digitales como prometimos, ofrecemos reembolso proporcional. Tu inversión está protegida."
+  },
+  {
+    question: "¿Por qué el precio Starter?",
+    answer: "El precio Starter te permite comenzar con una inversión menor mientras configuramos tu sistema. Es nuestra forma de reducir el riesgo de entrada para negocios en crecimiento."
   }
 ];
 
@@ -293,7 +332,6 @@ const PlansComparisonModal = ({ currentPlanKey }: { currentPlanKey: string }) =>
                       {plan.targetProfile}
                     </p>
                     
-                    {/* Inherited features first (if any) */}
                     {plan.inheritedFeatures && plan.inheritedFrom && (
                       <div className="mb-3 pb-3 border-b border-dashed">
                         <p className="text-xs font-medium text-muted-foreground mb-2">
@@ -315,7 +353,6 @@ const PlansComparisonModal = ({ currentPlanKey }: { currentPlanKey: string }) =>
                       </div>
                     )}
                     
-                    {/* Plan's own features */}
                     <ul className="space-y-1.5">
                       {plan.features.map((feature, idx) => (
                         <li key={idx} className="flex items-start gap-2 text-xs">
@@ -346,10 +383,14 @@ const DiagnosticResults = () => {
   const validatedParams = useMemo(() => {
     const rawParams = {
       google: searchParams.get('google'),
-      size: searchParams.get('size'),
+      license: searchParams.get('license'),
+      team: searchParams.get('team'),
+      revenue: searchParams.get('revenue'),
       expectation: searchParams.get('expectation'),
       management: searchParams.get('management'),
+      digital: searchParams.get('digital'),
       business: searchParams.get('business'),
+      name: searchParams.get('name'),
     };
     
     const result = diagnosticParamsSchema.safeParse(rawParams);
@@ -357,25 +398,34 @@ const DiagnosticResults = () => {
     if (result.success) {
       return {
         google: result.data.google ?? null,
-        size: result.data.size ?? null,
+        license: result.data.license ?? null,
+        team: result.data.team ?? null,
+        revenue: result.data.revenue ?? null,
         expectation: result.data.expectation ?? null,
         management: result.data.management ?? null,
+        digital: result.data.digital ?? null,
         businessName: sanitizeBusinessName(result.data.business),
+        ownerName: sanitizeBusinessName(result.data.name),
       };
     }
     
-    // If validation fails, return safe defaults
     return {
       google: null,
-      size: null,
+      license: null,
+      team: null,
+      revenue: null,
       expectation: null,
       management: null,
+      digital: null,
       businessName: null,
+      ownerName: null,
     };
   }, [searchParams]);
 
-  const { google, size, expectation, management, businessName } = validatedParams;
-  const { primary, requiresAudit, showPaymentPlan, needsGuidance } = determineRecommendation(google, size, expectation, management);
+  const { google, license, team, revenue, expectation, management, digital, businessName, ownerName } = validatedParams;
+  const { primary, profile, priceType, requiresAudit, napRisk, needsGuidance } = determineRecommendation(
+    google, license, team, revenue, expectation, management, digital
+  );
   const currentPlan = planData[primary];
   const auditPlan = planData.auditoria;
 
@@ -403,32 +453,43 @@ const DiagnosticResults = () => {
     element?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  // Get revenue label for display
+  const revenueLabel = revenue ? revenueLabels[revenue] : 'No especificado';
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-muted/30">
       <Navbar />
       
       <main className="pt-24 sm:pt-32 pb-16 sm:pb-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-2xl mx-auto">
-            {/* Header */}
-            <div className="text-center mb-8">
-              <div className="inline-flex items-center px-4 py-2 bg-primary/10 rounded-full mb-6">
-                <Check className="h-5 w-5 text-primary mr-2" />
-                <span className="font-semibold text-primary">Análisis Completado</span>
-              </div>
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground">
-                Tu Plan Recomendado
-              </h1>
-              {businessName && (
-                <p className="text-lg text-muted-foreground mt-2">
-                  para <span className="font-semibold text-foreground">{businessName}</span>
-                </p>
-              )}
-            </div>
+          <div className="max-w-3xl mx-auto space-y-8">
+            
+            {/* ========== SECTION 1: Profile Header ========== */}
+            <ProfileHeader 
+              profile={profile}
+              businessName={businessName}
+              ownerName={ownerName}
+              revenueLabel={revenueLabel}
+            />
 
-            {/* Audit Alert - Only if required */}
-            {requiresAudit && (
-              <Card className="border-2 border-yellow-500 bg-yellow-50 mb-6">
+            {/* ========== SECTION 2: Diagnostic Summary Cards ========== */}
+            <DiagnosticSummaryCards 
+              googleStatus={google}
+              monthlyRevenue={revenue}
+              teamSize={team}
+              digitalHealth={digital}
+            />
+
+            {/* ========== SECTION 3: Educational Insight (5-10% Rule) ========== */}
+            <EducationalInsight 
+              revenueRange={revenue}
+              recommendedPlanPrice={currentPlan.price}
+              profile={profile}
+            />
+
+            {/* ========== SECTION 4: NAP Risk Alert ========== */}
+            {napRisk && (
+              <Card className="border-2 border-yellow-500 bg-yellow-50">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
                     <div className="flex-shrink-0 p-3 bg-yellow-100 rounded-lg">
@@ -436,10 +497,11 @@ const DiagnosticResults = () => {
                     </div>
                     <div className="flex-1">
                       <h3 className="font-bold text-yellow-900 text-lg mb-1">
-                        ⚠️ Paso Previo Requerido: {auditPlan.title}
+                        ⚠️ Alerta: Riesgo de NAP Detectado
                       </h3>
                       <p className="text-yellow-800 mb-3">
-                        {auditPlan.helpMessage}
+                        Detectamos problemas con tus accesos o información de negocio (NAP). 
+                        Esto puede causar suspensión en Google. Recomendamos una auditoría antes de invertir en marketing.
                       </p>
                       <div className="flex items-center gap-4">
                         <span className="text-2xl font-bold text-yellow-900">{auditPlan.price}</span>
@@ -451,9 +513,9 @@ const DiagnosticResults = () => {
               </Card>
             )}
 
-            {/* Guidance Alert - When user is unsure */}
+            {/* ========== SECTION 5: Guidance Alert ========== */}
             {needsGuidance && (
-              <Card className="border-2 border-blue-500 bg-blue-50 mb-6">
+              <Card className="border-2 border-blue-500 bg-blue-50">
                 <CardContent className="p-6">
                   <div className="flex flex-col sm:flex-row items-start gap-4">
                     <div className="flex-shrink-0 p-3 bg-blue-100 rounded-lg">
@@ -464,7 +526,7 @@ const DiagnosticResults = () => {
                         💡 ¿No estás seguro por dónde empezar?
                       </h3>
                       <p className="text-blue-800 mb-4">
-                        Entendemos que el marketing digital puede ser confuso. Agenda una llamada de 15 minutos <strong>sin costo</strong> con nuestro equipo para analizar tu situación específica y recibir orientación personalizada.
+                        Entendemos que el marketing digital puede ser confuso. Agenda una llamada de 15 minutos <strong>sin costo</strong> con nuestro equipo para analizar tu situación específica.
                       </p>
                       <Button 
                         onClick={openCalendar}
@@ -479,27 +541,69 @@ const DiagnosticResults = () => {
               </Card>
             )}
 
-            {/* Primary Plan Card */}
-            <Card className="border-2 border-primary shadow-soft-lg overflow-hidden">
-              <CardHeader className="text-center pb-4 bg-gradient-to-b from-primary/5 to-transparent">
-                <div className="inline-flex items-center px-3 py-1 bg-primary/10 rounded-full text-sm font-medium text-primary mb-4 mx-auto">
-                  <Target className="h-4 w-4 mr-1" />
-                  Plan Principal Recomendado
-                </div>
-                <CardTitle className="text-2xl sm:text-3xl font-bold text-foreground">
-                  {currentPlan.title}
-                </CardTitle>
-                <div className="mt-4">
-                  <p className="text-3xl sm:text-4xl font-bold text-primary">
-                    {currentPlan.price}
-                  </p>
-                  {currentPlan.priceNote && (
-                    <p className="text-sm text-muted-foreground mt-1">
-                      {currentPlan.priceNote}
-                    </p>
-                  )}
+            {/* ========== SECTION 6: Plan Recommendation with Starter Pricing ========== */}
+            <div className="space-y-6">
+              <h2 className="text-2xl font-bold text-center text-foreground">
+                Tu Plan Recomendado
+              </h2>
+
+              {/* STARTER_TIER2: Show Starter Price Box */}
+              {priceType === 'STARTER_TIER2' && (
+                <StarterPriceBox 
+                  starterPrice="$599"
+                  normalPrice="$1,299"
+                  starterMonths={3}
+                  savings="$2,100"
+                  planName={currentPlan.title}
+                />
+              )}
+
+              {/* STARTER_TIER3: Show Price Ramp Timeline */}
+              {priceType === 'STARTER_TIER3' && (
+                <PriceRampTimeline 
+                  title="Inversión Escalonada - Plan Dominio Estratégico"
+                  steps={[
+                    { month: 'Mes 1', price: '$600', isStarter: true },
+                    { month: 'Meses 2-4', price: '$1,299', isStarter: true, label: 'por mes' },
+                    { month: 'Mes 5+', price: '$2,599', isStarter: false, label: 'por mes' }
+                  ]}
+                />
+              )}
+
+              {/* ONE_TIME: Show simple price */}
+              {priceType === 'ONE_TIME' && (
+                <Card className="border-2 border-primary bg-primary/5">
+                  <CardContent className="p-6 text-center">
+                    <p className="text-sm text-muted-foreground mb-2">Proyecto Finito (Sin mensualidades)</p>
+                    <p className="text-4xl font-bold text-primary">{currentPlan.price}</p>
+                    <p className="text-sm text-muted-foreground mt-2">{currentPlan.priceNote}</p>
+                  </CardContent>
+                </Card>
+              )}
+
+              {/* STANDARD_T1: Show standard price with subsidy note */}
+              {priceType === 'STANDARD_T1' && (
+                <Card className="border-2 border-primary bg-primary/5">
+                  <CardContent className="p-6 text-center">
+                    <p className="text-sm text-muted-foreground mb-2">Inversión Mensual</p>
+                    <p className="text-4xl font-bold text-primary">{currentPlan.price}</p>
+                    <p className="text-sm text-muted-foreground mt-2">{currentPlan.priceNote}</p>
+                  </CardContent>
+                </Card>
+              )}
+
+              {/* Primary Plan Card */}
+              <Card className="border-2 border-primary shadow-soft-lg overflow-hidden">
+                <CardHeader className="text-center pb-4 bg-gradient-to-b from-primary/5 to-transparent">
+                  <div className="inline-flex items-center px-3 py-1 bg-primary/10 rounded-full text-sm font-medium text-primary mb-4 mx-auto">
+                    <Target className="h-4 w-4 mr-1" />
+                    {currentPlan.title}
+                  </div>
+                  <CardTitle className="text-xl sm:text-2xl font-bold text-foreground">
+                    {currentPlan.description}
+                  </CardTitle>
                   
-                  {/* Authority Badges - Larger */}
+                  {/* Authority Badges */}
                   <div className="flex items-center justify-center gap-6 mt-6 pt-6 border-t border-border/30">
                     <img 
                       src={sello20Anios} 
@@ -513,116 +617,113 @@ const DiagnosticResults = () => {
                       className="h-14 sm:h-16 w-auto opacity-90 hover:opacity-100 transition-opacity"
                     />
                   </div>
-                </div>
-              </CardHeader>
-              
-              <CardContent className="space-y-6 p-6">
-                <p className="text-center text-muted-foreground text-lg">
-                  {currentPlan.description}
-                </p>
+                </CardHeader>
                 
-                {/* Inherited Features - Expanded inline */}
-                {currentPlan.inheritedFeatures && currentPlan.inheritedFrom && (
-                  <div className="bg-muted/50 rounded-xl p-4 border border-border/50">
-                    <p className="text-sm font-medium text-muted-foreground mb-3 flex items-center gap-2">
-                      <Check className="h-4 w-4 text-primary" />
-                      Incluye todo de <span className="font-semibold text-foreground">{planData[currentPlan.inheritedFrom].title}</span>:
-                    </p>
-                    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                      {currentPlan.inheritedFeatures.map((feature, index) => (
-                        <li key={index} className="flex items-start gap-2 text-sm text-muted-foreground">
-                          <Check className="h-4 w-4 text-primary/60 flex-shrink-0 mt-0.5" />
-                          <span>{feature}</span>
+                <CardContent className="space-y-6 p-6">
+                  {/* Inherited Features */}
+                  {currentPlan.inheritedFeatures && currentPlan.inheritedFrom && (
+                    <div className="bg-muted/50 rounded-xl p-4 border border-border/50">
+                      <p className="text-sm font-medium text-muted-foreground mb-3 flex items-center gap-2">
+                        <Check className="h-4 w-4 text-primary" />
+                        Incluye todo de <span className="font-semibold text-foreground">{planData[currentPlan.inheritedFrom].title}</span>:
+                      </p>
+                      <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                        {currentPlan.inheritedFeatures.map((feature, index) => (
+                          <li key={index} className="flex items-start gap-2 text-sm text-muted-foreground">
+                            <Check className="h-4 w-4 text-primary/60 flex-shrink-0 mt-0.5" />
+                            <span>{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  {/* Plan's Own Features List */}
+                  <div>
+                    {currentPlan.inheritedFrom && (
+                      <p className="text-sm font-medium text-primary mb-3">
+                        + Características exclusivas de {currentPlan.title}:
+                      </p>
+                    )}
+                    <ul className="space-y-3">
+                      {currentPlan.features.map((feature, index) => (
+                        <li key={index} className="flex items-start gap-3">
+                          <div className="flex-shrink-0 h-6 w-6 rounded-full bg-primary/10 flex items-center justify-center mt-0.5">
+                            <Check className="h-4 w-4 text-primary" />
+                          </div>
+                          <span className="text-foreground">{feature}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
-                )}
 
-                {/* Plan's Own Features List */}
-                <div>
-                  {currentPlan.inheritedFrom && (
-                    <p className="text-sm font-medium text-primary mb-3">
-                      + Características exclusivas de {currentPlan.title}:
-                    </p>
-                  )}
-                  <ul className="space-y-3">
-                    {currentPlan.features.map((feature, index) => (
-                      <li key={index} className="flex items-start gap-3">
-                        <div className="flex-shrink-0 h-6 w-6 rounded-full bg-primary/10 flex items-center justify-center mt-0.5">
-                          <Check className="h-4 w-4 text-primary" />
-                        </div>
-                        <span className="text-foreground">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* How it helps section */}
-                <div className="bg-blue-50 border border-blue-200 rounded-xl p-5">
-                  <div className="flex items-start gap-3">
-                    <Lightbulb className="h-5 w-5 text-blue-600 flex-shrink-0 mt-0.5" />
-                    <div>
-                      <h4 className="font-semibold text-blue-900 mb-2">
-                        ¿Cómo te ayuda este plan?
-                      </h4>
-                      <p className="text-blue-800">
-                        {currentPlan.helpMessage}
-                      </p>
+                  {/* How it helps section */}
+                  <div className="bg-blue-50 border border-blue-200 rounded-xl p-5">
+                    <div className="flex items-start gap-3">
+                      <Lightbulb className="h-5 w-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                      <div>
+                        <h4 className="font-semibold text-blue-900 mb-2">
+                          ¿Cómo te ayuda este plan?
+                        </h4>
+                        <p className="text-blue-800">
+                          {currentPlan.helpMessage}
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                {/* Plan metadata */}
-                <div className="flex flex-wrap gap-4 justify-center text-sm">
-                  <div className="flex items-center gap-2 px-3 py-1.5 bg-muted rounded-full">
-                    <Clock className="h-4 w-4 text-muted-foreground" />
-                    <span className="text-muted-foreground">{currentPlan.duration}</span>
+                  {/* Plan metadata */}
+                  <div className="flex flex-wrap gap-4 justify-center text-sm">
+                    <div className="flex items-center gap-2 px-3 py-1.5 bg-muted rounded-full">
+                      <Clock className="h-4 w-4 text-muted-foreground" />
+                      <span className="text-muted-foreground">{currentPlan.duration}</span>
+                    </div>
+                    <div className="flex items-center gap-2 px-3 py-1.5 bg-muted rounded-full">
+                      <Target className="h-4 w-4 text-muted-foreground" />
+                      <span className="text-muted-foreground">{currentPlan.targetProfile}</span>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-2 px-3 py-1.5 bg-muted rounded-full">
-                    <Target className="h-4 w-4 text-muted-foreground" />
-                    <span className="text-muted-foreground">{currentPlan.targetProfile}</span>
-                  </div>
-                </div>
 
-                {/* Disclaimer */}
-                <p className="text-center text-sm text-muted-foreground pt-2">
-                  🔒 Sin compromiso. Sin presión de venta. Conversación honesta sobre tu situación.
-                </p>
-              </CardContent>
-            </Card>
+                  {/* Starter Plan Conditions */}
+                  {(priceType === 'STARTER_TIER2' || priceType === 'STARTER_TIER3') && (
+                    <div className="bg-muted/50 rounded-lg p-4 text-sm text-muted-foreground">
+                      <p className="font-medium text-foreground mb-1">Condiciones del Programa Starter:</p>
+                      <ul className="space-y-1">
+                        <li>• Requiere permanencia mínima de {priceType === 'STARTER_TIER3' ? '12' : '6'} meses</li>
+                        <li>• El precio Starter aplica solo para nuevos clientes</li>
+                        <li>• 100% de propiedad de activos digitales desde el día 1</li>
+                      </ul>
+                    </div>
+                  )}
 
-            {/* Payment Plan CTA - Only for eligible plans */}
-            {showPaymentPlan && (
-              <Card className="mt-6 border-2 border-green-500/50 bg-gradient-to-r from-green-50 to-emerald-50">
-                <CardContent className="p-6 text-center">
-                  <div className="flex items-center justify-center gap-2 mb-3">
-                    <span className="text-2xl">💰</span>
-                    <h4 className="text-lg font-bold text-green-800">
-                      ¿Quieres comenzar con facilidades de pago?
-                    </h4>
-                  </div>
-                  <p className="text-green-700 mb-4">
-                    Pregunta por nuestro <span className="font-semibold">Programa de Becas</span> y opciones de pago escalonado en tu llamada de estrategia.
-                  </p>
+                  {/* CTA Button */}
                   <Button 
                     onClick={openCalendar}
-                    className="bg-green-600 hover:bg-green-700 text-white font-semibold gap-2"
+                    size="lg"
+                    className="w-full text-lg py-6 gap-2"
                   >
-                    <Phone className="h-4 w-4" />
-                    Consultar Facilidades de Pago
+                    <Calendar className="h-5 w-5" />
+                    {priceType === 'STARTER_TIER2' || priceType === 'STARTER_TIER3' 
+                      ? 'Aprobar mi Plan Starter'
+                      : 'Agendar Llamada de Estrategia'
+                    }
                   </Button>
+
+                  {/* Disclaimer */}
+                  <p className="text-center text-sm text-muted-foreground">
+                    🔒 Sin compromiso. Sin presión de venta. Conversación honesta.
+                  </p>
                 </CardContent>
               </Card>
-            )}
+            </div>
 
             {/* Compare Plans Button */}
-            <div className="flex justify-center mt-6">
+            <div className="flex justify-center">
               <PlansComparisonModal currentPlanKey={primary} />
             </div>
 
             {/* ========== CALENDAR SECTION ========== */}
-            <div id="calendar-section" className="mt-12 scroll-mt-24">
+            <div id="calendar-section" className="scroll-mt-24">
               <Card className="border-2 border-primary/20 shadow-soft-lg overflow-hidden">
                 <CardHeader className="text-center pb-4 bg-gradient-to-b from-primary/5 to-transparent">
                   <div className="inline-flex items-center px-3 py-1 bg-primary/10 rounded-full text-sm font-medium text-primary mb-4 mx-auto">
@@ -665,7 +766,7 @@ const DiagnosticResults = () => {
                     </cite>
                   </blockquote>
                   
-                  {/* GHL Calendar Embed - Responsive height */}
+                  {/* GHL Calendar Embed */}
                   <div className="rounded-xl overflow-hidden border border-border bg-background">
                     <iframe
                       src="https://lnk.c3localmarketing.com/widget/booking/niXmOF5syJl2P16WGpex"
@@ -687,7 +788,7 @@ const DiagnosticResults = () => {
             </div>
 
             {/* ========== PRICING FAQ SECTION ========== */}
-            <div className="mt-12">
+            <div>
               <h3 className="text-xl font-bold text-center mb-6 flex items-center justify-center gap-2">
                 <ChevronDown className="h-5 w-5 text-primary" />
                 Preguntas Frecuentes Sobre Precio
@@ -708,7 +809,7 @@ const DiagnosticResults = () => {
             </div>
 
             {/* Trust elements */}
-            <div className="flex flex-wrap justify-center gap-4 mt-8 text-sm text-muted-foreground">
+            <div className="flex flex-wrap justify-center gap-4 text-sm text-muted-foreground">
               <span className="flex items-center gap-1">
                 <Check className="h-4 w-4 text-primary" />
                 100% de propiedad tuya
