@@ -570,6 +570,19 @@ const DiagnosticResults = () => {
                 />
               )}
 
+              {/* Starter Strategy Explanation - NEW */}
+              {(priceType === 'STARTER_TIER2' || priceType === 'STARTER_TIER3') && (
+                <div className="bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-xl p-5">
+                  <p className="text-green-900 text-sm sm:text-base leading-relaxed">
+                    <strong className="text-green-800">La Lógica:</strong> Tu negocio está listo para el siguiente nivel, 
+                    pero no necesitas pagar el precio completo desde el día 1. Activamos el{" "}
+                    <span className="font-bold">Programa Starter</span> para reducir tu 
+                    inversión inicial mientras configuramos tu sistema. Es como pagar una 
+                    inscripción reducida en el gimnasio mientras agarras ritmo.
+                  </p>
+                </div>
+              )}
+
               {/* ONE_TIME: Show simple price */}
               {priceType === 'ONE_TIME' && (
                 <Card className="border-2 border-primary bg-primary/5">

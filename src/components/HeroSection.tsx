@@ -2,9 +2,11 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import heroImage from "@/assets/generated/hero_luis_consulting.png";
 import { useAnalytics } from "@/hooks/use-analytics";
+import { useLanguage } from "@/hooks/use-language";
 
 const HeroSection = () => {
   const { trackCTAClick } = useAnalytics();
+  const { t } = useLanguage();
 
   const scrollToDiagnostic = () => {
     trackCTAClick('Diagnosticar mi Negocio Gratis', 'Hero Section');
@@ -18,18 +20,18 @@ const HeroSection = () => {
         <div className="max-w-4xl mx-auto text-center space-y-8">
           {/* Badge */}
           <div className="inline-flex items-center px-5 py-2 bg-muted border border-primary/20 rounded-full">
-            <span className="text-sm font-bold text-primary tracking-wide">SISTEMA IMÁN LOCAL™</span>
+            <span className="text-sm font-bold text-primary tracking-wide">{t('hero.badge')}</span>
           </div>
 
           {/* H1 */}
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-foreground">
-            Existes en la vida real.{" "}
-            <span className="text-primary">Haz que Google te reconozca.</span>
+            {t('hero.headline')}{" "}
+            <span className="text-primary">{t('hero.headlineHighlight')}</span>
           </h1>
           
           {/* Subtitle */}
           <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto">
-            Verificación garantizada y software de gestión para negocios hispanos. Sin rentas mensuales eternas. <strong className="text-foreground">100% Tuyo.</strong>
+            {t('hero.subtitle')} <strong className="text-foreground">{t('hero.subtitleBold')}</strong>
           </p>
 
           {/* CTA */}
@@ -39,7 +41,7 @@ const HeroSection = () => {
               className="text-lg px-10 py-7 shadow-soft-lg hover:shadow-xl hover:scale-[1.02] transition-all rounded-xl"
               onClick={scrollToDiagnostic}
             >
-              Diagnosticar mi Negocio Gratis
+              {t('hero.cta')}
               <ArrowRight className="ml-3 h-5 w-5" />
             </Button>
           </div>
