@@ -1,4 +1,9 @@
 export const translations = {
+  // Ad Spend Disclaimer - used in Tier 2 and Tier 3
+  adSpendDisclaimer: {
+    es: 'La gestión de campañas está incluida. El presupuesto publicitario (Ad Spend) es adicional y se paga directamente por el cliente a las plataformas (Meta, Google, TikTok). Nosotros como empresa optimizamos las primeras inversiones, sobre todo si estás en etapa de aprendizaje, para optimizar cada $ y levantar base de datos.',
+    en: 'Campaign management is included. The advertising budget (Ad Spend) is additional and paid directly by the client to the platforms (Meta, Google, TikTok). As a company, we optimize the first investments, especially if you are in the learning stage, to optimize every $ and build a database.',
+  },
   es: {
     navbar: {
       scheduleCall: 'Agendar Llamada',

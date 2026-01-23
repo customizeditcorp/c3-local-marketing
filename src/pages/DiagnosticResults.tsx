@@ -21,6 +21,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { useLanguage } from "@/hooks/use-language";
 
 // Result components
 import ProfileHeader from "@/components/results/ProfileHeader";
@@ -380,6 +381,7 @@ const PlansComparisonModal = ({ currentPlanKey }: { currentPlanKey: string }) =>
 
 const DiagnosticResults = () => {
   const [searchParams] = useSearchParams();
+  const { language } = useLanguage();
   
   // Parse and validate all query parameters with Zod
   const validatedParams = useMemo(() => {
@@ -598,26 +600,50 @@ const DiagnosticResults = () => {
 
               {/* STARTER_TIER2: Show Starter Price Box */}
               {priceType === 'STARTER_TIER2' && (
-                <StarterPriceBox 
-                  starterPrice="$599"
-                  normalPrice="$1,299"
-                  starterMonths={2}
-                  savings="$1,400"
-                  planName={currentPlan.title}
-                />
+                <>
+                  <StarterPriceBox 
+                    starterPrice="$599"
+                    normalPrice="$1,299"
+                    starterMonths={2}
+                    savings="$1,400"
+                    planName={currentPlan.title}
+                  />
+                  {/* Ad Spend Disclaimer for Tier 2 */}
+                  <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mt-4">
+                    <p className="text-amber-900 text-sm leading-relaxed">
+                      <strong className="text-amber-800">📢 Sobre el Ad Spend:</strong>{' '}
+                      {language === 'es' 
+                        ? 'La gestión de campañas está incluida. El presupuesto publicitario (Ad Spend) es adicional y se paga directamente por el cliente a las plataformas (Meta, Google, TikTok). Nosotros como empresa optimizamos las primeras inversiones, sobre todo si estás en etapa de aprendizaje, para optimizar cada $ y levantar base de datos.'
+                        : 'Campaign management is included. The advertising budget (Ad Spend) is additional and paid directly by the client to the platforms (Meta, Google, TikTok). As a company, we optimize the first investments, especially if you are in the learning stage, to optimize every $ and build a database.'
+                      }
+                    </p>
+                  </div>
+                </>
               )}
 
               {/* STARTER_TIER3: Show Price Ramp Timeline */}
               {priceType === 'STARTER_TIER3' && (
-                <PriceRampTimeline 
-                  title="Inversión Escalonada - Plan Dominio Estratégico"
-                  showTagline={true}
-                  steps={[
-                    { month: 'Mes 1', price: '$600', isStarter: true },
-                    { month: 'Meses 2-4', price: '$1,299', isStarter: true, label: 'por mes' },
-                    { month: 'Mes 5+', price: '$2,599', isStarter: false, label: 'por mes' }
-                  ]}
-                />
+                <>
+                  <PriceRampTimeline 
+                    title="Inversión Escalonada - Plan Dominio Estratégico"
+                    showTagline={true}
+                    steps={[
+                      { month: 'Mes 1', price: '$600', isStarter: true },
+                      { month: 'Meses 2-4', price: '$1,299', isStarter: true, label: 'por mes' },
+                      { month: 'Mes 5+', price: '$2,599', isStarter: false, label: 'por mes' }
+                    ]}
+                  />
+                  {/* Ad Spend Disclaimer for Tier 3 */}
+                  <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mt-4">
+                    <p className="text-amber-900 text-sm leading-relaxed">
+                      <strong className="text-amber-800">📢 Sobre el Ad Spend:</strong>{' '}
+                      {language === 'es' 
+                        ? 'La gestión de campañas está incluida. El presupuesto publicitario (Ad Spend) es adicional y se paga directamente por el cliente a las plataformas (Meta, Google, TikTok). Nosotros como empresa optimizamos las primeras inversiones, sobre todo si estás en etapa de aprendizaje, para optimizar cada $ y levantar base de datos.'
+                        : 'Campaign management is included. The advertising budget (Ad Spend) is additional and paid directly by the client to the platforms (Meta, Google, TikTok). As a company, we optimize the first investments, especially if you are in the learning stage, to optimize every $ and build a database.'
+                      }
+                    </p>
+                  </div>
+                </>
               )}
 
               {/* Riesgo Compartido Explanation - Updated Speech */}
