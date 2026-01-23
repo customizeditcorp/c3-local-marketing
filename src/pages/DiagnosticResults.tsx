@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { z } from "zod";
 import { useMemo, useState, useEffect, useLayoutEffect } from "react";
+import { motion } from "framer-motion";
 import {
   Dialog,
   DialogContent,
@@ -27,6 +28,7 @@ import DiagnosticSummaryCards from "@/components/results/DiagnosticSummaryCards"
 import EducationalInsight from "@/components/results/EducationalInsight";
 import StarterPriceBox from "@/components/results/StarterPriceBox";
 import PriceRampTimeline from "@/components/results/PriceRampTimeline";
+import ProgressStepper from "@/components/results/ProgressStepper";
 
 // Logos
 import certificadoGBP from "@/assets/logos/certificado-gbp.png";
@@ -464,28 +466,55 @@ const DiagnosticResults = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto space-y-8">
             
+            {/* ========== Progress Stepper ========== */}
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4 }}
+            >
+              <ProgressStepper currentStep="results" />
+            </motion.div>
+
             {/* ========== SECTION 1: Profile Header ========== */}
-            <ProfileHeader 
-              profile={profile}
-              businessName={businessName}
-              ownerName={ownerName}
-              revenueLabel={revenueLabel}
-            />
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+            >
+              <ProfileHeader 
+                profile={profile}
+                businessName={businessName}
+                ownerName={ownerName}
+                revenueLabel={revenueLabel}
+              />
+            </motion.div>
 
             {/* ========== SECTION 2: Diagnostic Summary Cards ========== */}
-            <DiagnosticSummaryCards 
-              googleStatus={google}
-              monthlyRevenue={revenue}
-              teamSize={team}
-              digitalHealth={digital}
-            />
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              <DiagnosticSummaryCards 
+                googleStatus={google}
+                monthlyRevenue={revenue}
+                teamSize={team}
+                digitalHealth={digital}
+              />
+            </motion.div>
 
             {/* ========== SECTION 3: Educational Insight (5-10% Rule) ========== */}
-            <EducationalInsight 
-              revenueRange={revenue}
-              recommendedPlanPrice={currentPlan.price}
-              profile={profile}
-            />
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+            >
+              <EducationalInsight 
+                revenueRange={revenue}
+                recommendedPlanPrice={currentPlan.price}
+                profile={profile}
+              />
+            </motion.div>
 
             {/* ========== SECTION 4: NAP Risk Alert ========== */}
             {napRisk && (
