@@ -257,27 +257,35 @@ const determineRecommendation = (
 
 const CALENDAR_URL = '#cta-final';
 
-// Pricing FAQs for objections
+// Pricing FAQs for objections - Aligned with legal contracts
 const pricingFAQs = [
   {
-    question: "¿Qué pasa si quiero cancelar?",
-    answer: "Puedes cancelar en cualquier momento. Sin penalidades, sin ataduras. Solo pedimos un aviso de 30 días."
+    question: "¿Qué es la Auditoría NAP?",
+    answer: "La Auditoría NAP ($250) es un análisis profundo de tu presencia digital actual. Revisamos tu Nombre, Dirección y Teléfono (NAP) en 50+ directorios para detectar inconsistencias que afectan tu ranking en Google. Ideal si perdiste acceso a tu perfil de Google o tienes información desactualizada. Nota: No garantizamos decisiones de entidades externas como Google."
+  },
+  {
+    question: "¿Cuáles son los compromisos mínimos?",
+    answer: "Los compromisos varían por tier:\n\n• Presencia Digital: Proyecto finito de 90 días, sin mensualidades\n• Tier 1 (Cimientos) y Tier 2 (Expansión): 6 meses mínimo para acceder a la tarifa Starter subsidiada\n• Tier 3 (Dominio Estratégico): 12 meses mínimo debido a la inversión significativa de C3\n\nEstos compromisos nos permiten ofrecerte precios de arranque reducidos."
+  },
+  {
+    question: "¿Qué pasa si quiero cancelar antes del compromiso?",
+    answer: "Entendemos que las circunstancias cambian. Si cancelas antes del período mínimo acordado, aplica una liquidación proporcional del subsidio que C3 absorbió en tu arranque. Esto cubre la diferencia entre el precio Starter que pagaste y la tarifa estándar del servicio recibido. Sin sorpresas, todo está documentado en tu contrato."
+  },
+  {
+    question: "¿Quién paga el Ad Spend (presupuesto publicitario)?",
+    answer: "La gestión de campañas está incluida en los tiers que ofrecen Ads. Sin embargo, el presupuesto publicitario (Ad Spend) es adicional y se paga directamente por ti a las plataformas (Meta, Google, TikTok). Nosotros optimizamos cada dólar, especialmente en etapa de aprendizaje. Presupuesto sugerido: $500-$1,000/mes."
   },
   {
     question: "¿Quién es dueño de los activos digitales?",
-    answer: "TÚ eres dueño al 100% desde el día 1. Recibes todas las credenciales: dominio, hosting, Google Business, redes sociales, CRM. Todo."
+    answer: "Tú eres dueño del contenido personalizado (logos, copy, fotos editadas) una vez pagado en su totalidad. Recibes credenciales de dominio, hosting, Google Business y redes sociales. Nota: La tecnología de fondo, metodologías y sistemas propietarios de C3 permanecen como propiedad de la agencia, según términos de servicio."
   },
   {
-    question: "¿Cuándo veré resultados?",
-    answer: "Resultados iniciales (primeras llamadas, reseñas) en 30-45 días. Resultados sólidos y consistentes en 90 días."
+    question: "¿Hay garantía de resultados?",
+    answer: "Garantizamos la entrega de todos los activos digitales prometidos. Para SEO y posicionamiento, ofrecemos un enfoque de mejora continua pero no garantizamos rankings específicos, ya que dependen de factores externos (algoritmos de Google, competencia local). Usamos KPIs medibles para demostrar progreso mensual."
   },
   {
-    question: "¿Incluye garantía?",
-    answer: "Si no recibes tus activos digitales como prometimos, ofrecemos reembolso proporcional. Tu inversión está protegida."
-  },
-  {
-    question: "¿Por qué el precio Starter?",
-    answer: "El precio Starter te permite comenzar con una inversión menor mientras configuramos tu sistema. Es nuestra forma de reducir el riesgo de entrada para negocios en crecimiento."
+    question: "¿Por qué el precio Starter (Riesgo Compartido)?",
+    answer: "C3 subsidia hasta $1,400 de tu costo inicial porque creemos en tu negocio. El precio Starter reduce tu inversión de entrada mientras construimos tu infraestructura digital. Solo pasas a la tarifa estándar cuando tu sistema ya está funcionando y generando resultados. Nosotros ponemos la inversión, tú pones la confianza."
   }
 ];
 
