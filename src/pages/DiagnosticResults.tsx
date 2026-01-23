@@ -608,13 +608,13 @@ const DiagnosticResults = () => {
                     <img 
                       src={sello20Anios} 
                       alt="20+ Años de Experiencia" 
-                      className="h-16 sm:h-20 w-auto opacity-90 hover:opacity-100 transition-opacity"
+                      className="h-14 sm:h-16 w-auto max-w-[100px] sm:max-w-[120px] object-contain opacity-90 hover:opacity-100 transition-opacity"
                     />
                     <div className="h-12 w-px bg-border" />
                     <img 
                       src={certificadoGBP} 
                       alt="Google Business Profile Certificado" 
-                      className="h-14 sm:h-16 w-auto opacity-90 hover:opacity-100 transition-opacity"
+                      className="h-16 sm:h-20 w-auto max-w-[100px] sm:max-w-[120px] object-contain opacity-90 hover:opacity-100 transition-opacity"
                     />
                   </div>
                 </CardHeader>

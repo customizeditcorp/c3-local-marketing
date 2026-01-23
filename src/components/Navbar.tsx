@@ -9,8 +9,12 @@ import sello20Anios from "@/assets/logos/sello-20-anios-experiencia.webp";
 const Navbar = () => {
   const scrollToCalendar = () => {
     const calendarSection = document.getElementById('calendar-section');
+    const diagnosticSection = document.getElementById('diagnostico');
+    
     if (calendarSection) {
       calendarSection.scrollIntoView({ behavior: 'smooth' });
+    } else if (diagnosticSection) {
+      diagnosticSection.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
@@ -31,17 +35,17 @@ const Navbar = () => {
             <img 
               src={googlePartner} 
               alt="Google Business Profile Partner" 
-              className="h-8 lg:h-10 w-auto opacity-80 hover:opacity-100 transition-opacity"
+              className="h-9 lg:h-11 w-auto max-w-[90px] lg:max-w-[110px] object-contain opacity-80 hover:opacity-100 transition-opacity"
             />
             <img 
               src={certificadoGbp} 
               alt="Certificado Google Business Profile" 
-              className="h-8 lg:h-10 w-auto opacity-80 hover:opacity-100 transition-opacity"
+              className="h-11 lg:h-14 w-auto max-w-[90px] lg:max-w-[110px] object-contain opacity-80 hover:opacity-100 transition-opacity"
             />
             <img 
               src={sello20Anios} 
               alt="20 Años de Experiencia" 
-              className="h-8 lg:h-10 w-auto opacity-80 hover:opacity-100 transition-opacity"
+              className="h-10 lg:h-12 w-auto max-w-[90px] lg:max-w-[110px] object-contain opacity-80 hover:opacity-100 transition-opacity"
             />
           </div>
 
