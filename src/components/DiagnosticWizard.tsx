@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Progress } from "@/components/ui/progress";
 import { useAnalytics } from "@/hooks/use-analytics";
+import { useLanguage } from "@/hooks/use-language";
 import { 
   MapPinOff, 
   TrendingUp, 
@@ -20,7 +21,6 @@ import {
   Layers, 
   Database, 
   Loader2, 
-  Sparkles, 
   HelpCircle,
   FileCheck,
   Building,
@@ -56,16 +56,10 @@ interface WizardState {
   email: string;
 }
 
-const loadingMessages = [
-  "Analizando tus respuestas...",
-  "Revisando tu capacidad financiera...",
-  "Calculando inversión óptima (5-10%)...",
-  "Preparando tu plan personalizado..."
-];
-
 const DiagnosticWizard = () => {
   const navigate = useNavigate();
   const { trackLead } = useAnalytics();
+  const { t } = useLanguage();
   const [currentStep, setCurrentStep] = useState(1);
   const [isCalculating, setIsCalculating] = useState(false);
   const [loadingMessageIndex, setLoadingMessageIndex] = useState(0);
@@ -83,6 +77,13 @@ const DiagnosticWizard = () => {
     email: ''
   });
 
+  const loadingMessages = [
+    t('wizard.loading.analyzing'),
+    t('wizard.loading.reviewing'),
+    t('wizard.loading.calculating'),
+    t('wizard.loading.preparing')
+  ];
+
   const totalSteps = 8;
   const progress = (currentStep / totalSteps) * 100;
 
@@ -94,59 +95,59 @@ const DiagnosticWizard = () => {
       }, 1000);
       return () => clearInterval(interval);
     }
-  }, [isCalculating]);
+  }, [isCalculating, loadingMessages.length]);
 
-  // Step 1: Google Status Options
+  // Step 1: Google Status Options (FIXED - 100% GBP focused)
   const googleOptions = [
-    { value: 'nuevo' as GoogleStatus, label: 'Recién obtuve mi licencia / Voy empezando', icon: Sparkles },
-    { value: 'invisible' as GoogleStatus, label: 'No aparezco / Suspendido', icon: MapPinOff },
-    { value: 'noVende' as GoogleStatus, label: 'Aparezco pero no vendo', icon: TrendingUp },
-    { value: 'dominar' as GoogleStatus, label: 'Quiero dominar la zona', icon: Crown }
+    { value: 'nuevo' as GoogleStatus, label: t('wizard.step1Options.nuevo'), icon: MapPinOff },
+    { value: 'invisible' as GoogleStatus, label: t('wizard.step1Options.invisible'), icon: AlertTriangle },
+    { value: 'noVende' as GoogleStatus, label: t('wizard.step1Options.noVende'), icon: TrendingUp },
+    { value: 'dominar' as GoogleStatus, label: t('wizard.step1Options.dominar'), icon: Crown }
   ];
 
-  // Step 2: License Stage Options (NEW)
+  // Step 2: License Stage Options
   const licenseOptions = [
-    { value: 'nuevo' as LicenseStage, label: 'Soy Nuevo (Menos de 1 año / En trámite)', icon: FileCheck },
-    { value: 'estable' as LicenseStage, label: 'Estable (Años operando igual)', icon: Building },
-    { value: 'cambios' as LicenseStage, label: 'Cambios Recientes (Nombre/Entidad)', icon: RefreshCw }
+    { value: 'nuevo' as LicenseStage, label: t('wizard.step2Options.nuevo'), icon: FileCheck },
+    { value: 'estable' as LicenseStage, label: t('wizard.step2Options.estable'), icon: Building },
+    { value: 'cambios' as LicenseStage, label: t('wizard.step2Options.cambios'), icon: RefreshCw }
   ];
 
-  // Step 3: Team Size Options (renamed from operationSize)
+  // Step 3: Team Size Options
   const teamOptions = [
-    { value: 'solo' as TeamSize, label: 'Solo yo (y un ayudante)', icon: User },
-    { value: 'pequeno' as TeamSize, label: 'Equipo Pequeño (2-6 empleados)', icon: Users },
-    { value: 'grande' as TeamSize, label: 'Empresa Grande (10+ empleados)', icon: Building2 }
+    { value: 'solo' as TeamSize, label: t('wizard.step3Options.solo'), icon: User },
+    { value: 'pequeno' as TeamSize, label: t('wizard.step3Options.pequeno'), icon: Users },
+    { value: 'grande' as TeamSize, label: t('wizard.step3Options.grande'), icon: Building2 }
   ];
 
-  // Step 4: Monthly Revenue Options (NEW - CRITICAL)
+  // Step 4: Monthly Revenue Options (CRITICAL)
   const revenueOptions = [
-    { value: 'menos10k' as MonthlyRevenue, label: 'Menos de $10,000 / mes', icon: DollarSign },
-    { value: '10k-25k' as MonthlyRevenue, label: 'Entre $10,000 y $25,000 / mes', icon: TrendingUp },
-    { value: '25k-60k' as MonthlyRevenue, label: 'Entre $25,000 y $60,000 / mes', icon: Rocket },
-    { value: 'mas60k' as MonthlyRevenue, label: 'Más de $60,000 / mes', icon: Crown }
+    { value: 'menos10k' as MonthlyRevenue, label: t('wizard.step4Options.menos10k'), icon: DollarSign },
+    { value: '10k-25k' as MonthlyRevenue, label: t('wizard.step4Options.10k-25k'), icon: TrendingUp },
+    { value: '25k-60k' as MonthlyRevenue, label: t('wizard.step4Options.25k-60k'), icon: Rocket },
+    { value: 'mas60k' as MonthlyRevenue, label: t('wizard.step4Options.mas60k'), icon: Crown }
   ];
 
   // Step 5: Expectation Options
   const expectationOptions = [
-    { value: 'urgente' as Expectation, label: 'Ayer / Urgente', icon: Clock },
-    { value: 'proceso' as Expectation, label: '30-90 días (Entiendo el proceso)', icon: CalendarClock },
-    { value: 'legado' as Expectation, label: 'Largo plazo (Construir legado)', icon: Infinity },
-    { value: 'noSeguro' as Expectation, label: 'No estoy seguro / Necesito orientación', icon: HelpCircle }
+    { value: 'urgente' as Expectation, label: t('wizard.step5Options.urgente'), icon: Clock },
+    { value: 'proceso' as Expectation, label: t('wizard.step5Options.proceso'), icon: CalendarClock },
+    { value: 'legado' as Expectation, label: t('wizard.step5Options.legado'), icon: Infinity },
+    { value: 'noSeguro' as Expectation, label: t('wizard.step5Options.noSeguro'), icon: HelpCircle }
   ];
 
   // Step 6: Client Management Options
   const managementOptions = [
-    { value: 'papel' as ClientManagement, label: 'Papel y Lápiz', icon: FileText },
-    { value: 'apps' as ClientManagement, label: 'Varias Apps sueltas', icon: Layers },
-    { value: 'crm' as ClientManagement, label: 'CRM Profesional', icon: Database }
+    { value: 'papel' as ClientManagement, label: t('wizard.step6Options.papel'), icon: FileText },
+    { value: 'apps' as ClientManagement, label: t('wizard.step6Options.apps'), icon: Layers },
+    { value: 'crm' as ClientManagement, label: t('wizard.step6Options.crm'), icon: Database }
   ];
 
-  // Step 7: Digital Health Options (NEW)
+  // Step 7: Digital Health Options
   const digitalOptions = [
-    { value: 'nada' as DigitalHealth, label: 'No tengo nada aún', icon: Globe },
-    { value: 'acceso' as DigitalHealth, label: 'Sí, tengo mis claves y acceso total', icon: Key },
-    { value: 'perdido' as DigitalHealth, label: 'No tengo acceso / Las perdí', icon: AlertTriangle },
-    { value: 'malNAP' as DigitalHealth, label: 'Tengo acceso pero la info está mal (NAP)', icon: Edit3 }
+    { value: 'nada' as DigitalHealth, label: t('wizard.step7Options.nada'), icon: Globe },
+    { value: 'acceso' as DigitalHealth, label: t('wizard.step7Options.acceso'), icon: Key },
+    { value: 'perdido' as DigitalHealth, label: t('wizard.step7Options.perdido'), icon: AlertTriangle },
+    { value: 'malNAP' as DigitalHealth, label: t('wizard.step7Options.malNAP'), icon: Edit3 }
   ];
 
   const handleNext = () => {
@@ -257,7 +258,7 @@ const DiagnosticWizard = () => {
                 {loadingMessages[loadingMessageIndex]}
               </h3>
               <p className="text-muted-foreground">
-                Esto tomará solo un momento...
+                {t('wizard.loading.wait')}
               </p>
             </div>
             <Progress value={((loadingMessageIndex + 1) / loadingMessages.length) * 100} className="h-2 bg-muted [&>div]:bg-primary" />
@@ -273,7 +274,7 @@ const DiagnosticWizard = () => {
         {/* Progress Bar */}
         <div className="mb-8">
           <div className="flex justify-between text-sm text-muted-foreground mb-2">
-            <span>Paso {currentStep} de {totalSteps}</span>
+            <span>{t('wizard.step')} {currentStep} {t('wizard.of')} {totalSteps}</span>
             <span>{Math.round(progress)}%</span>
           </div>
           <Progress value={progress} className="h-2 bg-muted [&>div]:bg-primary" />
@@ -283,7 +284,7 @@ const DiagnosticWizard = () => {
         {currentStep === 1 && (
           <div className="space-y-6">
             <h3 className="text-xl sm:text-2xl font-bold text-foreground text-center">
-              ¿Cuál es tu situación en Google?
+              {t('wizard.step1Title')}
             </h3>
             <div className="grid gap-4">
               {googleOptions.map((option) => 
@@ -293,11 +294,11 @@ const DiagnosticWizard = () => {
           </div>
         )}
 
-        {/* Step 2: License Stage (NEW) */}
+        {/* Step 2: License Stage */}
         {currentStep === 2 && (
           <div className="space-y-6">
             <h3 className="text-xl sm:text-2xl font-bold text-foreground text-center">
-              ¿En qué etapa está tu licencia de contratista (CSLB)?
+              {t('wizard.step2Title')}
             </h3>
             <div className="grid gap-4">
               {licenseOptions.map((option) => 
@@ -311,7 +312,7 @@ const DiagnosticWizard = () => {
         {currentStep === 3 && (
           <div className="space-y-6">
             <h3 className="text-xl sm:text-2xl font-bold text-foreground text-center">
-              ¿Cuál es el tamaño de tu equipo?
+              {t('wizard.step3Title')}
             </h3>
             <div className="grid gap-4">
               {teamOptions.map((option) => 
@@ -321,14 +322,14 @@ const DiagnosticWizard = () => {
           </div>
         )}
 
-        {/* Step 4: Monthly Revenue (NEW - CRITICAL) */}
+        {/* Step 4: Monthly Revenue (CRITICAL) */}
         {currentStep === 4 && (
           <div className="space-y-6">
             <h3 className="text-xl sm:text-2xl font-bold text-foreground text-center">
-              ¿Cuál es tu facturación mensual promedio?
+              {t('wizard.step4Title')}
             </h3>
             <p className="text-center text-muted-foreground text-sm">
-              Esta información nos ayuda a recomendarte un plan acorde a tu capacidad
+              {t('wizard.step4Subtitle')}
             </p>
             <div className="grid gap-4">
               {revenueOptions.map((option) => 
@@ -342,7 +343,7 @@ const DiagnosticWizard = () => {
         {currentStep === 5 && (
           <div className="space-y-6">
             <h3 className="text-xl sm:text-2xl font-bold text-foreground text-center">
-              ¿Qué tan rápido necesitas ver resultados?
+              {t('wizard.step5Title')}
             </h3>
             <div className="grid gap-4">
               {expectationOptions.map((option) => 
@@ -356,7 +357,7 @@ const DiagnosticWizard = () => {
         {currentStep === 6 && (
           <div className="space-y-6">
             <h3 className="text-xl sm:text-2xl font-bold text-foreground text-center">
-              ¿Cómo gestionas tus clientes actualmente?
+              {t('wizard.step6Title')}
             </h3>
             <div className="grid gap-4">
               {managementOptions.map((option) => 
@@ -366,14 +367,14 @@ const DiagnosticWizard = () => {
           </div>
         )}
 
-        {/* Step 7: Digital Health (NEW) */}
+        {/* Step 7: Digital Health */}
         {currentStep === 7 && (
           <div className="space-y-6">
             <h3 className="text-xl sm:text-2xl font-bold text-foreground text-center">
-              ¿Tienes acceso a tus cuentas digitales?
+              {t('wizard.step7Title')}
             </h3>
             <p className="text-center text-muted-foreground text-sm">
-              Google Business Profile, redes sociales, dominio web, etc.
+              {t('wizard.step7Subtitle')}
             </p>
             <div className="grid gap-4">
               {digitalOptions.map((option) => 
@@ -388,52 +389,52 @@ const DiagnosticWizard = () => {
           <div className="space-y-6">
             <div className="text-center mb-4">
               <h3 className="text-xl sm:text-2xl font-bold text-foreground">
-                ¡Último paso!
+                {t('wizard.step8Title')}
               </h3>
               <p className="text-muted-foreground mt-2">
-                Ingresa tus datos para ver tu plan personalizado
+                {t('wizard.step8Subtitle')}
               </p>
             </div>
             <div className="space-y-4">
               <div>
-                <Label htmlFor="businessName">Nombre de tu Negocio</Label>
+                <Label htmlFor="businessName">{t('wizard.businessNameLabel')}</Label>
                 <Input
                   id="businessName"
                   type="text"
-                  placeholder="Ej: JV Roofing, Cali Painting..."
+                  placeholder={t('wizard.businessNamePlaceholder')}
                   value={state.businessName}
                   onChange={(e) => setState({ ...state, businessName: e.target.value })}
                   className="mt-1"
                 />
               </div>
               <div>
-                <Label htmlFor="name">Tu Nombre</Label>
+                <Label htmlFor="name">{t('wizard.nameLabel')}</Label>
                 <Input
                   id="name"
                   type="text"
-                  placeholder="Tu nombre completo"
+                  placeholder={t('wizard.namePlaceholder')}
                   value={state.name}
                   onChange={(e) => setState({ ...state, name: e.target.value })}
                   className="mt-1"
                 />
               </div>
               <div>
-                <Label htmlFor="phone">Teléfono</Label>
+                <Label htmlFor="phone">{t('wizard.phoneLabel')}</Label>
                 <Input
                   id="phone"
                   type="tel"
-                  placeholder="(555) 123-4567"
+                  placeholder={t('wizard.phonePlaceholder')}
                   value={state.phone}
                   onChange={(e) => setState({ ...state, phone: e.target.value })}
                   className="mt-1"
                 />
               </div>
               <div>
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="email">{t('wizard.emailLabel')}</Label>
                 <Input
                   id="email"
                   type="email"
-                  placeholder="tu@email.com"
+                  placeholder={t('wizard.emailPlaceholder')}
                   value={state.email}
                   onChange={(e) => setState({ ...state, email: e.target.value })}
                   className="mt-1"
@@ -447,7 +448,7 @@ const DiagnosticWizard = () => {
         <div className="flex justify-between mt-8">
           {currentStep > 1 ? (
             <Button variant="outline" onClick={handleBack}>
-              Atrás
+              {t('wizard.back')}
             </Button>
           ) : (
             <div />
@@ -459,7 +460,7 @@ const DiagnosticWizard = () => {
               disabled={!canProceed()}
               className="ml-auto"
             >
-              Siguiente
+              {t('wizard.next')}
             </Button>
           ) : (
             <Button 
@@ -467,7 +468,7 @@ const DiagnosticWizard = () => {
               disabled={!canProceed()}
               className="ml-auto"
             >
-              Ver mi Plan
+              {t('wizard.viewPlan')}
             </Button>
           )}
         </div>

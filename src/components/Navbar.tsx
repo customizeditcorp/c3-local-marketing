@@ -5,8 +5,12 @@ import c3Logo from "@/assets/logos/c3Verticalorange200x200.svg";
 import googlePartner from "@/assets/logos/google-business-profile.webp";
 import certificadoGbp from "@/assets/logos/certificado-gbp.png";
 import sello20Anios from "@/assets/logos/sello-20-anios-experiencia.webp";
+import LanguageToggle from "./LanguageToggle";
+import { useLanguage } from "@/hooks/use-language";
 
 const Navbar = () => {
+  const { t } = useLanguage();
+
   const scrollToCalendar = () => {
     const calendarSection = document.getElementById('calendar-section');
     const diagnosticSection = document.getElementById('diagnostico');
@@ -49,14 +53,17 @@ const Navbar = () => {
             />
           </div>
 
-          <Button 
-            onClick={scrollToCalendar}
-            className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold gap-2"
-          >
-            <Calendar className="h-4 w-4" />
-            <span className="hidden sm:inline">Agendar Llamada</span>
-            <span className="sm:hidden">Agendar</span>
-          </Button>
+          <div className="flex items-center gap-3">
+            <LanguageToggle />
+            <Button 
+              onClick={scrollToCalendar}
+              className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold gap-2"
+            >
+              <Calendar className="h-4 w-4" />
+              <span className="hidden sm:inline">{t('navbar.scheduleCall')}</span>
+              <span className="sm:hidden">{t('navbar.schedule')}</span>
+            </Button>
+          </div>
         </div>
       </div>
     </nav>
