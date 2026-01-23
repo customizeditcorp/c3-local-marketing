@@ -1,4 +1,5 @@
-import { Check, ArrowRight } from "lucide-react";
+import { Check, ArrowRight, Handshake } from "lucide-react";
+import { useLanguage } from "@/hooks/use-language";
 
 interface TimelineStep {
   month: string;
@@ -10,15 +11,40 @@ interface TimelineStep {
 interface PriceRampTimelineProps {
   steps: TimelineStep[];
   title?: string;
+  showTagline?: boolean;
 }
 
-const PriceRampTimeline = ({ steps, title }: PriceRampTimelineProps) => {
+const PriceRampTimeline = ({ steps, title, showTagline = false }: PriceRampTimelineProps) => {
+  const { language } = useLanguage();
+  
+  const t = {
+    es: {
+      scaledInvestment: 'Inversión escalonada: empiezas con menos y escalas gradualmente',
+      investmentTagline: 'Nosotros ponemos la inversión, tú pones la confianza.',
+      starter: 'Starter',
+    },
+    en: {
+      scaledInvestment: 'Scaled investment: start with less and scale gradually',
+      investmentTagline: 'We put in the investment, you put in the trust.',
+      starter: 'Starter',
+    }
+  };
+
+  const text = t[language];
+
   return (
     <div className="bg-gradient-to-br from-amber-50 to-orange-50 border-2 border-amber-300 rounded-xl p-6">
       {title && (
-        <h4 className="text-lg font-bold text-amber-900 text-center mb-6">
+        <h4 className="text-lg font-bold text-amber-900 text-center mb-4">
           {title}
         </h4>
+      )}
+      
+      {showTagline && (
+        <p className="text-sm text-green-700 italic text-center mb-4 flex items-center justify-center gap-2">
+          <Handshake className="h-4 w-4 text-green-600" />
+          {text.investmentTagline}
+        </p>
       )}
       
       {/* Desktop Timeline */}
@@ -35,7 +61,7 @@ const PriceRampTimeline = ({ steps, title }: PriceRampTimelineProps) => {
             >
               {step.isStarter && (
                 <span className="text-xs font-bold text-green-600 uppercase tracking-wide mb-1">
-                  Starter
+                  {text.starter}
                 </span>
               )}
               <span className="text-xs text-muted-foreground">{step.month}</span>
@@ -83,7 +109,7 @@ const PriceRampTimeline = ({ steps, title }: PriceRampTimelineProps) => {
                 <div>
                   <span className="text-xs text-muted-foreground block">{step.month}</span>
                   {step.isStarter && (
-                    <span className="text-xs font-bold text-green-600">STARTER</span>
+                    <span className="text-xs font-bold text-green-600">{text.starter.toUpperCase()}</span>
                   )}
                 </div>
                 <span className={`text-xl font-bold ${step.isStarter ? 'text-green-600' : 'text-amber-800'}`}>
@@ -98,7 +124,7 @@ const PriceRampTimeline = ({ steps, title }: PriceRampTimelineProps) => {
       {/* Explanation */}
       <p className="text-sm text-amber-800 text-center mt-6">
         <Check className="h-4 w-4 inline-block mr-1 text-green-600" />
-        Inversión escalonada: empiezas con menos y escalas gradualmente
+        {text.scaledInvestment}
       </p>
     </div>
   );

@@ -144,7 +144,7 @@ const planData: Record<string, PlanDetails> = {
   cimientos: {
     title: 'Programa Cimientos',
     price: '$599/mes',
-    priceNote: 'Subsidio de entrada: $499 → $299 → $449 → $599',
+    priceNote: 'Riesgo Compartido: $399 x 2 meses, luego $599',
     description: 'Mantenimiento técnico, reputación y tráfico constante para tu negocio en marcha.',
     helpMessage: 'Ya tienes presencia pero necesitas mantenimiento profesional y campañas activas. Este plan mantiene tu negocio visible sin que tú hagas nada.',
     features: cimientosFeatures,
@@ -155,7 +155,7 @@ const planData: Record<string, PlanDetails> = {
   expansion: {
     title: 'Plan Expansión Total',
     price: '$1,299/mes',
-    priceNote: 'Beca de implementación: $599 x 3 meses, luego $1,299',
+    priceNote: 'Riesgo Compartido: $599 x 2 meses, luego $1,299',
     description: 'Omnicanalidad, video y automatización para negocios establecidos.',
     helpMessage: 'Tienes equipo y capacidad de crecer, pero tu marketing no lo refleja. Este plan te da presencia en 3 redes + video + CRM completo.',
     features: expansionFeatures,
@@ -168,7 +168,7 @@ const planData: Record<string, PlanDetails> = {
   dominio: {
     title: 'Plan Dominio Estratégico',
     price: '$2,599/mes',
-    priceNote: 'Inversión escalonada: $600 → $1,299 x 3 → $2,599',
+    priceNote: 'Riesgo Compartido: $600 → $1,299 x 3 → $2,599',
     description: 'Estrategia por temporadas, embudos de venta y marketing masivo para líderes locales.',
     helpMessage: 'Eres un líder en tu zona con capacidad de escalar. Este plan te convierte en la referencia de tu industria con campañas estacionales y funnels avanzados.',
     features: dominioFeatures,
@@ -576,13 +576,33 @@ const DiagnosticResults = () => {
                 Tu Plan Recomendado
               </h2>
 
+              {/* STANDARD_T1: Show Starter Price Box for Tier 1 (Cimientos) */}
+              {priceType === 'STANDARD_T1' && (
+                <>
+                  <StarterPriceBox 
+                    starterPrice="$399"
+                    normalPrice="$599"
+                    starterMonths={2}
+                    savings="$400"
+                    planName={currentPlan.title}
+                  />
+                  <PriceRampTimeline 
+                    title="Inversión Escalonada - Programa Cimientos"
+                    steps={[
+                      { month: 'Meses 1-2', price: '$399', isStarter: true, label: 'por mes' },
+                      { month: 'Mes 3+', price: '$599', isStarter: false, label: 'por mes' }
+                    ]}
+                  />
+                </>
+              )}
+
               {/* STARTER_TIER2: Show Starter Price Box */}
               {priceType === 'STARTER_TIER2' && (
                 <StarterPriceBox 
                   starterPrice="$599"
                   normalPrice="$1,299"
-                  starterMonths={3}
-                  savings="$2,100"
+                  starterMonths={2}
+                  savings="$1,400"
                   planName={currentPlan.title}
                 />
               )}
@@ -591,6 +611,7 @@ const DiagnosticResults = () => {
               {priceType === 'STARTER_TIER3' && (
                 <PriceRampTimeline 
                   title="Inversión Escalonada - Plan Dominio Estratégico"
+                  showTagline={true}
                   steps={[
                     { month: 'Mes 1', price: '$600', isStarter: true },
                     { month: 'Meses 2-4', price: '$1,299', isStarter: true, label: 'por mes' },
@@ -599,15 +620,16 @@ const DiagnosticResults = () => {
                 />
               )}
 
-              {/* Starter Strategy Explanation - NEW */}
-              {(priceType === 'STARTER_TIER2' || priceType === 'STARTER_TIER3') && (
+              {/* Riesgo Compartido Explanation - Updated Speech */}
+              {(priceType === 'STANDARD_T1' || priceType === 'STARTER_TIER2' || priceType === 'STARTER_TIER3') && (
                 <div className="bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-xl p-5">
                   <p className="text-green-900 text-sm sm:text-base leading-relaxed">
-                    <strong className="text-green-800">La Lógica:</strong> Tu negocio está listo para el siguiente nivel, 
-                    pero no necesitas pagar el precio completo desde el día 1. Activamos el{" "}
-                    <span className="font-bold">Programa Starter</span> para reducir tu 
-                    inversión inicial mientras configuramos tu sistema. Es como pagar una 
-                    inscripción reducida en el gimnasio mientras agarras ritmo.
+                    <strong className="text-green-800">🤝 Riesgo Compartido:</strong> En C3 Marketing sabemos que el arranque es crítico, 
+                    por eso <span className="font-bold">subsidiamos hasta $1,400 USD</span> de tu costo inicial. 
+                    Nosotros invertimos en construir tu infraestructura y tú solo cubres una tarifa reducida 
+                    (<span className="font-bold">Starter</span>) mientras preparamos el despegue. Solo pasas a la tarifa 
+                    estándar cuando tu sistema ya está listo para escalar.{" "}
+                    <span className="italic">Nosotros ponemos la inversión, tú pones la confianza.</span>
                   </p>
                 </div>
               )}
@@ -617,17 +639,6 @@ const DiagnosticResults = () => {
                 <Card className="border-2 border-primary bg-primary/5">
                   <CardContent className="p-6 text-center">
                     <p className="text-sm text-muted-foreground mb-2">Proyecto Finito (Sin mensualidades)</p>
-                    <p className="text-4xl font-bold text-primary">{currentPlan.price}</p>
-                    <p className="text-sm text-muted-foreground mt-2">{currentPlan.priceNote}</p>
-                  </CardContent>
-                </Card>
-              )}
-
-              {/* STANDARD_T1: Show standard price with subsidy note */}
-              {priceType === 'STANDARD_T1' && (
-                <Card className="border-2 border-primary bg-primary/5">
-                  <CardContent className="p-6 text-center">
-                    <p className="text-sm text-muted-foreground mb-2">Inversión Mensual</p>
                     <p className="text-4xl font-bold text-primary">{currentPlan.price}</p>
                     <p className="text-sm text-muted-foreground mt-2">{currentPlan.priceNote}</p>
                   </CardContent>
