@@ -23,9 +23,9 @@ const TermsOfService = () => {
               1. Acceptance of Terms
             </h2>
             <p className="text-muted-foreground leading-relaxed">
-              By accessing and using the services provided by C3 Marketing Hub ("we," "us," or "our"), 
-              you agree to be bound by these Terms of Service. If you do not agree with any part of 
-              these terms, you may not use our services.
+              By accessing and using the services provided by L & M Creative Service INC dba C3 Marketing Hub 
+              ("we," "us," or "our"), you agree to be bound by these Terms of Service. If you do not agree 
+              with any part of these terms, you may not use our services.
             </p>
           </section>
 
@@ -100,7 +100,8 @@ const TermsOfService = () => {
             </p>
             <p className="text-muted-foreground leading-relaxed">
               C3 Marketing Hub retains the right to use completed work in our portfolio and marketing 
-              materials unless otherwise agreed in writing.
+              materials unless otherwise agreed in writing. We also retain ownership of any background 
+              technology, frameworks, or pre-existing code used to deliver the services.
             </p>
           </section>
 
@@ -121,11 +122,12 @@ const TermsOfService = () => {
               7. Limitation of Liability
             </h2>
             <p className="text-muted-foreground leading-relaxed mb-4">
-              C3 Marketing Hub shall not be liable for any indirect, incidental, special, consequential, 
-              or punitive damages resulting from your use of our services.
+              C3 Marketing Hub (and its parent entity L & M Creative Service INC) shall not be liable for 
+              any indirect, incidental, special, consequential, or punitive damages resulting from your 
+              use of our services.
             </p>
             <p className="text-muted-foreground leading-relaxed">
-              Our total liability shall not exceed the amount paid by you for services in the twelve (12) 
+              Our total liability shall not exceed the amount paid by you for services in the three (3) 
               months preceding the claim.
             </p>
           </section>
