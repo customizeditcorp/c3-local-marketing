@@ -12,6 +12,10 @@ const PrivacyPolicy = () => {
           Privacy Policy & SMS Terms of Service
         </h1>
         
+        <p className="text-muted-foreground mb-8">
+          Last Updated: January 2025
+        </p>
+        
         <div className="prose prose-lg max-w-none space-y-8 text-foreground/90">
           {/* Section 1 */}
           <section>
@@ -20,22 +24,23 @@ const PrivacyPolicy = () => {
             </h2>
             <p className="text-muted-foreground leading-relaxed">
               C3 Marketing Hub collects information you provide directly to us, such as your name, 
-              phone number, and email address, when you request a consultation or engage our marketing services.
+              phone number, and email address, when you request a consultation, fill out a form on 
+              our website, or engage our marketing services.
             </p>
           </section>
 
           {/* Section 2 */}
           <section>
             <h2 className="text-2xl font-semibold text-foreground mb-4">
-              2. Information Sharing (Crucial for A2P Compliance)
+              2. Information Sharing (Strict No-Sharing Policy)
             </h2>
             <p className="text-muted-foreground leading-relaxed mb-4">
-              We do not sell, trade, or rent Users' personal identification information to others. 
-              No mobile information will be shared with third parties/affiliates for marketing/promotional purposes.
+              We do not sell, trade, or rent Users' personal identification information to others.
             </p>
             <p className="text-muted-foreground leading-relaxed font-medium bg-primary/5 p-4 rounded-lg border border-primary/20">
-              <strong>Important:</strong> All the above categories exclude text messaging originator opt-in data and consent; 
-              this information will not be shared with any third parties.
+              <strong>CRITICAL PRIVACY NOTICE:</strong> No mobile information will be shared with third parties 
+              or affiliates for marketing or promotional purposes. All the above categories exclude text messaging 
+              originator opt-in data and consent; this information will not be shared with any third parties.
             </p>
           </section>
 
@@ -55,7 +60,7 @@ const PrivacyPolicy = () => {
                 <h3 className="font-semibold text-foreground">Program Description:</h3>
                 <p className="text-muted-foreground">
                   Messages are strictly for account management, including monthly performance reports, 
-                  billing alerts, and appointment confirmations for strategy sessions with Carlos Cordero.
+                  billing alerts, project updates, and appointment confirmations for strategy sessions with Carlos Cordero.
                 </p>
               </div>
               
@@ -69,7 +74,7 @@ const PrivacyPolicy = () => {
               <div>
                 <h3 className="font-semibold text-foreground">Frequency:</h3>
                 <p className="text-muted-foreground">
-                  Message frequency varies based on your account activity.
+                  Message frequency varies based on your account activity and current projects.
                 </p>
               </div>
               
@@ -103,14 +108,26 @@ const PrivacyPolicy = () => {
           {/* Section 4 */}
           <section>
             <h2 className="text-2xl font-semibold text-foreground mb-4">
-              4. Contact Us
+              4. Data Security
+            </h2>
+            <p className="text-muted-foreground leading-relaxed">
+              We implement appropriate data collection, storage, and processing practices and security measures 
+              to protect against unauthorized access, alteration, disclosure, or destruction of your personal information.
+            </p>
+          </section>
+
+          {/* Section 5 */}
+          <section>
+            <h2 className="text-2xl font-semibold text-foreground mb-4">
+              5. Contact Us
             </h2>
             <p className="text-muted-foreground leading-relaxed mb-4">
-              If you have any questions about these Terms, please contact:
+              If you have any questions about this Privacy Policy or our SMS Terms, please contact:
             </p>
             <div className="bg-card p-6 rounded-xl border border-border">
               <p className="font-semibold text-foreground mb-2">C3 Marketing Hub</p>
               <p className="text-muted-foreground">Attn: Carlos Cordero</p>
+              <p className="text-muted-foreground">134B Inger Dr, Santa Maria CA 93454</p>
               <p className="text-muted-foreground">
                 Phone: <a href="tel:+18056084843" className="text-primary hover:underline">(805) 608-4843</a>
               </p>
