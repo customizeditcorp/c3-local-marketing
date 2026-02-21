@@ -251,6 +251,26 @@ export const translations = {
       backToHome: '← Volver al inicio',
       lastUpdated: 'Última actualización: Enero 2025',
     },
+    resources: {
+      cslbForms: {
+        seoTitle: 'Formularios CSLB California - Directorio Rápido | C3 Local Marketing',
+        seoDescription: 'Directorio completo de formularios oficiales del CSLB para contratistas de California.',
+        h1: 'Formularios Oficiales del CSLB California — Directorio Rápido',
+        problem: 'Navegar por el sitio web del gobierno puede ser confuso. Perder tiempo buscando el formulario correcto retrasa tus proyectos y contrataciones.',
+        solution: 'Hemos organizado los formularios más importantes del CSLB para que los encuentres en segundos y en un solo lugar.',
+        viewDoc: 'Ver Documento Oficial',
+        legalNote: 'C3 Local Marketing no es una entidad gubernamental. Enlazamos directamente a los documentos públicos del Estado de California para facilitar el acceso a nuestros clientes contratistas.',
+      },
+      verifyName: {
+        seoTitle: 'Cómo Verificar el Nombre de tu Constructora en California | C3 Local Marketing',
+        seoDescription: 'Guía paso a paso para verificar la disponibilidad del nombre de tu constructora en California.',
+        h1: 'Guía: Cómo Verificar si el Nombre de tu Constructora está Disponible',
+        problem: 'Nada duele más que pagar por la rotulación de tus camionetas o dominios web y descubrir que otro contratista ya registró ese nombre.',
+        solution: 'La Solución: Guía Paso a Paso',
+        ctaTitle: '¿Nombre confirmado? Asegura tu dominio y web hoy.',
+        ctaButton: 'Asegura tu Dominio y Web Hoy',
+      },
+    },
   },
   en: {
     navbar: {
@@ -498,6 +518,26 @@ export const translations = {
     legal: {
       backToHome: '← Back to Home',
       lastUpdated: 'Last Updated: January 2025',
+    },
+    resources: {
+      cslbForms: {
+        seoTitle: 'CSLB Forms Directory - California Contractor Forms | C3 Local Marketing',
+        seoDescription: 'Complete directory of official CSLB forms for California contractors.',
+        h1: 'Official CSLB Forms — Quick Directory',
+        problem: 'Navigating government websites can be confusing. Wasting time searching for the right form delays your projects and hiring.',
+        solution: "We've organized the most important CSLB forms so you can find them in seconds, all in one place.",
+        viewDoc: 'View Official Document',
+        legalNote: 'C3 Local Marketing is not a government entity. We link directly to public documents from the State of California to facilitate access for our contractor clients.',
+      },
+      verifyName: {
+        seoTitle: 'How to Verify Your Business Name in California | C3 Local Marketing',
+        seoDescription: 'Step-by-step guide to verify your business name availability in California.',
+        h1: 'Guide: How to Verify if Your Construction Company Name is Available',
+        problem: 'Nothing hurts more than paying for truck wraps or web domains only to discover that another contractor already registered that name.',
+        solution: 'The Solution: Step-by-Step Guide',
+        ctaTitle: 'Name confirmed? Secure your domain and website today.',
+        ctaButton: 'Secure Your Domain & Website Today',
+      },
     },
   },
 } as const;
