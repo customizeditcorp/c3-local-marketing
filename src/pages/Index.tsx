@@ -9,6 +9,7 @@ import FAQSection from "@/components/FAQSection";
 import FinalCTASection from "@/components/FinalCTASection";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import CallNowButton from "@/components/CallNowButton";
 
 const Index = () => {
   return (
@@ -24,6 +25,7 @@ const Index = () => {
       <FinalCTASection />
       <Footer />
       <WhatsAppButton />
+      <CallNowButton />
     </div>
   );
 };

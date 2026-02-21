@@ -42,6 +42,15 @@ All colors MUST be HSL.
     --c3-gray-border: 0 0% 61%; /* #9C9C9B - Border Gray */
     --c3-section-alt: 220 20% 97%; /* #F5F7FA - Section background */
     
+    /* Brand Colors - Google */
+    --google-blue: 217 89% 61%; /* #4285F4 */
+    --google-red: 4 90% 58%; /* #EA4335 */
+    --google-yellow: 43 96% 56%; /* #FBBC05 */
+    --google-green: 151 55% 42%; /* #34A853 */
+    
+    /* Brand Colors - Meta */
+    --meta-blue: 214 100% 50%; /* #0866FF */
+    
     --background: 0 0% 100%;
     --foreground: 220 20% 12%; /* Texto más oscuro para mejor contraste */
     --card: 0 0% 100%;
