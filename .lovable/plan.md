@@ -1,84 +1,93 @@
 
 
-# Fase Final: Centro de Recursos + Traducciones
+# Fase 4: Precios Reales + Anexo Legal + Pulido Final
 
 ## Resumen
 
-Reemplazar los 2 placeholders de recursos con paginas completas usando el copy proporcionado, y actualizar el archivo de traducciones para cubrir las secciones faltantes.
+Integrar los precios reales del Sistema Maestro en la pagina de Websites, agregar el anexo legal A2P 10DLC a Terminos de Servicio, y confirmar que las paginas de recursos y traducciones estan completas.
 
 ---
 
-## 1. CSLBForms (src/pages/resources/CSLBForms.tsx)
+## 1. Actualizar Precios en Websites (src/pages/services/Websites.tsx)
 
-**Reemplazar placeholder actual.**
+**Reemplazar el array `planes` (lineas 41-60)** con los 3 tiers reales:
 
-Estructura:
-- PageLayout + SEOHead con title/description optimizados y faqItems para Schema
-- Hero: H1 "Formularios Oficiales del CSLB California - Directorio Rapido" + barra decorativa C3
-- Seccion "El Problema" (fondo muted): Copy sobre navegar sitios del gobierno confusos
-- Seccion "La Solucion" (fondo blanco): Copy sobre formularios organizados en un solo lugar
-- Grid de Cards (3 columnas desktop, 1 mobile) con formularios CSLB:
-  - "Aplicacion para Licencia Original" - Para solicitar tu primera licencia de contratista
-  - "Certificacion de Asbestos (DOSH)" - Requerida para proyectos de remocion de asbestos
-  - "Registro de Vendedor HIS (Home Improvement Salesperson)" - Para registrar vendedores de mejoras del hogar
-  - "Solicitud de Examen" - Para programar tu examen de licencia CSLB
-  - "Renovacion de Licencia" - Para renovar tu licencia activa antes del vencimiento
-  - "Cambio de Nombre o Direccion" - Para actualizar la informacion de tu licencia
-  - "Fianza de Contratista (Contractor Bond)" - Documentacion para tu fianza requerida
-  - "Reactivacion de Licencia" - Para reactivar una licencia vencida o inactiva
-- Cada Card: titulo, descripcion de 1 linea, boton secundario "Ver Documento Oficial" enlazando a https://www.cslb.ca.gov/About_Us/Library/Forms_And_Applications.aspx
-- Nota legal (fondo muted, texto sm): "C3 Local Marketing no es una entidad gubernamental. Enlazamos directamente a los documentos publicos del Estado de California para facilitar el acceso a nuestros clientes contratistas."
-- CTA final: "Diagnostica tu Negocio Gratis" -> /#diagnostico
+### Plan Cimientos
+- Nombre: "Programa Cimientos"
+- Precio: "$499/mes (Mes 1-3) -> $599/mes (Mes 4+)"
+- Badge: ninguno
+- Enfoque: Google Business Profile
+- Features: GBP verificado y optimizado, SEO local basico, NAP consistente, Gestion de resenas, Reportes mensuales
 
----
+### Plan Expansion Total (RECOMENDADO)
+- Nombre: "Plan Expansion Total"
+- Precio: "$599/mes (Mes 1-2) -> $1,299/mes (Mes 3+)"
+- Badge: "Recomendado" (reemplaza "Mas Popular")
+- Enfoque: Omnicanal y Growth Marketing
+- Features: Todo de Cimientos + Meta Ads management, Sitio web profesional, Campanas de leads, Retargeting, Reportes avanzados
 
-## 2. VerifyBusinessName (src/pages/resources/VerifyBusinessName.tsx)
+### Plan Dominio Estrategico
+- Nombre: "Plan Dominio Estrategico"
+- Precio: "Mes 1: $600 | Mes 2: $1,299 | Mes 3+: $2,599"
+- Badge: ninguno
+- Enfoque: Funnels y Automatizacion total
+- Features: Todo de Expansion + CRM automatizado, Funnels de conversion, SMS/Email automatico, Soporte prioritario, Estrategia personalizada
 
-**Reemplazar placeholder actual.**
-
-Estructura:
-- PageLayout + SEOHead con title/description y faqItems
-- Hero: H1 "Guia: Como Verificar si el Nombre de tu Constructora esta Disponible" + barra decorativa
-- Seccion "El Problema" (fondo muted): Copy sobre pagar por truck wraps y dominios para descubrir que el nombre ya esta registrado
-- Seccion guia paso a paso (fondo blanco) con 3 Cards numeradas:
-  - Paso 1: "Busqueda en el CSLB" - Verifica que ningun otro contratista activo tenga el nombre exacto. Boton externo -> https://www.cslb.ca.gov/OnlineServices/CheckLicenseII/CheckLicense.aspx
-  - Paso 2: "Secretario de Estado (Bizfile)" - Revisa la base de datos oficial de corporaciones y LLCs. Boton externo -> https://bizfileonline.sos.ca.gov/search/business
-  - Paso 3: "Protege tu Dominio Digital" - Asegurate de que el .com este disponible antes de registrar en el estado. Texto: "Nosotros te ayudamos con eso."
-- CTA final prominente: "Asegura tu Dominio y Web Hoy" -> /servicios/websites-profesionales
-- FAQ con 3-4 preguntas relevantes + Schema
+**Cambios en la UI de cada Card:**
+- Mostrar precio con formato escalonado (starter -> normal) en lugar de un solo precio
+- Agregar subtitulo descriptivo del enfoque debajo del nombre
+- Eliminar la nota "Precios por definir" (linea 156) ya que ahora son reales
+- Agregar nota de Ad Spend debajo del grid: "La gestion de campanas esta incluida. El presupuesto publicitario (Ad Spend) es adicional y se paga directamente por el cliente a las plataformas."
 
 ---
 
-## 3. Traducciones (src/i18n/translations.ts)
+## 2. Anexo Legal A2P 10DLC (src/pages/TermsOfService.tsx)
 
-**Modificar archivo existente.** Agregar traducciones para:
+**Agregar una nueva seccion DESPUES de la seccion 11 (Informacion de Contacto), ANTES del bloque de links del footer (linea 212).**
 
-Dentro de `es` y `en`:
-- `navbar.services` / `navbar.areas` / `navbar.industries` / `navbar.resources` (titulos de dropdowns)
-- `servicesHub.title` / `servicesHub.titleHighlight` (titulo de la seccion en Home)
-- `resources.cslbForms.*` (titulos y textos de la pagina CSLB)
-- `resources.verifyName.*` (titulos y textos de la pagina de verificacion)
-- `footer.services` / `footer.areas` / `footer.resources` (titulos de columnas del footer)
+Nueva seccion con estructura bilingue (usando el patron `language === 'es'` existente):
 
-Nota: El Navbar y ServicesHubSection actualmente usan ternarios `isEnglish ?` directamente. Para esta fase, mantendremos ese patron (funciona correctamente) y solo agregaremos keys para el contenido de las 2 paginas de recursos, ya que esas si necesitan ser bilingues via `t()`.
+### Titulo: "Anexo de Comunicaciones Electronicas (A2P 10DLC)"
+
+Contenido (3 puntos):
+- **Consentimiento:** Al proporcionar tu numero, aceptas recibir mensajes de texto y WhatsApp para fines de seguimiento de proyectos y marketing.
+- **Opt-Out:** El usuario puede cancelar la suscripcion en cualquier momento enviando la palabra 'STOP'. Para ayuda, envia 'HELP'.
+- **Privacidad de Datos:** No compartimos ni vendemos datos de consentimiento de mensajes de texto con terceros.
+
+Version en ingles correspondiente incluida.
 
 ---
 
-## Archivos a crear/modificar
+## 3. Paginas de Recursos - Confirmacion
+
+Las paginas CSLBForms.tsx y VerifyBusinessName.tsx ya estan **completas** con:
+- Grid de 8 formularios CSLB con enlaces al sitio oficial
+- Guia de 3 pasos con enlaces externos a CSLB y Bizfile
+- FAQs, SEOHead, disclaimers legales
+- Soporte bilingue via `isEnglish`
+
+**No requieren cambios adicionales.**
+
+---
+
+## 4. Traducciones - Verificacion
+
+El archivo translations.ts ya contiene las keys para `resources.cslbForms` y `resources.verifyName` en ambos idiomas.
+
+**No requiere cambios adicionales** ya que las paginas de servicios, ubicaciones e industrias usan ternarios `isEnglish ?` directamente (patron consistente en todo el sitio).
+
+---
+
+## Archivos a modificar
 
 | Archivo | Accion |
 |---------|--------|
-| src/pages/resources/CSLBForms.tsx | REEMPLAZAR placeholder |
-| src/pages/resources/VerifyBusinessName.tsx | REEMPLAZAR placeholder |
-| src/i18n/translations.ts | MODIFICAR - agregar keys de recursos |
+| src/pages/services/Websites.tsx | MODIFICAR - reemplazar precios placeholder con tiers reales |
+| src/pages/TermsOfService.tsx | MODIFICAR - agregar Anexo A2P 10DLC al final |
 
 ## Detalles tecnicos
 
-- Ambas paginas siguen el patron visual establecido: Hero + Problem + Solution + Content + CTA
-- SEOHead inyecta FAQPage Schema en cada pagina
-- Links externos usan target="_blank" rel="noopener noreferrer"
-- Grid de formularios CSLB usa el componente Card existente con Button variant="outline"
-- Pasos numerados en VerifyBusinessName usan Cards con numeros grandes (text-4xl font-bold text-primary) como indicadores visuales
-- Iconos Lucide: FileText (formularios), ExternalLink (enlaces externos), Search (busqueda), Shield (verificacion), Globe (dominio)
-- CTA de VerifyBusinessName enlaza internamente a /servicios/websites-profesionales (cross-selling)
+- Websites.tsx: El array `planes` se reemplaza con datos reales. La estructura de Card se ajusta para mostrar precios escalonados (texto mas pequeno para starter, texto grande para precio normal)
+- TermsOfService.tsx: Se agrega una seccion 12 siguiendo el patron bilingue existente (`language === 'es' ? ... : ...`). Se inserta antes de la linea 212 (bloque de links)
+- No se tocan CSLBForms.tsx, VerifyBusinessName.tsx ni translations.ts (ya estan completos)
 
