@@ -206,6 +206,33 @@ const TermsOfService = () => {
                 Email: <a href="mailto:info@c3marketinghub.com" className="text-primary hover:underline">info@c3marketinghub.com</a>
               </p>
             </div>
+           </section>
+
+          {/* Section 12 - A2P 10DLC */}
+          <section>
+            <h2 className="text-2xl font-semibold text-foreground mb-4">
+              {language === 'es' ? '12. Anexo de Comunicaciones Electrónicas (A2P 10DLC)' : '12. Electronic Communications Addendum (A2P 10DLC)'}
+            </h2>
+            <div className="space-y-4 text-muted-foreground">
+              <p className="leading-relaxed">
+                <strong className="text-foreground">{language === 'es' ? 'Consentimiento:' : 'Consent:'}</strong>{' '}
+                {language === 'es'
+                  ? 'Al proporcionar tu número de teléfono, aceptas recibir mensajes de texto (SMS) y WhatsApp de C3 Marketing Hub para fines de seguimiento de proyectos y marketing. La frecuencia de mensajes puede variar. Pueden aplicarse tarifas estándar de mensajes y datos.'
+                  : 'By providing your phone number, you consent to receiving text messages (SMS) and WhatsApp messages from C3 Marketing Hub for project follow-up and marketing purposes. Message frequency may vary. Standard message and data rates may apply.'}
+              </p>
+              <p className="leading-relaxed">
+                <strong className="text-foreground">{language === 'es' ? 'Opt-Out (Cancelación):' : 'Opt-Out:'}</strong>{' '}
+                {language === 'es'
+                  ? 'Puedes cancelar la suscripción en cualquier momento enviando la palabra "STOP" al número desde el cual recibiste el mensaje. Para ayuda, envía "HELP". Tras cancelar, no recibirás más mensajes de marketing.'
+                  : 'You can unsubscribe at any time by replying "STOP" to the number from which you received the message. For help, reply "HELP". After opting out, you will no longer receive marketing messages.'}
+              </p>
+              <p className="leading-relaxed">
+                <strong className="text-foreground">{language === 'es' ? 'Privacidad de Datos:' : 'Data Privacy:'}</strong>{' '}
+                {language === 'es'
+                  ? 'No compartimos, vendemos ni cedemos los datos de consentimiento de mensajes de texto con terceros bajo ninguna circunstancia.'
+                  : 'We do not share, sell, or transfer text message consent data to any third parties under any circumstances.'}
+              </p>
+            </div>
           </section>
         </div>
 
