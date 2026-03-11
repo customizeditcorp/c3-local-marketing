@@ -130,10 +130,21 @@ const Footer = () => {
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-10 pt-6 border-t border-white/10 text-center">
+        <div className="mt-10 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-white/50">
             © {new Date().getFullYear()} C3 Local Marketing. {isEnglish ? "All rights reserved." : "Todos los derechos reservados."}
           </p>
+          <div className="flex items-center gap-4">
+            <a href="https://www.facebook.com/c3localmarketing" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-white transition-colors" aria-label="Facebook">
+              <Facebook className="h-5 w-5" />
+            </a>
+            <a href="https://www.instagram.com/c3localmarketing/" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-white transition-colors" aria-label="Instagram">
+              <Instagram className="h-5 w-5" />
+            </a>
+            <a href="https://www.tiktok.com/@c3localmarketing" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-white transition-colors" aria-label="TikTok">
+              <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.34-6.34V8.75a8.18 8.18 0 004.76 1.52V6.84a4.84 4.84 0 01-1-.15z"/></svg>
+            </a>
+          </div>
         </div>
       </div>
     </footer>
