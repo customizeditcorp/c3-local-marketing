@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/hooks/use-language";
-import { MapPin, Phone, Mail } from "lucide-react";
+import { MapPin, Phone, Mail, Facebook, Instagram } from "lucide-react";
+import c3Logo from "@/assets/logos/c3white200x200.svg";
 
 const Footer = () => {
   const { t, isEnglish } = useLanguage();
