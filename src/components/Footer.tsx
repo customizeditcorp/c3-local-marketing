@@ -29,7 +29,14 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           {/* NAP + Map */}
           <div className="lg:col-span-1 space-y-4">
-            <h3 className="text-lg font-bold text-white">C3 Local Marketing</h3>
+            <Link to="/" className="inline-block">
+              <img src={c3Logo} alt="C3 Local Marketing" className="h-14 w-auto" />
+            </Link>
+            <p className="text-sm text-white/70">
+              {isEnglish 
+                ? "Digital marketing agency for Hispanic contractors in California." 
+                : "Agencia de marketing digital para contratistas hispanos en California."}
+            </p>
             <div className="space-y-3 text-sm text-white/80">
               <a href="https://maps.google.com/?q=134+Inger+Dr,+Santa+Maria,+CA+93454" target="_blank" rel="noopener noreferrer" className="flex items-start gap-2 hover:text-white transition-colors">
                 <MapPin className="h-4 w-4 mt-0.5 flex-shrink-0" />
