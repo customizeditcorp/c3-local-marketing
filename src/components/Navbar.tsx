@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Calendar, ChevronDown, Menu, X } from "lucide-react";
-import c3Logo from "@/assets/logos/c3Verticalorange200x200.svg";
+import c3Logo from "@/assets/logos/c3orange200x200.png";
 import LanguageToggle from "./LanguageToggle";
 import { useLanguage } from "@/hooks/use-language";
 
