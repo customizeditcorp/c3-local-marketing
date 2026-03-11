@@ -8,7 +8,7 @@ interface LanguageContextType {
 }
 
 export const LanguageContext = createContext<LanguageContextType>({
-  language: 'es',
+  language: 'en',
   setLanguage: () => {},
 });
 
@@ -16,9 +16,9 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const [language, setLanguageState] = useState<Language>(() => {
     if (typeof window !== 'undefined') {
       const saved = localStorage.getItem('c3-language');
-      return (saved as Language) || 'es';
+      return (saved as Language) || 'en';
     }
-    return 'es';
+    return 'en';
   });
 
   useEffect(() => {

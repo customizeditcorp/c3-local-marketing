@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useLanguage } from "@/hooks/use-language";
 
 interface FAQItem {
   question: string;
@@ -9,19 +10,39 @@ interface SEOHeadProps {
   title: string;
   description: string;
   faqItems?: FAQItem[];
+  ogTitle?: string;
+  ogDescription?: string;
 }
 
-const SEOHead = ({ title, description, faqItems }: SEOHeadProps) => {
+const SEOHead = ({ title, description, faqItems, ogTitle, ogDescription }: SEOHeadProps) => {
+  const { language } = useLanguage();
+
   useEffect(() => {
+    // Update html lang attribute dynamically
+    document.documentElement.lang = language === 'es' ? 'es' : 'en';
+
     document.title = title;
 
-    let metaDesc = document.querySelector('meta[name="description"]');
-    if (!metaDesc) {
-      metaDesc = document.createElement("meta");
-      metaDesc.setAttribute("name", "description");
-      document.head.appendChild(metaDesc);
-    }
-    metaDesc.setAttribute("content", description);
+    const setMeta = (selector: string, attr: string, content: string) => {
+      let el = document.querySelector(selector);
+      if (!el) {
+        el = document.createElement("meta");
+        const [key, value] = attr.split("=");
+        el.setAttribute(key, value);
+        document.head.appendChild(el);
+      }
+      el.setAttribute("content", content);
+    };
+
+    setMeta('meta[name="description"]', 'name=description', description);
+
+    // Update OG tags
+    const socialTitle = ogTitle || title;
+    const socialDesc = ogDescription || description;
+    setMeta('meta[property="og:title"]', 'property=og:title', socialTitle);
+    setMeta('meta[property="og:description"]', 'property=og:description', socialDesc);
+    setMeta('meta[name="twitter:title"]', 'name=twitter:title', socialTitle);
+    setMeta('meta[name="twitter:description"]', 'name=twitter:description', socialDesc);
 
     // Clean up existing FAQ schema
     const existingFaq = document.getElementById("faq-schema");
@@ -50,7 +71,7 @@ const SEOHead = ({ title, description, faqItems }: SEOHeadProps) => {
       const faqScript = document.getElementById("faq-schema");
       if (faqScript) faqScript.remove();
     };
-  }, [title, description, faqItems]);
+  }, [title, description, faqItems, ogTitle, ogDescription, language]);
 
   return null;
 };
