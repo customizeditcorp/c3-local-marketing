@@ -44,6 +44,26 @@ const SEOHead = ({ title, description, faqItems, ogTitle, ogDescription }: SEOHe
     setMeta('meta[name="twitter:title"]', 'name=twitter:title', socialTitle);
     setMeta('meta[name="twitter:description"]', 'name=twitter:description', socialDesc);
 
+    // Hreflang tags for bilingual SEO
+    const baseUrl = 'https://c3marketinghub.com';
+    const currentPath = window.location.pathname;
+
+    const setLink = (id: string, hreflang: string, href: string) => {
+      let el = document.getElementById(id) as HTMLLinkElement | null;
+      if (!el) {
+        el = document.createElement('link');
+        el.id = id;
+        el.rel = 'alternate';
+        document.head.appendChild(el);
+      }
+      el.setAttribute('hreflang', hreflang);
+      el.setAttribute('href', href);
+    };
+
+    setLink('hreflang-en', 'en', `${baseUrl}${currentPath}`);
+    setLink('hreflang-es', 'es', `${baseUrl}${currentPath}`);
+    setLink('hreflang-default', 'x-default', `${baseUrl}${currentPath}`);
+
     // Clean up existing FAQ schema
     const existingFaq = document.getElementById("faq-schema");
     if (existingFaq) existingFaq.remove();
