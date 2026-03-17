@@ -1,93 +1,66 @@
 
 
-# Fase 4: Precios Reales + Anexo Legal + Pulido Final
+# Información disponible para entrenar tu chatbot
 
-## Resumen
-
-Integrar los precios reales del Sistema Maestro en la pagina de Websites, agregar el anexo legal A2P 10DLC a Terminos de Servicio, y confirmar que las paginas de recursos y traducciones estan completas.
+Tu sitio web tiene contenido rico y estructurado que se puede extraer para entrenar un chatbot. Aquí está todo organizado:
 
 ---
 
-## 1. Actualizar Precios en Websites (src/pages/services/Websites.tsx)
-
-**Reemplazar el array `planes` (lineas 41-60)** con los 3 tiers reales:
-
-### Plan Cimientos
-- Nombre: "Programa Cimientos"
-- Precio: "$499/mes (Mes 1-3) -> $599/mes (Mes 4+)"
-- Badge: ninguno
-- Enfoque: Google Business Profile
-- Features: GBP verificado y optimizado, SEO local basico, NAP consistente, Gestion de resenas, Reportes mensuales
-
-### Plan Expansion Total (RECOMENDADO)
-- Nombre: "Plan Expansion Total"
-- Precio: "$599/mes (Mes 1-2) -> $1,299/mes (Mes 3+)"
-- Badge: "Recomendado" (reemplaza "Mas Popular")
-- Enfoque: Omnicanal y Growth Marketing
-- Features: Todo de Cimientos + Meta Ads management, Sitio web profesional, Campanas de leads, Retargeting, Reportes avanzados
-
-### Plan Dominio Estrategico
-- Nombre: "Plan Dominio Estrategico"
-- Precio: "Mes 1: $600 | Mes 2: $1,299 | Mes 3+: $2,599"
-- Badge: ninguno
-- Enfoque: Funnels y Automatizacion total
-- Features: Todo de Expansion + CRM automatizado, Funnels de conversion, SMS/Email automatico, Soporte prioritario, Estrategia personalizada
-
-**Cambios en la UI de cada Card:**
-- Mostrar precio con formato escalonado (starter -> normal) en lugar de un solo precio
-- Agregar subtitulo descriptivo del enfoque debajo del nombre
-- Eliminar la nota "Precios por definir" (linea 156) ya que ahora son reales
-- Agregar nota de Ad Spend debajo del grid: "La gestion de campanas esta incluida. El presupuesto publicitario (Ad Spend) es adicional y se paga directamente por el cliente a las plataformas."
+## 1. Sobre C3 Marketing Hub
+- **Producto principal**: Sistema Imán Local™ / Local Magnet System™
+- **Público objetivo**: Contratistas hispanos de servicios locales en California (landscaping, plumbing, HVAC, electrical, roofing, painting, construction)
+- **Propuesta de valor**: Verificación de Google Business Profile + infraestructura digital completa en 90 días, sin mensualidades eternas, 100% propiedad del cliente
+- **Teléfono**: (805) 608-4843
+- **Redes**: @c3localmarketing (Facebook, Instagram, TikTok)
 
 ---
 
-## 2. Anexo Legal A2P 10DLC (src/pages/TermsOfService.tsx)
+## 2. Catálogo de Planes y Precios
 
-**Agregar una nueva seccion DESPUES de la seccion 11 (Informacion de Contacto), ANTES del bloque de links del footer (linea 212).**
+| Plan | Precio | Perfil | Duración |
+|------|--------|--------|----------|
+| Auditoría NAP | $250 (único) | Negocios con inconsistencias NAP | 35-45 días |
+| Presencia Digital | $3,300 (único) o $2,970 contado | Contratista nuevo (<$10k/mes) | 90 días |
+| Cimientos | $599/mes (Starter: $399 x 2 meses) | Solopreneur ($10k-$25k/mes) | 6 meses mín. |
+| Expansión Total | $1,299/mes (Starter: $599 x 2 meses) | Negocio establecido ($25k-$60k/mes) | 6 meses mín. |
+| Dominio Estratégico | $2,599/mes (Ramp: $600→$1,299→$2,599) | Líder local ($60k+/mes) | 12 meses mín. |
 
-Nueva seccion con estructura bilingue (usando el patron `language === 'es'` existente):
-
-### Titulo: "Anexo de Comunicaciones Electronicas (A2P 10DLC)"
-
-Contenido (3 puntos):
-- **Consentimiento:** Al proporcionar tu numero, aceptas recibir mensajes de texto y WhatsApp para fines de seguimiento de proyectos y marketing.
-- **Opt-Out:** El usuario puede cancelar la suscripcion en cualquier momento enviando la palabra 'STOP'. Para ayuda, envia 'HELP'.
-- **Privacidad de Datos:** No compartimos ni vendemos datos de consentimiento de mensajes de texto con terceros.
-
-Version en ingles correspondiente incluida.
+Cada plan tiene features detallados, features heredados de tiers anteriores, y modelo de Riesgo Compartido.
 
 ---
 
-## 3. Paginas de Recursos - Confirmacion
+## 3. Lógica del Diagnóstico (8 pasos del wizard)
+- **Paso 1**: Estado de Google Business Profile (4 opciones)
+- **Paso 2**: Etapa de licencia CSLB (3 opciones)
+- **Paso 3**: Tamaño del equipo (3 opciones)
+- **Paso 4**: Facturación mensual (4 opciones) — variable crítica
+- **Paso 5**: Expectativa de resultados (4 opciones)
+- **Paso 6**: Gestión de clientes (3 opciones)
+- **Paso 7**: Salud digital / accesos (4 opciones)
+- **Paso 8**: Datos de contacto
 
-Las paginas CSLBForms.tsx y VerifyBusinessName.tsx ya estan **completas** con:
-- Grid de 8 formularios CSLB con enlaces al sitio oficial
-- Guia de 3 pasos con enlaces externos a CSLB y Bizfile
-- FAQs, SEOHead, disclaimers legales
-- Soporte bilingue via `isEnglish`
-
-**No requieren cambios adicionales.**
-
----
-
-## 4. Traducciones - Verificacion
-
-El archivo translations.ts ya contiene las keys para `resources.cslbForms` y `resources.verifyName` en ambos idiomas.
-
-**No requiere cambios adicionales** ya que las paginas de servicios, ubicaciones e industrias usan ternarios `isEnglish ?` directamente (patron consistente en todo el sitio).
+La lógica de recomendación mapea revenue → perfil → plan recomendado.
 
 ---
 
-## Archivos a modificar
+## 4. FAQs (9 preguntas en ES + EN)
+Cubren: tipos de negocio, propiedad de activos, por qué 90 días, qué pasa después, tecnología requerida, sin oficina física, publicidad en Google, garantía, límite de 10 espacios.
 
-| Archivo | Accion |
-|---------|--------|
-| src/pages/services/Websites.tsx | MODIFICAR - reemplazar precios placeholder con tiers reales |
-| src/pages/TermsOfService.tsx | MODIFICAR - agregar Anexo A2P 10DLC al final |
+## 5. FAQs de Pricing (7 preguntas adicionales)
+Cubren: Auditoría NAP, compromisos mínimos, cancelación anticipada, Ad Spend, propiedad de activos digitales, garantía de resultados, precio Starter.
 
-## Detalles tecnicos
+## 6. Testimonios (6 clientes reales)
+Cali Painting, Lorenzo's Plumbing, AGS Recycling, JV Roofing, Bajascape LLC, Transmission Exchange.
 
-- Websites.tsx: El array `planes` se reemplaza con datos reales. La estructura de Card se ajusta para mostrar precios escalonados (texto mas pequeno para starter, texto grande para precio normal)
-- TermsOfService.tsx: Se agrega una seccion 12 siguiendo el patron bilingue existente (`language === 'es' ? ... : ...`). Se inserta antes de la linea 212 (bloque de links)
-- No se tocan CSLBForms.tsx, VerifyBusinessName.tsx ni translations.ts (ya estan completos)
+## 7. Equipo
+Carlos Cordero, Juan Arroyo, Luis Arroyo, María Cordero.
+
+## 8. Todo el contenido en bilingüe (ES/EN)
+545 líneas de traducciones estructuradas.
+
+---
+
+## Propuesta: ¿Qué quieres hacer?
+
+Puedo crear un archivo TXT/JSON con toda esta información estructurada para entrenar tu chatbot externamente, **o** puedo construir un chatbot directamente en tu sitio web usando Lovable AI que ya conoce todo este contenido y responde preguntas de tus visitantes en tiempo real (en español e inglés).
 
