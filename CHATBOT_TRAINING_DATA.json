@@ -1,0 +1,416 @@
+{
+  "metadata": {
+    "company": "C3 Marketing Hub",
+    "version": "1.0",
+    "lastUpdated": "2025-03-17",
+    "languages": ["es", "en"],
+    "purpose": "AI chatbot training data"
+  },
+  "company": {
+    "name": "C3 Marketing Hub",
+    "altName": "C3 Local Marketing",
+    "product": "Sistema Imán Local™ / Local Magnet System™",
+    "website": "https://c3-local-marketing.lovable.app",
+    "phone": "(805) 608-4843",
+    "social": {
+      "facebook": "https://www.facebook.com/c3localmarketing",
+      "instagram": "https://www.instagram.com/c3localmarketing",
+      "tiktok": "https://www.tiktok.com/@c3localmarketing"
+    },
+    "targetAudience": "Contratistas hispanos de servicios locales en California",
+    "industries": ["Landscaping", "Plumbing", "HVAC", "Electrical", "Roofing", "Painting", "General Building/Construction"],
+    "locations": ["San Luis Obispo County", "Santa Barbara County"],
+    "valueProposition": [
+      "Verificación garantizada de Google Business Profile",
+      "Infraestructura digital completa en 90 días",
+      "Sin mensualidades eternas (plan base)",
+      "100% propiedad del cliente sobre activos digitales",
+      "Modelo de Riesgo Compartido — C3 subsidia el arranque"
+    ],
+    "team": [
+      { "name": "Carlos Cordero" },
+      { "name": "Juan Arroyo" },
+      { "name": "Luis Arroyo" },
+      { "name": "María Cordero" }
+    ],
+    "combinedExperience": "20+ años"
+  },
+  "plans": [
+    {
+      "id": "auditoria",
+      "name": "Auditoría NAP & Legal",
+      "tier": 0,
+      "price": "$250",
+      "priceType": "one_time",
+      "duration": "35-45 días hábiles",
+      "commitment": "Ninguno",
+      "targetProfile": "Negocios con inconsistencias NAP",
+      "targetRevenue": null,
+      "description": "Antes de invertir en marketing, necesitas resolver tu situación legal y de accesos.",
+      "features": [
+        "Auditoría cruzada de registros estatales y federales",
+        "Gestión de corrección ante Secretaria de Estado o CSLB",
+        "Reporte de Riesgo oficial para apelaciones en Google",
+        "Tiempo estimado: 35-45 días hábiles"
+      ],
+      "inheritedFeatures": [],
+      "sharedRisk": null
+    },
+    {
+      "id": "presencia",
+      "name": "Presencia Digital",
+      "tier": 1,
+      "price": "$3,300",
+      "priceType": "one_time",
+      "cashDiscount": "$2,970 de contado (ahorra $330)",
+      "paymentOptions": ["Pago completo: $3,135 (5% dto)", "3 pagos mensuales: $1,100 cada uno"],
+      "duration": "90 días (proyecto finito)",
+      "commitment": "Ninguno — proyecto finito",
+      "targetProfile": "Contratista Nuevo (0-1 año)",
+      "targetRevenue": "< $10,000/mes",
+      "description": "Construye tu infraestructura digital desde cero. Proyecto finito, sin mensualidades.",
+      "features": [
+        "Sitio Web Profesional optimizado para móvil (5-7 páginas en Squarespace)",
+        "Google Business Profile verificado y optimizado",
+        "Dominio .com (.org, .net disponibles)",
+        "Correo corporativo Gmail (5 cuentas)",
+        "Redes Sociales (FB + IG) configuradas",
+        "12 posts de arranque",
+        "Análisis de competencia completo",
+        "10 keywords estratégicas + SEO local",
+        "Configuración de LinkTree",
+        "Contenido profesional optimizado",
+        "Capacitación completa",
+        "100% de propiedad al finalizar"
+      ],
+      "inheritedFeatures": [],
+      "afterService": {
+        "hosting": "Squarespace ~$16-23/mes (directo al proveedor)",
+        "optionalMaintenance": "Desde $300/mes",
+        "mandatoryFees": false
+      },
+      "sharedRisk": null
+    },
+    {
+      "id": "cimientos",
+      "name": "Programa Cimientos",
+      "tier": 2,
+      "price": "$599/mes",
+      "priceType": "monthly",
+      "starterPrice": "$399/mes x 2 meses",
+      "normalPrice": "$599/mes",
+      "duration": "Continuo",
+      "commitment": "6 meses mínimo",
+      "targetProfile": "Solopreneur",
+      "targetRevenue": "$10,000-$25,000/mes",
+      "description": "Mantenimiento técnico, reputación y tráfico constante para tu negocio en marcha.",
+      "features": [
+        "Instalación Pixel, Analytics, Stripe",
+        "4 Posts Google Business Profile/mes",
+        "Respuesta a Reviews",
+        "Gestión de 1 Canal de Ads (Meta O Google)",
+        "Reporte mensual de resultados",
+        "Migración CRM básica"
+      ],
+      "inheritedFeatures": [],
+      "sharedRisk": {
+        "c3Subsidy": "$400",
+        "starterMonths": 2,
+        "starterRate": "$399/mes",
+        "standardRate": "$599/mes"
+      }
+    },
+    {
+      "id": "expansion",
+      "name": "Plan Expansión Total",
+      "tier": 3,
+      "price": "$1,299/mes",
+      "priceType": "monthly",
+      "starterPrice": "$599/mes x 2 meses",
+      "normalPrice": "$1,299/mes",
+      "duration": "Continuo",
+      "commitment": "6 meses mínimo",
+      "targetProfile": "Negocio Establecido",
+      "targetRevenue": "$25,000-$60,000/mes",
+      "description": "Omnicanalidad, video y automatización para negocios establecidos.",
+      "features": [
+        "4 Posts Estáticos + 4 Videos (Reels/TikTok)",
+        "3 Redes Sociales (IG/FB/TikTok)",
+        "2 Canales de Ads (Meta + Google)",
+        "8 Posts GBP/mes + SEO Local",
+        "App C3, CRM Completo, Chatbot Básico",
+        "30 min Asesoría/mes"
+      ],
+      "inheritedFeatures": [
+        "Instalación Pixel, Analytics, Stripe",
+        "4 Posts Google Business Profile/mes",
+        "Respuesta a Reviews",
+        "Gestión de 1 Canal de Ads (Meta O Google)",
+        "Reporte mensual de resultados",
+        "Migración CRM básica"
+      ],
+      "inheritedFrom": "cimientos",
+      "sharedRisk": {
+        "c3Subsidy": "$1,400",
+        "starterMonths": 2,
+        "starterRate": "$599/mes",
+        "standardRate": "$1,299/mes"
+      }
+    },
+    {
+      "id": "dominio",
+      "name": "Plan Dominio Estratégico",
+      "tier": 4,
+      "price": "$2,599/mes",
+      "priceType": "monthly",
+      "rampPricing": [
+        { "month": 1, "price": "$600" },
+        { "months": "2-4", "price": "$1,299" },
+        { "months": "5+", "price": "$2,599" }
+      ],
+      "normalPrice": "$2,599/mes",
+      "duration": "Continuo",
+      "commitment": "12 meses mínimo",
+      "targetProfile": "Líder Local",
+      "targetRevenue": "> $60,000/mes",
+      "description": "Estrategia por temporadas, embudos de venta y marketing masivo para líderes locales.",
+      "features": [
+        "Campañas Bimensuales (Temporadas)",
+        "1 Landing Page por campaña + 1 Funnel",
+        "Email Marketing (Secuencias) + SMS",
+        "Review System automatizado",
+        "Chatbot Avanzado + ChatGPT Team Seat",
+        "60 min Asesoría Estratégica/mes"
+      ],
+      "inheritedFeatures": [
+        "Instalación Pixel, Analytics, Stripe",
+        "4 Posts Google Business Profile/mes",
+        "Respuesta a Reviews",
+        "Gestión de 1 Canal de Ads (Meta O Google)",
+        "Reporte mensual de resultados",
+        "Migración CRM básica",
+        "4 Posts Estáticos + 4 Videos (Reels/TikTok)",
+        "3 Redes Sociales (IG/FB/TikTok)",
+        "2 Canales de Ads (Meta + Google)",
+        "8 Posts GBP/mes + SEO Local",
+        "App C3, CRM Completo, Chatbot Básico",
+        "30 min Asesoría/mes"
+      ],
+      "inheritedFrom": "expansion",
+      "sharedRisk": {
+        "c3Subsidy": "~$3,000",
+        "rampMonths": 4,
+        "rampSchedule": "$600 → $1,299x3 → $2,599",
+        "standardRate": "$2,599/mes"
+      }
+    }
+  ],
+  "adSpendNote": "La gestión de campañas está incluida. El presupuesto publicitario (Ad Spend) es adicional y se paga directamente por el cliente a las plataformas (Meta, Google, TikTok). Presupuesto sugerido: $500-$1,000/mes.",
+  "diagnosticWizard": {
+    "totalSteps": 8,
+    "steps": [
+      {
+        "step": 1,
+        "title": "Estado de Google Business Profile",
+        "isCritical": false,
+        "options": [
+          { "value": "nuevo", "label": "No tengo Google Business Profile", "labelEn": "I don't have a Google Business Profile" },
+          { "value": "invisible", "label": "Tengo GBP pero está suspendido", "labelEn": "I have GBP but it is suspended" },
+          { "value": "noVende", "label": "Aparezco pero no genero llamadas", "labelEn": "I appear but don't get calls" },
+          { "value": "dominar", "label": "Aparezco bien, quiero dominar mi zona", "labelEn": "I appear well, I want to dominate my area" }
+        ]
+      },
+      {
+        "step": 2,
+        "title": "Etapa de Licencia CSLB",
+        "isCritical": false,
+        "options": [
+          { "value": "nuevo", "label": "Soy Nuevo (Menos de 1 año / En trámite)", "labelEn": "I'm New (Less than 1 year / In process)" },
+          { "value": "estable", "label": "Estable (Años operando igual)", "labelEn": "Stable (Years operating the same)" },
+          { "value": "cambios", "label": "Cambios Recientes (Nombre/Entidad)", "labelEn": "Recent Changes (Name/Entity)" }
+        ]
+      },
+      {
+        "step": 3,
+        "title": "Tamaño del Equipo",
+        "isCritical": false,
+        "options": [
+          { "value": "solo", "label": "Solo yo (y un ayudante)", "labelEn": "Just me (and a helper)" },
+          { "value": "pequeno", "label": "Equipo Pequeño (2-6 empleados)", "labelEn": "Small Team (2-6 employees)" },
+          { "value": "grande", "label": "Empresa Grande (10+ empleados)", "labelEn": "Large Company (10+ employees)" }
+        ]
+      },
+      {
+        "step": 4,
+        "title": "Facturación Mensual Promedio",
+        "isCritical": true,
+        "subtitle": "Esta información nos ayuda a recomendarte un plan acorde a tu capacidad",
+        "options": [
+          { "value": "menos10k", "label": "Menos de $10,000 / mes", "labelEn": "Less than $10,000 / month" },
+          { "value": "10k-25k", "label": "Entre $10,000 y $25,000 / mes", "labelEn": "Between $10,000 and $25,000 / month" },
+          { "value": "25k-60k", "label": "Entre $25,000 y $60,000 / mes", "labelEn": "Between $25,000 and $60,000 / month" },
+          { "value": "mas60k", "label": "Más de $60,000 / mes", "labelEn": "More than $60,000 / month" }
+        ]
+      },
+      {
+        "step": 5,
+        "title": "Expectativa de Resultados",
+        "isCritical": false,
+        "options": [
+          { "value": "urgente", "label": "Ayer / Urgente", "labelEn": "Yesterday / Urgent" },
+          { "value": "proceso", "label": "30-90 días (Entiendo el proceso)", "labelEn": "30-90 days (I understand the process)" },
+          { "value": "legado", "label": "Largo plazo (Construir legado)", "labelEn": "Long term (Build a legacy)" },
+          { "value": "noSeguro", "label": "No estoy seguro / Necesito orientación", "labelEn": "Not sure / Need guidance" }
+        ]
+      },
+      {
+        "step": 6,
+        "title": "Gestión de Clientes",
+        "isCritical": false,
+        "options": [
+          { "value": "papel", "label": "Papel y Lápiz", "labelEn": "Paper and Pencil" },
+          { "value": "apps", "label": "Varias Apps sueltas", "labelEn": "Various loose Apps" },
+          { "value": "crm", "label": "CRM Profesional", "labelEn": "Professional CRM" }
+        ]
+      },
+      {
+        "step": 7,
+        "title": "Salud Digital / Accesos",
+        "isCritical": false,
+        "subtitle": "Google Business Profile, redes sociales, dominio web, etc.",
+        "options": [
+          { "value": "nada", "label": "No tengo nada aún", "labelEn": "I don't have anything yet" },
+          { "value": "acceso", "label": "Sí, tengo mis claves y acceso total", "labelEn": "Yes, I have my keys and full access" },
+          { "value": "perdido", "label": "No tengo acceso / Las perdí", "labelEn": "I don't have access / I lost them" },
+          { "value": "malNAP", "label": "Tengo acceso pero la info está mal (NAP)", "labelEn": "I have access but the info is wrong (NAP)" }
+        ]
+      },
+      {
+        "step": 8,
+        "title": "Datos de Contacto",
+        "fields": ["businessName", "name", "phone", "email"]
+      }
+    ]
+  },
+  "recommendationLogic": {
+    "primaryVariable": "revenue (Paso 4)",
+    "rule": "5-10% del revenue mensual = capacidad de inversión en marketing",
+    "mapping": [
+      { "revenue": "menos10k", "profile": "INICIAL", "recommendedPlan": "presencia", "priceType": "one_time" },
+      { "revenue": "10k-25k", "profile": "ESTABILIDAD", "recommendedPlan": "cimientos", "priceType": "standard" },
+      { "revenue": "25k-60k", "profile": "CRECIMIENTO", "recommendedPlan": "expansion", "priceType": "starter_tier2" },
+      { "revenue": "mas60k", "profile": "LIDER", "recommendedPlan": "dominio", "priceType": "starter_tier3" }
+    ],
+    "modifiers": [
+      { "condition": "team === 'grande'", "effect": "Sube a Expansión o Dominio" },
+      { "condition": "google === 'invisible' || digital === 'perdido' || digital === 'malNAP'", "effect": "Requiere Auditoría NAP primero" },
+      { "condition": "expectation === 'noSeguro'", "effect": "Ofrece llamada de orientación gratuita" }
+    ]
+  },
+  "faqs": {
+    "general": [
+      {
+        "question": "¿Para qué tipo de negocios funciona esto?",
+        "questionEn": "What type of businesses does this work for?",
+        "answer": "El Sistema Imán Local™ está diseñado específicamente para negocios de servicios locales (home services): Landscaping, plomería, HVAC, electricidad, construcción, pintura, remodelación, roofing. Si tienes 4+ empleados y quieres dejar de depender solo de referencias, esto es para ti.",
+        "answerEn": "The Local Magnet System™ is specifically designed for local service businesses (home services): Landscaping, plumbing, HVAC, electrical, construction, painting, remodeling, roofing. If you have 4+ employees and want to stop depending only on referrals, this is for you."
+      },
+      {
+        "question": "¿Realmente seré dueño de todo?",
+        "questionEn": "Will I really own everything?",
+        "answer": "Sí, eres dueño del contenido personalizado (logos, copy, fotos editadas, dominios) una vez pagado en su totalidad. Recibes todas las credenciales: Gmail corporativo, Squarespace, Google Business Profile. Nota: La tecnología de fondo y sistemas propietarios de C3 permanecen como propiedad de la agencia.",
+        "answerEn": "Yes, you own the personalized content (logos, copy, edited photos, domains) once fully paid. You receive all credentials: Corporate Gmail, Squarespace, Google Business Profile. Note: Background technology and C3's proprietary systems remain agency property."
+      },
+      {
+        "question": "¿Por qué 90 días y no más rápido?",
+        "questionEn": "Why 90 days and not faster?",
+        "answer": "Verificación de Google Business Profile toma 3-5 semanas (especialmente sin sede física), la optimización SEO necesita tiempo, y el diseño de calidad no se puede apurar. 90 días es el tiempo real para resultados sólidos.",
+        "answerEn": "Google Business Profile verification takes 3-5 weeks (especially without physical location), SEO optimization needs time, and quality design cannot be rushed. 90 days is the real time for solid results."
+      },
+      {
+        "question": "¿Qué pasa después de los 90 días?",
+        "questionEn": "What happens after the 90 days?",
+        "answer": "Tu sistema sigue trabajando 100% solo. No hay mensualidades obligatorias. Solo pagas hosting de Squarespace (~$16-23/mes directo al proveedor). Mantenimiento opcional desde $300/mes.",
+        "answerEn": "Your system keeps working 100% on its own. No mandatory monthly fees. You only pay Squarespace hosting (~$16-23/month direct to provider). Optional maintenance from $300/month."
+      },
+      {
+        "question": "¿Necesito saber de tecnología?",
+        "questionEn": "Do I need to know about technology?",
+        "answer": "No. Todo el proceso técnico lo manejamos nosotros. Tú solo necesitas aprobar diseños y proveer fotos. Al final te capacitamos para tareas básicas.",
+        "answerEn": "No. We handle all the technical process. You only need to approve designs and provide photos. At the end we train you for basic tasks."
+      },
+      {
+        "question": "¿Funciona si no tengo oficina física?",
+        "questionEn": "Does it work if I don't have a physical office?",
+        "answer": "Sí. Tenemos experiencia verificando negocios de área de servicio (sin dirección física visible). El proceso toma ~5 semanas vs ~3 semanas con oficina.",
+        "answerEn": "Yes. We have experience verifying service area businesses (without visible physical address). Process takes ~5 weeks vs ~3 weeks with office."
+      },
+      {
+        "question": "¿Incluye publicidad en Google?",
+        "questionEn": "Does it include Google advertising?",
+        "answer": "El sistema te deja ads-ready desde día 1. La gestión de campañas está incluida en planes con Ads, pero el Ad Spend se paga directamente a las plataformas. Presupuesto sugerido: $500-1,000/mes.",
+        "answerEn": "The system leaves you ads-ready from day 1. Campaign management is included in plans with Ads, but Ad Spend is paid directly to platforms. Suggested budget: $500-1,000/month."
+      },
+      {
+        "question": "¿Qué pasa si no estoy satisfecho?",
+        "questionEn": "What if I'm not satisfied?",
+        "answer": "Revisiones ilimitadas durante los 90 días. Garantizamos entrega de todos los activos digitales prometidos. Para SEO no garantizamos rankings específicos ya que dependen de factores externos.",
+        "answerEn": "Unlimited revisions during the 90 days. We guarantee delivery of all promised digital assets. For SEO we don't guarantee specific rankings as they depend on external factors."
+      },
+      {
+        "question": "¿Por qué solo 10 espacios al mes?",
+        "questionEn": "Why only 10 spots per month?",
+        "answer": "Cada implementación requiere atención personalizada: brief detallado, diseño custom (no plantillas), verificación manual de Google, capacitación 1-on-1. Limitamos a 10 para mantener calidad.",
+        "answerEn": "Each implementation requires personalized attention: detailed brief, custom design (no templates), manual Google verification, 1-on-1 training. We limit to 10 to maintain quality."
+      }
+    ],
+    "pricing": [
+      {
+        "question": "¿Qué es la Auditoría NAP?",
+        "answer": "La Auditoría NAP ($250) es un análisis profundo de tu presencia digital. Revisamos tu Nombre, Dirección y Teléfono (NAP) en 50+ directorios para detectar inconsistencias que afectan tu ranking en Google."
+      },
+      {
+        "question": "¿Cuáles son los compromisos mínimos?",
+        "answer": "Presencia Digital: Proyecto finito 90 días. Tier 1 (Cimientos) y Tier 2 (Expansión): 6 meses mínimo. Tier 3 (Dominio): 12 meses mínimo."
+      },
+      {
+        "question": "¿Qué pasa si quiero cancelar antes del compromiso?",
+        "answer": "Aplica una liquidación proporcional del subsidio que C3 absorbió en tu arranque. Cubre la diferencia entre el precio Starter y la tarifa estándar. Todo documentado en contrato."
+      },
+      {
+        "question": "¿Quién paga el Ad Spend?",
+        "answer": "La gestión está incluida. El presupuesto publicitario es adicional y se paga directamente a las plataformas (Meta, Google, TikTok). Sugerido: $500-$1,000/mes."
+      },
+      {
+        "question": "¿Quién es dueño de los activos digitales?",
+        "answer": "El cliente es dueño del contenido personalizado una vez pagado. La tecnología de fondo y sistemas propietarios de C3 permanecen como propiedad de la agencia."
+      },
+      {
+        "question": "¿Hay garantía de resultados?",
+        "answer": "Garantizamos entrega de activos digitales. Para SEO ofrecemos mejora continua pero no rankings específicos. Usamos KPIs medibles para demostrar progreso."
+      },
+      {
+        "question": "¿Por qué el precio Starter (Riesgo Compartido)?",
+        "answer": "C3 subsidia hasta $1,400 del costo inicial. El precio Starter reduce tu inversión de entrada mientras construimos tu infraestructura. Solo pasas a tarifa estándar cuando tu sistema funciona."
+      }
+    ]
+  },
+  "testimonials": [
+    { "name": "Loe Sepulveda", "business": "Cali Painting", "quote": "C3 recuperó mi perfil, lo optimizamos juntos y ahora está verificado y funcionando perfecto.", "result": "Perfil recuperado y verificado" },
+    { "name": "Lorenzo", "business": "Lorenzo's Plumbing", "quote": "C3 me recuperó al 100% todos mis activos digitales que perdí con otras agencias.", "result": "100% de sus activos recuperados" },
+    { "name": "AGS Recycling", "business": "AGS Recycling (5 Sedes)", "quote": "Unificaron 5 sedes bajo una misma cuenta. Ahora todo está ordenado para nuestra expansión.", "result": "5 sedes unificadas y verificadas" },
+    { "name": "Jose Valdovinos", "business": "JV Roofing INC", "quote": "Desde la primera semana me entregaron resultados. Mis números no paran de crecer.", "result": "Resultados desde la primera semana" },
+    { "name": "Octavio Claudio", "business": "Bajascape LLC", "quote": "Más de 6 años con C3. Recibo proyectos constantemente gracias a mi presencia digital.", "result": "Más de 6 años de relación exitosa" },
+    { "name": "Destiny Castro", "business": "Transmission Exchange", "quote": "Las visitas al perfil y a la web se dispararon completamente después de trabajar con C3.", "result": "Visitas al perfil y web se dispararon" }
+  ],
+  "services": [
+    { "id": "gbp", "name": "Google Business Profile", "description": "Verificación y optimización" },
+    { "id": "websites", "name": "Websites", "description": "Sitios web profesionales" },
+    { "id": "meta-ads", "name": "Meta Ads", "description": "Gestión de campañas Facebook/Instagram" },
+    { "id": "crm", "name": "CRM & Automation", "description": "Automatización de gestión de clientes" }
+  ],
+  "resources": [
+    { "id": "cslb-forms", "name": "Directorio de Formularios CSLB California" },
+    { "id": "verify-name", "name": "Guía: Verificar nombre de constructora en California" }
+  ]
+}
