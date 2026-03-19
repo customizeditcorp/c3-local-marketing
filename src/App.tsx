@@ -33,6 +33,7 @@ import GeneralBuilding from "./pages/industries/GeneralBuilding";
 // Resources
 import CSLBForms from "./pages/resources/CSLBForms";
 import VerifyBusinessName from "./pages/resources/VerifyBusinessName";
+import KnowledgeBase from "./pages/KnowledgeBase";
 
 const queryClient = new QueryClient();
 
