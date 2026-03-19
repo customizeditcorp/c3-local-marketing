@@ -74,6 +74,9 @@ const App = () => (
             <Route path="/recursos/formularios-cslb-california" element={<CSLBForms />} />
             <Route path="/recursos/verificar-nombre-negocio-california" element={<VerifyBusinessName />} />
 
+            {/* Knowledge Base for chatbot training */}
+            <Route path="/kb" element={<KnowledgeBase />} />
+
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
