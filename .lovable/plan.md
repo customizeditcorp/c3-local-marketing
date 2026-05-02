@@ -1,93 +1,61 @@
+# Plan: Pasar preflight de GHL — Chat Widget + remover formularios con teléfono
 
+## Contexto
+GHL exige a la vez:
+1. **Chat Widget Compliance** → widget de LeadConnector cargado en todas las rutas.
+2. **Multiple Opt-ins** → cero formularios con teléfono/SMS coexistiendo con el widget.
 
-# Fase 4: Precios Reales + Anexo Legal + Pulido Final
+Solución: el widget queda como único canal de captura durante la validación.
 
-## Resumen
+## Cambios
 
-Integrar los precios reales del Sistema Maestro en la pagina de Websites, agregar el anexo legal A2P 10DLC a Terminos de Servicio, y confirmar que las paginas de recursos y traducciones estan completas.
+### 1. Crear `src/components/ChatWidget.tsx`
+Componente que inyecta el script oficial de LeadConnector una sola vez en el `<body>`. Sin `EXCLUDED_ROUTES`. Maneja cleanup en unmount y evita doble inyección.
 
----
+```tsx
+// Inyecta:
+// <script src="https://widgets.leadconnectorhq.com/loader.js"
+//   data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js"
+//   data-widget-id="69f54068e9677e19182a0a5c"
+//   data-source="WEB_USER"></script>
+```
 
-## 1. Actualizar Precios en Websites (src/pages/services/Websites.tsx)
+### 2. Montar `<ChatWidget />` global en `src/App.tsx`
+Insertarlo dentro de `<BrowserRouter>` y fuera de `<Routes>`, para que esté presente en todas las rutas: `/`, `/contact`, `/resultados`, `/servicios/*`, `/industrias/*`, `/areas-de-servicio/*`, `/recursos/*`, `/kb`, legales, NotFound.
 
-**Reemplazar el array `planes` (lineas 41-60)** con los 3 tiers reales:
+### 3. Limpiar `src/pages/Contact.tsx` (única página con formulario embebido)
+Quitar:
+- El `<iframe>` de `lnk.c3localmarketing.com/widget/form/...`
+- El bloque del checkbox `sms-consent` y el state `hasConsented`
+- El import de `Checkbox` y `Link` (si queda sin uso)
+- La carga del script `form_embed.js` en el `useEffect`
 
-### Plan Cimientos
-- Nombre: "Programa Cimientos"
-- Precio: "$499/mes (Mes 1-3) -> $599/mes (Mes 4+)"
-- Badge: ninguno
-- Enfoque: Google Business Profile
-- Features: GBP verificado y optimizado, SEO local basico, NAP consistente, Gestion de resenas, Reportes mensuales
+Reemplazar la columna izquierda (donde estaba el form) por un bloque CTA reforzado:
+- Botón grande **Llamar (805) 608-4843** → `tel:+18056084843`
+- Botón grande **WhatsApp** → `https://wa.me/18056084843`
+- Botón **Email** → `mailto:info@c3marketinghub.com`
+- Mensaje: "Para iniciar conversación al instante, usa el chat en la esquina inferior derecha."
 
-### Plan Expansion Total (RECOMENDADO)
-- Nombre: "Plan Expansion Total"
-- Precio: "$599/mes (Mes 1-2) -> $1,299/mes (Mes 3+)"
-- Badge: "Recomendado" (reemplaza "Mas Popular")
-- Enfoque: Omnicanal y Growth Marketing
-- Features: Todo de Cimientos + Meta Ads management, Sitio web profesional, Campanas de leads, Retargeting, Reportes avanzados
+Se conservan: NAP, mapa de Google, sección "Términos de SMS" (informativa).
 
-### Plan Dominio Estrategico
-- Nombre: "Plan Dominio Estrategico"
-- Precio: "Mes 1: $600 | Mes 2: $1,299 | Mes 3+: $2,599"
-- Badge: ninguno
-- Enfoque: Funnels y Automatizacion total
-- Features: Todo de Expansion + CRM automatizado, Funnels de conversion, SMS/Email automatico, Soporte prioritario, Estrategia personalizada
+### 4. Eliminar `src/components/DiagnosisForm.tsx`
+Ya no tiene importadores en el árbol. Se borra para no dejar opt-in alternativo en el repo.
 
-**Cambios en la UI de cada Card:**
-- Mostrar precio con formato escalonado (starter -> normal) en lugar de un solo precio
-- Agregar subtitulo descriptivo del enfoque debajo del nombre
-- Eliminar la nota "Precios por definir" (linea 156) ya que ahora son reales
-- Agregar nota de Ad Spend debajo del grid: "La gestion de campanas esta incluida. El presupuesto publicitario (Ad Spend) es adicional y se paga directamente por el cliente a las plataformas."
+### 5. Actualizar CSP en `index.html`
+Añadir dominios de LeadConnector Chat Widget a la Content Security Policy:
+- `script-src`: agregar `https://widgets.leadconnectorhq.com`
+- `connect-src`: agregar `https://services.leadconnectorhq.com https://backend.leadconnectorhq.com https://widgets.leadconnectorhq.com`
+- `frame-src`: agregar `https://widgets.leadconnectorhq.com https://services.leadconnectorhq.com`
+- `img-src`: ya permite `https:` → OK
 
----
+Sin esto el script del widget puede ser bloqueado por el navegador.
 
-## 2. Anexo Legal A2P 10DLC (src/pages/TermsOfService.tsx)
+### 6. Auditoría final (verificación, no cambios)
+Confirmar con `rg` que tras los cambios no queden hits de `widget/form` ni `form_embed` en el árbol activo. Los canales `tel:`, `mailto:`, `wa.me`, `WhatsAppButton` y `CallNowButton` se conservan: **no son formularios**, son links directos compatibles con la regla de Multiple Opt-ins.
 
-**Agregar una nueva seccion DESPUES de la seccion 11 (Informacion de Contacto), ANTES del bloque de links del footer (linea 212).**
-
-Nueva seccion con estructura bilingue (usando el patron `language === 'es'` existente):
-
-### Titulo: "Anexo de Comunicaciones Electronicas (A2P 10DLC)"
-
-Contenido (3 puntos):
-- **Consentimiento:** Al proporcionar tu numero, aceptas recibir mensajes de texto y WhatsApp para fines de seguimiento de proyectos y marketing.
-- **Opt-Out:** El usuario puede cancelar la suscripcion en cualquier momento enviando la palabra 'STOP'. Para ayuda, envia 'HELP'.
-- **Privacidad de Datos:** No compartimos ni vendemos datos de consentimiento de mensajes de texto con terceros.
-
-Version en ingles correspondiente incluida.
-
----
-
-## 3. Paginas de Recursos - Confirmacion
-
-Las paginas CSLBForms.tsx y VerifyBusinessName.tsx ya estan **completas** con:
-- Grid de 8 formularios CSLB con enlaces al sitio oficial
-- Guia de 3 pasos con enlaces externos a CSLB y Bizfile
-- FAQs, SEOHead, disclaimers legales
-- Soporte bilingue via `isEnglish`
-
-**No requieren cambios adicionales.**
-
----
-
-## 4. Traducciones - Verificacion
-
-El archivo translations.ts ya contiene las keys para `resources.cslbForms` y `resources.verifyName` en ambos idiomas.
-
-**No requiere cambios adicionales** ya que las paginas de servicios, ubicaciones e industrias usan ternarios `isEnglish ?` directamente (patron consistente en todo el sitio).
-
----
-
-## Archivos a modificar
-
-| Archivo | Accion |
-|---------|--------|
-| src/pages/services/Websites.tsx | MODIFICAR - reemplazar precios placeholder con tiers reales |
-| src/pages/TermsOfService.tsx | MODIFICAR - agregar Anexo A2P 10DLC al final |
-
-## Detalles tecnicos
-
-- Websites.tsx: El array `planes` se reemplaza con datos reales. La estructura de Card se ajusta para mostrar precios escalonados (texto mas pequeno para starter, texto grande para precio normal)
-- TermsOfService.tsx: Se agrega una seccion 12 siguiendo el patron bilingue existente (`language === 'es' ? ... : ...`). Se inserta antes de la linea 212 (bloque de links)
-- No se tocan CSLBForms.tsx, VerifyBusinessName.tsx ni translations.ts (ya estan completos)
-
+## Resultado
+- Chat widget de LeadConnector (`69f54068e9677e19182a0a5c`) cargado en **todas** las rutas.
+- **Cero** formularios con teléfono/SMS embebidos en el sitio.
+- Único opt-in oficial = el propio Chat Widget de GHL.
+- Canales directos (call / WhatsApp / email / mapa) intactos.
+- CSP correctamente configurado para que el widget cargue sin bloqueos.
