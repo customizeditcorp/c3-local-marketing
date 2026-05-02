@@ -34,6 +34,7 @@ import GeneralBuilding from "./pages/industries/GeneralBuilding";
 import CSLBForms from "./pages/resources/CSLBForms";
 import VerifyBusinessName from "./pages/resources/VerifyBusinessName";
 import KnowledgeBase from "./pages/KnowledgeBase";
+import ChatWidget from "./components/ChatWidget";
 
 const queryClient = new QueryClient();
 
@@ -44,6 +45,7 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
+          <ChatWidget />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/contact" element={<Contact />} />
