@@ -81,30 +81,25 @@ interface PlanDetails {
 
 // Core features for each plan
 const cimientosFeatures = [
-  'Instalación Pixel, Analytics, Stripe',
-  '4 Posts Google Business Profile/mes',
-  'Respuesta a Reviews',
-  'Gestión de 1 Canal de Ads (Meta O Google)',
-  'Reporte mensual de resultados',
-  'Migración CRM básica'
+  'Licencia CRM C3 Studio',
+  'Embudos de Venta y Gestión de Contactos',
+  'Chat Automatizado para Atención al Cliente',
+  'Automatización de Solicitud de Reseñas (Google Reviews)',
 ];
 
-const expansionFeatures = [
-  '4 Posts Estáticos + 4 Videos (Reels/TikTok)',
-  '3 Redes Sociales (IG/FB/TikTok)',
-  '2 Canales de Ads (Meta + Google)',
-  '8 Posts GBP/mes + SEO Local',
-  'App C3, CRM Completo, Chatbot Básico',
-  '30 min Asesoría/mes'
+const presenciaFeatures = [
+  'Creación de Sitio Web Premium y Optimizado',
+  'Configuración y Setup de Google Business Profile',
+  'Textos y Oferta de Valor impulsados por nuestra IA',
+  'Dominio registrado a tu nombre desde el día 1',
+  'Mantenimiento y Soporte Activo',
 ];
 
-const dominioFeatures = [
-  'Campañas Bimensuales (Temporadas)',
-  '1 Landing Page por campaña + 1 Funnel',
-  'Email Marketing (Secuencias) + SMS',
-  'Review System automatizado',
-  'Chatbot Avanzado + ChatGPT Team Seat',
-  '60 min Asesoría Estratégica/mes'
+const imanLocalFeatures = [
+  'Trabajo activo de SEO Local',
+  'Publicaciones semanales en Google Business Profile',
+  'Monitoreo de posicionamiento en el mapa (BrightLocal Rank)',
+  'Rastreo de Palabras Clave Locales',
 ];
 
 const planData: Record<string, PlanDetails> = {
@@ -125,57 +120,56 @@ const planData: Record<string, PlanDetails> = {
     tier: 0
   },
   presencia: {
-    title: 'Presencia Digital',
-    price: '$3,300',
-    priceNote: 'o $2,970 de contado (ahorra $330)',
-    description: 'Construye tu infraestructura digital desde cero. Proyecto finito, sin mensualidades.',
-    helpMessage: 'Vas empezando y no tienes presencia web. Este plan te construye todo en 90 días y TÚ te quedas con el 100% de las credenciales.',
+    title: 'Plan Lanzamiento',
+    price: '$1,800',
+    priceNote: 'Pago único — Llave en mano',
+    description: 'Propiedad absoluta sin contratos mensuales. Website + Google Business Profile, transferencia total el día 1.',
+    helpMessage: 'Vas empezando y quieres ser dueño 100% sin contratos mensuales. Este plan te entrega el website y GBP llave en mano.',
     features: [
-      'Sitio Web Profesional optimizado para móvil',
-      'Google Business Profile verificado',
-      'Redes Sociales (FB + IG) configuradas',
-      '12 posts de arranque',
-      'Email corporativo + Gemini AI',
-      '100% de propiedad al finalizar'
+      'Desarrollo de Website Premium',
+      'Setup de Google Business Profile',
+      'Entrega "Llave en Mano"',
+      'Transferencia total de activos el Día 1',
+      'No incluye CRM ni mantenimiento mensual',
     ],
-    duration: '3 meses (proyecto finito)',
-    targetProfile: 'Contratista Nuevo (0-1 año)',
+    duration: 'Pago único',
+    targetProfile: 'Contratista Nuevo (sin compromiso mensual)',
     tier: 1
   },
   cimientos: {
-    title: 'Programa Cimientos',
-    price: '$599/mes',
-    priceNote: 'Riesgo Compartido: $399 x 2 meses, luego $599',
-    description: 'Mantenimiento técnico, reputación y tráfico constante para tu negocio en marcha.',
-    helpMessage: 'Ya tienes presencia pero necesitas mantenimiento profesional y campañas activas. Este plan mantiene tu negocio visible sin que tú hagas nada.',
+    title: 'Cimientos',
+    price: '$150/mes',
+    priceNote: 'Suscripción base — sin compromiso forzoso',
+    description: 'La base operativa para organizar tu negocio y no perder clientes.',
+    helpMessage: 'Necesitas organizar tus contactos y dejar de perder leads. Cimientos te da el CRM y las automatizaciones esenciales.',
     features: cimientosFeatures,
-    duration: '6 meses mínimo',
-    targetProfile: 'Solopreneur ($10k-$25k/mes)',
+    duration: 'Suscripción mensual',
+    targetProfile: 'Solopreneur que pierde leads',
     tier: 2
   },
   expansion: {
-    title: 'Plan Expansión Total',
-    price: '$1,299/mes',
-    priceNote: 'Riesgo Compartido: $599 x 2 meses, luego $1,299',
-    description: 'Omnicanalidad, video y automatización para negocios establecidos.',
-    helpMessage: 'Tienes equipo y capacidad de crecer, pero tu marketing no lo refleja. Este plan te da presencia en 3 redes + video + CRM completo.',
-    features: expansionFeatures,
+    title: 'Presencia Digital',
+    price: '$399/mes',
+    priceNote: 'Compromiso mínimo de 6 meses',
+    description: 'Tu ecosistema digital completo. Eres dueño de tu marca en internet.',
+    helpMessage: 'Tienes operación pero te falta presencia profesional online. Presencia Digital te construye website + GBP + CRM en marcha.',
+    features: presenciaFeatures,
     inheritedFeatures: cimientosFeatures,
     inheritedFrom: 'cimientos',
     duration: '6 meses mínimo',
-    targetProfile: 'Negocio Establecido ($25k-$60k/mes)',
+    targetProfile: 'Negocio Establecido ($10k-$60k/mes)',
     tier: 3
   },
   dominio: {
-    title: 'Plan Dominio Estratégico',
-    price: '$2,599/mes',
-    priceNote: 'Riesgo Compartido: $600 → $1,299 x 3 → $2,599',
-    description: 'Estrategia por temporadas, embudos de venta y marketing masivo para líderes locales.',
-    helpMessage: 'Eres un líder en tu zona con capacidad de escalar. Este plan te convierte en la referencia de tu industria con campañas estacionales y funnels avanzados.',
-    features: dominioFeatures,
-    inheritedFeatures: [...cimientosFeatures, ...expansionFeatures],
+    title: 'Imán Local',
+    price: '$498/mes',
+    priceNote: 'Compromiso mínimo de 6 meses',
+    description: 'Tracción orgánica y posicionamiento constante frente a tu competencia.',
+    helpMessage: 'Eres un líder en tu zona y quieres dominar el mapa. Imán Local te da SEO activo + posteos semanales + tracking de keywords.',
+    features: imanLocalFeatures,
+    inheritedFeatures: [...cimientosFeatures, ...presenciaFeatures],
     inheritedFrom: 'expansion',
-    duration: '12 meses mínimo',
+    duration: '6 meses mínimo',
     targetProfile: 'Líder Local ($60k+/mes)',
     tier: 4
   }
