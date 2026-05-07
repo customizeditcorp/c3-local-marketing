@@ -27,8 +27,6 @@ import { useLanguage } from "@/hooks/use-language";
 import ProfileHeader from "@/components/results/ProfileHeader";
 import DiagnosticSummaryCards from "@/components/results/DiagnosticSummaryCards";
 import EducationalInsight from "@/components/results/EducationalInsight";
-import StarterPriceBox from "@/components/results/StarterPriceBox";
-import PriceRampTimeline from "@/components/results/PriceRampTimeline";
 import ProgressStepper from "@/components/results/ProgressStepper";
 
 // Logos
