@@ -42,7 +42,7 @@ const planes = [
   {
     name: "Cimientos",
     subtitle: "CRM y Automatización Base",
-    price: "$150/mes",
+    price: "$149/mes",
     label: "Suscripción Base",
     highlighted: false,
     features: [
@@ -187,7 +187,7 @@ const Websites = () => (
           * Compromiso mínimo de 6 meses para Presencia Digital e Imán Local. Cancelación anticipada anula la licencia sobre los entregables.
         </p>
         <p className="text-sm text-muted-foreground text-center mt-2 italic">
-          * ¿Sin contratos mensuales? Plan Lanzamiento: $1,800 pago único (website + GBP, llave en mano).
+          * ¿Sin contratos mensuales? Plan Lanzamiento: $1,799 pago único (website + GBP, llave en mano).
         </p>
       </div>
     </section>

@@ -79,7 +79,7 @@ const PricingSection = ({ onOpenForm }: PricingSectionProps) => {
     {
       name: 'Cimientos',
       tagline: 'La base operativa para organizar tu negocio y no perder clientes.',
-      price: '$150',
+      price: '$149',
       priceNote: '/mes (Suscripción Base)',
       includes: [
         'Licencia CRM C3 Studio',
@@ -138,7 +138,7 @@ const PricingSection = ({ onOpenForm }: PricingSectionProps) => {
     {
       name: 'Foundations',
       tagline: 'The operational base to organize your business and never lose a lead.',
-      price: '$150',
+      price: '$149',
       priceNote: '/month (Base Subscription)',
       includes: [
         'C3 Studio CRM License',
@@ -198,7 +198,7 @@ const PricingSection = ({ onOpenForm }: PricingSectionProps) => {
   const launchPlan = language === 'es' ? {
     name: 'Plan Lanzamiento',
     tagline: 'Propiedad absoluta sin contratos mensuales.',
-    price: '$1,800',
+    price: '$1,799',
     priceNote: 'Pago Único',
     includes: [
       'Desarrollo de Website Premium',
@@ -213,7 +213,7 @@ const PricingSection = ({ onOpenForm }: PricingSectionProps) => {
   } : {
     name: 'Launch Plan',
     tagline: 'Absolute ownership with no monthly contracts.',
-    price: '$1,800',
+    price: '$1,799',
     priceNote: 'One-Time Payment',
     includes: [
       'Premium Website Development',

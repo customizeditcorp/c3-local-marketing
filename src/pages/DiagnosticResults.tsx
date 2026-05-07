@@ -119,7 +119,7 @@ const planData: Record<string, PlanDetails> = {
   },
   presencia: {
     title: 'Plan Lanzamiento',
-    price: '$1,800',
+    price: '$1,799',
     priceNote: 'Pago único — Llave en mano',
     description: 'Propiedad absoluta sin contratos mensuales. Website + Google Business Profile, transferencia total el día 1.',
     helpMessage: 'Vas empezando y quieres ser dueño 100% sin contratos mensuales. Este plan te entrega el website y GBP llave en mano.',
@@ -136,7 +136,7 @@ const planData: Record<string, PlanDetails> = {
   },
   cimientos: {
     title: 'Cimientos',
-    price: '$150/mes',
+    price: '$149/mes',
     priceNote: 'Suscripción base — sin compromiso forzoso',
     description: 'La base operativa para organizar tu negocio y no perder clientes.',
     helpMessage: 'Necesitas organizar tus contactos y dejar de perder leads. Cimientos te da el CRM y las automatizaciones esenciales.',
