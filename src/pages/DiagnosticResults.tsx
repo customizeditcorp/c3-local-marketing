@@ -27,8 +27,6 @@ import { useLanguage } from "@/hooks/use-language";
 import ProfileHeader from "@/components/results/ProfileHeader";
 import DiagnosticSummaryCards from "@/components/results/DiagnosticSummaryCards";
 import EducationalInsight from "@/components/results/EducationalInsight";
-import StarterPriceBox from "@/components/results/StarterPriceBox";
-import PriceRampTimeline from "@/components/results/PriceRampTimeline";
 import ProgressStepper from "@/components/results/ProgressStepper";
 
 // Logos
@@ -81,30 +79,25 @@ interface PlanDetails {
 
 // Core features for each plan
 const cimientosFeatures = [
-  'Instalación Pixel, Analytics, Stripe',
-  '4 Posts Google Business Profile/mes',
-  'Respuesta a Reviews',
-  'Gestión de 1 Canal de Ads (Meta O Google)',
-  'Reporte mensual de resultados',
-  'Migración CRM básica'
+  'Licencia CRM C3 Studio',
+  'Embudos de Venta y Gestión de Contactos',
+  'Chat Automatizado para Atención al Cliente',
+  'Automatización de Solicitud de Reseñas (Google Reviews)',
 ];
 
-const expansionFeatures = [
-  '4 Posts Estáticos + 4 Videos (Reels/TikTok)',
-  '3 Redes Sociales (IG/FB/TikTok)',
-  '2 Canales de Ads (Meta + Google)',
-  '8 Posts GBP/mes + SEO Local',
-  'App C3, CRM Completo, Chatbot Básico',
-  '30 min Asesoría/mes'
+const presenciaFeatures = [
+  'Creación de Sitio Web Premium y Optimizado',
+  'Configuración y Setup de Google Business Profile',
+  'Textos y Oferta de Valor impulsados por nuestra IA',
+  'Dominio registrado a tu nombre desde el día 1',
+  'Mantenimiento y Soporte Activo',
 ];
 
-const dominioFeatures = [
-  'Campañas Bimensuales (Temporadas)',
-  '1 Landing Page por campaña + 1 Funnel',
-  'Email Marketing (Secuencias) + SMS',
-  'Review System automatizado',
-  'Chatbot Avanzado + ChatGPT Team Seat',
-  '60 min Asesoría Estratégica/mes'
+const imanLocalFeatures = [
+  'Trabajo activo de SEO Local',
+  'Publicaciones semanales en Google Business Profile',
+  'Monitoreo de posicionamiento en el mapa (BrightLocal Rank)',
+  'Rastreo de Palabras Clave Locales',
 ];
 
 const planData: Record<string, PlanDetails> = {
@@ -125,57 +118,56 @@ const planData: Record<string, PlanDetails> = {
     tier: 0
   },
   presencia: {
-    title: 'Presencia Digital',
-    price: '$3,300',
-    priceNote: 'o $2,970 de contado (ahorra $330)',
-    description: 'Construye tu infraestructura digital desde cero. Proyecto finito, sin mensualidades.',
-    helpMessage: 'Vas empezando y no tienes presencia web. Este plan te construye todo en 90 días y TÚ te quedas con el 100% de las credenciales.',
+    title: 'Plan Lanzamiento',
+    price: '$1,800',
+    priceNote: 'Pago único — Llave en mano',
+    description: 'Propiedad absoluta sin contratos mensuales. Website + Google Business Profile, transferencia total el día 1.',
+    helpMessage: 'Vas empezando y quieres ser dueño 100% sin contratos mensuales. Este plan te entrega el website y GBP llave en mano.',
     features: [
-      'Sitio Web Profesional optimizado para móvil',
-      'Google Business Profile verificado',
-      'Redes Sociales (FB + IG) configuradas',
-      '12 posts de arranque',
-      'Email corporativo + Gemini AI',
-      '100% de propiedad al finalizar'
+      'Desarrollo de Website Premium',
+      'Setup de Google Business Profile',
+      'Entrega "Llave en Mano"',
+      'Transferencia total de activos el Día 1',
+      'No incluye CRM ni mantenimiento mensual',
     ],
-    duration: '3 meses (proyecto finito)',
-    targetProfile: 'Contratista Nuevo (0-1 año)',
+    duration: 'Pago único',
+    targetProfile: 'Contratista Nuevo (sin compromiso mensual)',
     tier: 1
   },
   cimientos: {
-    title: 'Programa Cimientos',
-    price: '$599/mes',
-    priceNote: 'Riesgo Compartido: $399 x 2 meses, luego $599',
-    description: 'Mantenimiento técnico, reputación y tráfico constante para tu negocio en marcha.',
-    helpMessage: 'Ya tienes presencia pero necesitas mantenimiento profesional y campañas activas. Este plan mantiene tu negocio visible sin que tú hagas nada.',
+    title: 'Cimientos',
+    price: '$150/mes',
+    priceNote: 'Suscripción base — sin compromiso forzoso',
+    description: 'La base operativa para organizar tu negocio y no perder clientes.',
+    helpMessage: 'Necesitas organizar tus contactos y dejar de perder leads. Cimientos te da el CRM y las automatizaciones esenciales.',
     features: cimientosFeatures,
-    duration: '6 meses mínimo',
-    targetProfile: 'Solopreneur ($10k-$25k/mes)',
+    duration: 'Suscripción mensual',
+    targetProfile: 'Solopreneur que pierde leads',
     tier: 2
   },
   expansion: {
-    title: 'Plan Expansión Total',
-    price: '$1,299/mes',
-    priceNote: 'Riesgo Compartido: $599 x 2 meses, luego $1,299',
-    description: 'Omnicanalidad, video y automatización para negocios establecidos.',
-    helpMessage: 'Tienes equipo y capacidad de crecer, pero tu marketing no lo refleja. Este plan te da presencia en 3 redes + video + CRM completo.',
-    features: expansionFeatures,
+    title: 'Presencia Digital',
+    price: '$399/mes',
+    priceNote: 'Compromiso mínimo de 6 meses',
+    description: 'Tu ecosistema digital completo. Eres dueño de tu marca en internet.',
+    helpMessage: 'Tienes operación pero te falta presencia profesional online. Presencia Digital te construye website + GBP + CRM en marcha.',
+    features: presenciaFeatures,
     inheritedFeatures: cimientosFeatures,
     inheritedFrom: 'cimientos',
     duration: '6 meses mínimo',
-    targetProfile: 'Negocio Establecido ($25k-$60k/mes)',
+    targetProfile: 'Negocio Establecido ($10k-$60k/mes)',
     tier: 3
   },
   dominio: {
-    title: 'Plan Dominio Estratégico',
-    price: '$2,599/mes',
-    priceNote: 'Riesgo Compartido: $600 → $1,299 x 3 → $2,599',
-    description: 'Estrategia por temporadas, embudos de venta y marketing masivo para líderes locales.',
-    helpMessage: 'Eres un líder en tu zona con capacidad de escalar. Este plan te convierte en la referencia de tu industria con campañas estacionales y funnels avanzados.',
-    features: dominioFeatures,
-    inheritedFeatures: [...cimientosFeatures, ...expansionFeatures],
+    title: 'Imán Local',
+    price: '$498/mes',
+    priceNote: 'Compromiso mínimo de 6 meses',
+    description: 'Tracción orgánica y posicionamiento constante frente a tu competencia.',
+    helpMessage: 'Eres un líder en tu zona y quieres dominar el mapa. Imán Local te da SEO activo + posteos semanales + tracking de keywords.',
+    features: imanLocalFeatures,
+    inheritedFeatures: [...cimientosFeatures, ...presenciaFeatures],
     inheritedFrom: 'expansion',
-    duration: '12 meses mínimo',
+    duration: '6 meses mínimo',
     targetProfile: 'Líder Local ($60k+/mes)',
     tier: 4
   }
@@ -586,98 +578,29 @@ const DiagnosticResults = () => {
                 Tu Plan Recomendado
               </h2>
 
-              {/* STANDARD_T1: Show Starter Price Box for Tier 1 (Cimientos) */}
-              {priceType === 'STANDARD_T1' && (
-                <>
-                  <StarterPriceBox 
-                    starterPrice="$399"
-                    normalPrice="$599"
-                    starterMonths={2}
-                    savings="$400"
-                    planName={currentPlan.title}
-                  />
-                  <PriceRampTimeline 
-                    title="Inversión Escalonada - Programa Cimientos"
-                    steps={[
-                      { month: 'Meses 1-2', price: '$399', isStarter: true, label: 'por mes' },
-                      { month: 'Mes 3+', price: '$599', isStarter: false, label: 'por mes' }
-                    ]}
-                  />
-                </>
-              )}
+              {/* Single Price Card — fixed pricing model */}
+              <Card className="border-2 border-primary bg-primary/5">
+                <CardContent className="p-6 text-center space-y-2">
+                  <p className="text-sm text-muted-foreground">{currentPlan.targetProfile}</p>
+                  <p className="text-5xl font-bold text-primary">{currentPlan.price}</p>
+                  {currentPlan.priceNote && (
+                    <p className="text-sm text-muted-foreground">{currentPlan.priceNote}</p>
+                  )}
+                </CardContent>
+              </Card>
 
-              {/* STARTER_TIER2: Show Starter Price Box */}
-              {priceType === 'STARTER_TIER2' && (
-                <>
-                  <StarterPriceBox 
-                    starterPrice="$599"
-                    normalPrice="$1,299"
-                    starterMonths={2}
-                    savings="$1,400"
-                    planName={currentPlan.title}
-                  />
-                  {/* Ad Spend Disclaimer for Tier 2 */}
-                  <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mt-4">
-                    <p className="text-amber-900 text-sm leading-relaxed">
-                      <strong className="text-amber-800">📢 Sobre el Ad Spend:</strong>{' '}
-                      {language === 'es' 
-                        ? 'La gestión de campañas está incluida. El presupuesto publicitario (Ad Spend) es adicional y se paga directamente por el cliente a las plataformas (Meta, Google, TikTok). Nosotros como empresa optimizamos las primeras inversiones, sobre todo si estás en etapa de aprendizaje, para optimizar cada $ y levantar base de datos.'
-                        : 'Campaign management is included. The advertising budget (Ad Spend) is additional and paid directly by the client to the platforms (Meta, Google, TikTok). As a company, we optimize the first investments, especially if you are in the learning stage, to optimize every $ and build a database.'
-                      }
-                    </p>
-                  </div>
-                </>
-              )}
-
-              {/* STARTER_TIER3: Show Price Ramp Timeline */}
-              {priceType === 'STARTER_TIER3' && (
-                <>
-                  <PriceRampTimeline 
-                    title="Inversión Escalonada - Plan Dominio Estratégico"
-                    showTagline={true}
-                    steps={[
-                      { month: 'Mes 1', price: '$600', isStarter: true },
-                      { month: 'Meses 2-4', price: '$1,299', isStarter: true, label: 'por mes' },
-                      { month: 'Mes 5+', price: '$2,599', isStarter: false, label: 'por mes' }
-                    ]}
-                  />
-                  {/* Ad Spend Disclaimer for Tier 3 */}
-                  <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mt-4">
-                    <p className="text-amber-900 text-sm leading-relaxed">
-                      <strong className="text-amber-800">📢 Sobre el Ad Spend:</strong>{' '}
-                      {language === 'es' 
-                        ? 'La gestión de campañas está incluida. El presupuesto publicitario (Ad Spend) es adicional y se paga directamente por el cliente a las plataformas (Meta, Google, TikTok). Nosotros como empresa optimizamos las primeras inversiones, sobre todo si estás en etapa de aprendizaje, para optimizar cada $ y levantar base de datos.'
-                        : 'Campaign management is included. The advertising budget (Ad Spend) is additional and paid directly by the client to the platforms (Meta, Google, TikTok). As a company, we optimize the first investments, especially if you are in the learning stage, to optimize every $ and build a database.'
-                      }
-                    </p>
-                  </div>
-                </>
-              )}
-
-              {/* Riesgo Compartido Explanation - Updated Speech */}
-              {(priceType === 'STANDARD_T1' || priceType === 'STARTER_TIER2' || priceType === 'STARTER_TIER3') && (
-                <div className="bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-xl p-5">
-                  <p className="text-green-900 text-sm sm:text-base leading-relaxed">
-                    <strong className="text-green-800">🤝 Riesgo Compartido:</strong> En C3 Marketing sabemos que el arranque es crítico, 
-                    por eso <span className="font-bold">subsidiamos hasta $1,400 USD</span> de tu costo inicial. 
-                    Nosotros invertimos en construir tu infraestructura y tú solo cubres una tarifa reducida 
-                    (<span className="font-bold">Starter</span>) mientras preparamos el despegue. Solo pasas a la tarifa 
-                    estándar cuando tu sistema ya está listo para escalar.{" "}
-                    <span className="italic">Nosotros ponemos la inversión, tú pones la confianza.</span>
+              {/* Ad Spend Disclaimer */}
+              {(primary === 'expansion' || primary === 'dominio') && (
+                <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
+                  <p className="text-amber-900 text-sm leading-relaxed">
+                    <strong className="text-amber-800">📢 Add-on Acelerador de Campañas:</strong>{' '}
+                    {language === 'es'
+                      ? '$199/mes por canal (Google Ads o Meta Ads). El presupuesto publicitario (Ad Spend) se paga directo a la plataforma elegida.'
+                      : '$199/month per channel (Google Ads or Meta Ads). Ad budget (Ad Spend) is paid directly to the chosen platform.'}
                   </p>
                 </div>
               )}
 
-              {/* ONE_TIME: Show simple price */}
-              {priceType === 'ONE_TIME' && (
-                <Card className="border-2 border-primary bg-primary/5">
-                  <CardContent className="p-6 text-center">
-                    <p className="text-sm text-muted-foreground mb-2">Proyecto Finito (Sin mensualidades)</p>
-                    <p className="text-4xl font-bold text-primary">{currentPlan.price}</p>
-                    <p className="text-sm text-muted-foreground mt-2">{currentPlan.priceNote}</p>
-                  </CardContent>
-                </Card>
-              )}
 
               {/* Primary Plan Card */}
               <Card className="border-2 border-primary shadow-soft-lg overflow-hidden">
@@ -771,30 +694,29 @@ const DiagnosticResults = () => {
                     </div>
                   </div>
 
-                  {/* Starter Plan Conditions */}
-                  {(priceType === 'STARTER_TIER2' || priceType === 'STARTER_TIER3') && (
+                  {/* Plan Conditions */}
+                  {(primary === 'expansion' || primary === 'dominio') && (
                     <div className="bg-muted/50 rounded-lg p-4 text-sm text-muted-foreground">
-                      <p className="font-medium text-foreground mb-1">Condiciones del Programa Starter:</p>
+                      <p className="font-medium text-foreground mb-1">Condiciones del Plan:</p>
                       <ul className="space-y-1">
-                        <li>• Requiere permanencia mínima de {priceType === 'STARTER_TIER3' ? '12' : '6'} meses</li>
-                        <li>• El precio Starter aplica solo para nuevos clientes</li>
-                        <li>• 100% de propiedad de activos digitales desde el día 1</li>
+                        <li>• Compromiso mínimo de 6 meses</li>
+                        <li>• Precios con descuento por pago en Efectivo, ACH o Zelle (Tarjeta de crédito +3%)</li>
+                        <li>• Cancelación anticipada anula la licencia sobre los entregables</li>
+                        <li>• Renovación automática mes a mes tras los 6 meses</li>
                       </ul>
                     </div>
                   )}
 
                   {/* CTA Button */}
-                  <Button 
+                  <Button
                     onClick={openCalendar}
                     size="lg"
                     className="w-full text-lg py-6 gap-2"
                   >
                     <Calendar className="h-5 w-5" />
-                    {priceType === 'STARTER_TIER2' || priceType === 'STARTER_TIER3' 
-                      ? 'Aprobar mi Plan Starter'
-                      : 'Agendar Llamada de Estrategia'
-                    }
+                    Agendar Llamada de Estrategia
                   </Button>
+
 
                   {/* Disclaimer */}
                   <p className="text-center text-sm text-muted-foreground">

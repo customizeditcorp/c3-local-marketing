@@ -40,34 +40,46 @@ const features = [
 
 const planes = [
   {
-    name: "Programa Cimientos",
-    subtitle: "Google Business Profile",
-    starterPrice: "$399/mes",
-    starterLabel: "Mes 1-2",
-    normalPrice: "$599/mes",
-    normalLabel: "Mes 3+",
+    name: "Cimientos",
+    subtitle: "CRM y Automatización Base",
+    price: "$150/mes",
+    label: "Suscripción Base",
     highlighted: false,
-    features: ["GBP verificado y optimizado", "SEO local básico", "NAP consistente", "Gestión de reseñas", "Reportes mensuales"],
+    features: [
+      "Licencia CRM C3 Studio",
+      "Embudos de venta y contactos",
+      "Chat automatizado",
+      "Solicitud automática de reseñas Google",
+    ],
   },
   {
-    name: "Plan Expansión Total",
-    subtitle: "Omnicanal y Growth Marketing",
-    starterPrice: "$599/mes",
-    starterLabel: "Mes 1-2",
-    normalPrice: "$1,299/mes",
-    normalLabel: "Mes 3+",
+    name: "Presencia Digital",
+    subtitle: "Ecosistema digital completo",
+    price: "$399/mes",
+    label: "6 meses mínimo",
     highlighted: true,
-    features: ["Todo de Cimientos +", "Meta Ads management", "Sitio web profesional", "Campañas de leads", "Retargeting", "Reportes avanzados"],
+    features: [
+      "Todo de Cimientos +",
+      "Sitio Web Premium optimizado",
+      "Setup de Google Business Profile",
+      "Copy y oferta con IA",
+      "Dominio a tu nombre día 1",
+      "Mantenimiento y soporte activo",
+    ],
   },
   {
-    name: "Plan Dominio Estratégico",
-    subtitle: "Funnels y Automatización Total",
-    starterPrice: "$600 → $1,299",
-    starterLabel: "Mes 1-2",
-    normalPrice: "$2,599/mes",
-    normalLabel: "Mes 3+",
+    name: "Imán Local",
+    subtitle: "SEO Local y posicionamiento",
+    price: "$498/mes",
+    label: "6 meses mínimo",
     highlighted: false,
-    features: ["Todo de Expansión +", "CRM automatizado", "Funnels de conversión", "SMS/Email automático", "Soporte prioritario", "Estrategia personalizada"],
+    features: [
+      "Todo de Presencia Digital +",
+      "SEO Local activo",
+      "Publicaciones semanales en GBP",
+      "Monitoreo BrightLocal Rank",
+      "Rastreo de keywords locales",
+    ],
   },
 ];
 
@@ -147,9 +159,8 @@ const Websites = () => (
                 <CardTitle className="text-lg">{plan.name}</CardTitle>
                 <p className="text-xs text-muted-foreground mt-1 uppercase tracking-wide">{plan.subtitle}</p>
                 <div className="mt-3 space-y-1">
-                  <p className="text-sm text-muted-foreground line-through">{plan.starterPrice} <span className="no-underline text-xs">({plan.starterLabel})</span></p>
-                  <p className="text-3xl font-bold text-foreground">{plan.normalPrice}</p>
-                  <p className="text-xs text-muted-foreground">{plan.normalLabel}</p>
+                  <p className="text-3xl font-bold text-foreground">{plan.price}</p>
+                  <p className="text-xs text-muted-foreground">{plan.label}</p>
                 </div>
               </CardHeader>
               <CardContent className="flex-1">
@@ -170,10 +181,13 @@ const Websites = () => (
           ))}
         </div>
         <p className="text-sm text-muted-foreground text-center mt-6 italic">
-          * La gestión de campañas está incluida. El presupuesto publicitario (Ad Spend) es adicional y se paga directamente por el cliente a las plataformas.
+          * Add-on Acelerador de Campañas: $199/mes por canal (Google Ads o Meta Ads). El presupuesto publicitario (Ad Spend) se paga directo a la plataforma.
         </p>
         <p className="text-sm text-muted-foreground text-center mt-2 italic">
-          * Compromiso mínimo de 6 meses para Cimientos y Expansión, 12 meses para Dominio Estratégico.
+          * Compromiso mínimo de 6 meses para Presencia Digital e Imán Local. Cancelación anticipada anula la licencia sobre los entregables.
+        </p>
+        <p className="text-sm text-muted-foreground text-center mt-2 italic">
+          * ¿Sin contratos mensuales? Plan Lanzamiento: $1,800 pago único (website + GBP, llave en mano).
         </p>
       </div>
     </section>

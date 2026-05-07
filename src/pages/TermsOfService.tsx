@@ -5,249 +5,157 @@ import { useLanguage } from "@/hooks/use-language";
 
 const TermsOfService = () => {
   const { t, language } = useLanguage();
+  const es = language === 'es';
 
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-      
+
       <main className="container mx-auto px-4 py-20 max-w-4xl">
-        <h1 className="text-4xl font-bold mb-8 text-foreground">
-          {language === 'es' ? 'Términos de Servicio' : 'Terms of Service'}
+        <h1 className="text-4xl font-bold mb-2 text-foreground">
+          {es ? 'Términos Operativos y de Propiedad Intelectual' : 'Operational Terms and Intellectual Property'}
         </h1>
-        
         <p className="text-muted-foreground mb-8">
-          {t('legal.lastUpdated')}
+          L &amp; M Creative Service INC (DBA C3 Marketing) — {t('legal.lastUpdated')}
         </p>
 
         <div className="prose prose-lg max-w-none space-y-8 text-foreground/90">
           {/* Section 1 */}
           <section>
             <h2 className="text-2xl font-semibold text-foreground mb-4">
-              {language === 'es' ? '1. Aceptación de Términos' : '1. Acceptance of Terms'}
+              {es ? '1. Uso de Sistemas y Desarrollo a Riesgo (Fase Cero)' : '1. Systems Use and At-Risk Development (Phase Zero)'}
             </h2>
             <p className="text-muted-foreground leading-relaxed">
-              {language === 'es'
-                ? 'Al acceder y utilizar los servicios proporcionados por L & M Creative Service INC dba C3 Marketing Hub ("nosotros"), usted acepta estar sujeto a estos Términos de Servicio. Si no está de acuerdo con alguna parte de estos términos, no puede utilizar nuestros servicios.'
-                : 'By accessing and using the services provided by L & M Creative Service INC dba C3 Marketing Hub ("we," "us," or "our"), you agree to be bound by these Terms of Service. If you do not agree with any part of these terms, you may not use our services.'}
+              {es
+                ? 'C3 Marketing puede ofrecer maquetas, simulaciones y prototipos de sitios web o perfiles de Google sin costo de configuración inicial (Fase Cero). Estos entregables son simulaciones en entornos cerrados. No se registrarán dominios, ni se indexarán sitios web en buscadores, ni se transferirán accesos hasta la formalización de la suscripción y el primer pago. Si el cliente no aprueba el proyecto en el tiempo estipulado, C3 Marketing eliminará las simulaciones y retendrá todos los derechos.'
+                : 'C3 Marketing may offer mockups, simulations and prototypes of websites or Google profiles at no initial setup cost (Phase Zero). These deliverables are simulations in closed environments. No domains will be registered, no websites will be indexed in search engines, and no access will be transferred until the subscription is formalized and the first payment is made. If the client does not approve the project within the stipulated time, C3 Marketing will delete the simulations and retain all rights.'}
             </p>
           </section>
 
           {/* Section 2 */}
           <section>
             <h2 className="text-2xl font-semibold text-foreground mb-4">
-              {language === 'es' ? '2. Descripción de Servicios' : '2. Services Description'}
+              {es ? '2. Inteligencia Artificial, Metodologías y Obras Derivadas' : '2. Artificial Intelligence, Methodologies and Derivative Works'}
             </h2>
-            <p className="text-muted-foreground leading-relaxed mb-4">
-              {language === 'es'
-                ? 'C3 Marketing Hub proporciona servicios de marketing digital que incluyen, pero no se limitan a:'
-                : 'C3 Marketing Hub provides digital marketing services including but not limited to:'}
+            <p className="text-muted-foreground leading-relaxed">
+              {es
+                ? 'El cliente autoriza el procesamiento de sus datos comerciales iniciales mediante nuestros sistemas de análisis e Inteligencia Artificial (C3 Studio). Mientras que el cliente retiene la propiedad de sus datos comerciales básicos, los textos publicitarios, estructuras y la "Oferta de Valor" resultantes constituyen una "Obra Derivada" propiedad de C3 Marketing. Asimismo, la agencia retiene el 100% de la propiedad intelectual sobre la arquitectura de su software, lógicas de programación y metodologías de ventas.'
+                : 'The client authorizes processing of their initial business data through our analysis systems and Artificial Intelligence (C3 Studio). While the client retains ownership of their basic business data, the resulting advertising copy, structures and "Value Offer" constitute a "Derivative Work" owned by C3 Marketing. Likewise, the agency retains 100% intellectual property over its software architecture, programming logic and sales methodologies.'}
             </p>
-            <ul className="list-disc list-inside text-muted-foreground space-y-2 ml-4">
-              <li>{language === 'es' ? 'Optimización y gestión de Google Business Profile' : 'Google Business Profile optimization and management'}</li>
-              <li>{language === 'es' ? 'Servicios de SEO local' : 'Local SEO services'}</li>
-              <li>{language === 'es' ? 'Diseño y desarrollo de sitios web' : 'Website design and development'}</li>
-              <li>{language === 'es' ? 'Marketing en redes sociales' : 'Social media marketing'}</li>
-              <li>{language === 'es' ? 'Campañas de publicidad digital' : 'Digital advertising campaigns'}</li>
-              <li>{language === 'es' ? 'Consultoría y estrategia de marketing' : 'Marketing consultation and strategy'}</li>
-            </ul>
           </section>
 
           {/* Section 3 */}
           <section>
             <h2 className="text-2xl font-semibold text-foreground mb-4">
-              {language === 'es' ? '3. Responsabilidades del Cliente' : '3. Client Responsibilities'}
+              {es ? '3. Adquisición de Derechos (Vesting) y Cancelaciones' : '3. Vesting and Cancellations'}
             </h2>
             <p className="text-muted-foreground leading-relaxed mb-4">
-              {language === 'es' ? 'Como cliente, usted acepta:' : 'As a client, you agree to:'}
+              {es
+                ? 'Para garantizar resultados en los motores de búsqueda, los planes mensuales (Cimientos, Presencia Digital, Imán Local) requieren un compromiso mínimo forzoso de seis (6) meses.'
+                : 'To guarantee results in search engines, monthly plans (Foundations, Digital Presence, Local Magnet) require a forced minimum commitment of six (6) months.'}
             </p>
-            <ul className="list-disc list-inside text-muted-foreground space-y-2 ml-4">
-              <li>{language === 'es' ? 'Proporcionar información precisa y completa necesaria para nuestros servicios' : 'Provide accurate and complete information necessary for our services'}</li>
-              <li>{language === 'es' ? 'Responder a las solicitudes de información o aprobaciones de manera oportuna' : 'Respond to requests for information or approvals in a timely manner'}</li>
-              <li>{language === 'es' ? 'Otorgar el acceso necesario a sus cuentas y plataformas comerciales según sea requerido' : 'Grant necessary access to your business accounts and platforms as required'}</li>
-              <li>{language === 'es' ? 'Realizar pagos según el calendario acordado' : 'Make payments according to the agreed-upon schedule'}</li>
-              <li>{language === 'es' ? 'Cumplir con todas las leyes y regulaciones aplicables' : 'Comply with all applicable laws and regulations'}</li>
+            <ul className="list-disc list-inside text-muted-foreground space-y-3 ml-4">
+              <li>
+                <strong className="text-foreground">{es ? 'Cancelación anticipada: ' : 'Early cancellation: '}</strong>
+                {es
+                  ? 'Si el cliente cancela el servicio antes de cumplir el sexto mes, no adquiere ninguna licencia de uso ni derecho de propiedad sobre el diseño web, textos o videos creados por C3 Marketing. El uso continuo de estos activos constituirá una infracción a los Derechos de Autor.'
+                  : 'If the client cancels the service before completing the sixth month, they acquire no use license or ownership rights over the web design, copy or videos created by C3 Marketing. Continued use of these assets will constitute a Copyright infringement.'}
+              </li>
+              <li>
+                <strong className="text-foreground">{es ? 'Cumplimiento del contrato: ' : 'Contract fulfillment: '}</strong>
+                {es
+                  ? 'Al liquidar la sexta (6ta) mensualidad, el cliente adquiere una licencia perpetua y libre de regalías sobre los "Entregables Finales" (textos, videos, diseño web frontal) y es libre de transferirlos a otro proveedor si lo desea.'
+                  : 'Upon paying the sixth (6th) monthly installment, the client acquires a perpetual, royalty-free license over the "Final Deliverables" (copy, videos, front-end web design) and is free to transfer them to another provider if they wish.'}
+              </li>
             </ul>
+            <p className="text-muted-foreground leading-relaxed mt-4">
+              {es
+                ? 'Bajo ninguna circunstancia se entregarán códigos fuente, bases de datos o acceso a los flujos internos del CRM de C3 Studio.'
+                : 'Under no circumstances will source code, databases or access to the internal flows of the C3 Studio CRM be delivered.'}
+            </p>
           </section>
 
           {/* Section 4 */}
           <section>
             <h2 className="text-2xl font-semibold text-foreground mb-4">
-              {language === 'es' ? '4. Términos de Pago' : '4. Payment Terms'}
+              {es ? '4. Exención de Responsabilidad (Hold Harmless)' : '4. Hold Harmless'}
             </h2>
-            <div className="space-y-4 text-muted-foreground">
-              <p className="leading-relaxed">
-                <strong className="text-foreground">{language === 'es' ? 'Tarifas:' : 'Fees:'}</strong> {language === 'es'
-                  ? 'Las tarifas de servicio se detallan en su acuerdo de servicio individual. Todas las tarifas se cotizan en dólares estadounidenses a menos que se especifique lo contrario.'
-                  : 'Service fees are outlined in your individual service agreement. All fees are quoted in US dollars unless otherwise specified.'}
-              </p>
-              <p className="leading-relaxed">
-                <strong className="text-foreground">{language === 'es' ? 'Calendario de Pagos:' : 'Payment Schedule:'}</strong> {language === 'es'
-                  ? 'Los pagos vencen según el calendario especificado en su acuerdo de servicio, típicamente de forma mensual.'
-                  : 'Payments are due according to the schedule specified in your service agreement, typically on a monthly basis.'}
-              </p>
-              <p className="leading-relaxed">
-                <strong className="text-foreground">{language === 'es' ? 'Pagos Atrasados:' : 'Late Payments:'}</strong> {language === 'es'
-                  ? 'Los pagos atrasados pueden resultar en la suspensión de servicios. Se puede aplicar un cargo por mora a los saldos vencidos.'
-                  : 'Late payments may result in suspension of services. A late fee may be applied to overdue balances.'}
-              </p>
-              <p className="leading-relaxed">
-                <strong className="text-foreground">{language === 'es' ? 'Reembolsos:' : 'Refunds:'}</strong> {language === 'es'
-                  ? 'Las políticas de reembolso se especifican en los acuerdos de servicio individuales. Generalmente, las tarifas por trabajo completado no son reembolsables.'
-                  : 'Refund policies are specified in individual service agreements. Generally, fees for completed work are non-refundable.'}
-              </p>
-            </div>
+            <p className="text-muted-foreground leading-relaxed mb-4">
+              {es
+                ? 'C3 Marketing provee la infraestructura tecnológica y publicitaria; el cliente es el único responsable de sus operaciones, promesas de venta y ética comercial.'
+                : 'C3 Marketing provides the technological and advertising infrastructure; the client is solely responsible for their operations, sales promises and commercial ethics.'}
+            </p>
+            <ul className="list-disc list-inside text-muted-foreground space-y-2 ml-4">
+              <li>{es ? 'C3 Marketing no se hace responsable por disputas legales derivadas de las operaciones del cliente con sus consumidores.' : 'C3 Marketing is not responsible for legal disputes arising from the client\'s operations with their consumers.'}</li>
+              <li>{es ? 'C3 Marketing no garantiza un volumen específico de ventas o posición exacta en buscadores, ya que el posicionamiento depende de algoritmos de terceros (Google, Meta).' : 'C3 Marketing does not guarantee a specific sales volume or exact search engine position, since ranking depends on third-party algorithms (Google, Meta).'}</li>
+              <li>{es ? 'Si el cliente, sus empleados o terceros modifican el código fuente de la página web o migran el sitio a servidores externos, toda garantía de funcionamiento y seguridad quedará anulada instantáneamente.' : 'If the client, their employees or third parties modify the source code of the website or migrate the site to external servers, all functionality and security warranties will be instantly voided.'}</li>
+            </ul>
           </section>
 
           {/* Section 5 */}
           <section>
             <h2 className="text-2xl font-semibold text-foreground mb-4">
-              {language === 'es' ? '5. Propiedad Intelectual' : '5. Intellectual Property'}
-            </h2>
-            <p className="text-muted-foreground leading-relaxed mb-4">
-              {language === 'es'
-                ? 'Tras el pago completo, los clientes reciben la propiedad del contenido personalizado creado específicamente para ellos, incluyendo diseños de sitios web, gráficos y contenido escrito.'
-                : 'Upon full payment, clients receive ownership of custom content created specifically for them, including website designs, graphics, and written content.'}
-            </p>
-            <p className="text-muted-foreground leading-relaxed">
-              {language === 'es'
-                ? 'C3 Marketing Hub conserva el derecho de usar el trabajo completado en nuestro portafolio y materiales de marketing a menos que se acuerde lo contrario por escrito. También conservamos la propiedad de cualquier tecnología de fondo, frameworks o código preexistente utilizado para entregar los servicios.'
-                : 'C3 Marketing Hub retains the right to use completed work in our portfolio and marketing materials unless otherwise agreed in writing. We also retain ownership of any background technology, frameworks, or pre-existing code used to deliver the services.'}
-            </p>
-          </section>
-
-          {/* Section 6 */}
-          <section>
-            <h2 className="text-2xl font-semibold text-foreground mb-4">
-              {language === 'es' ? '6. Confidencialidad' : '6. Confidentiality'}
+              {es ? '5. Condiciones de Pago' : '5. Payment Conditions'}
             </h2>
             <p className="text-muted-foreground leading-relaxed">
-              {language === 'es'
-                ? 'Mantenemos la confidencialidad de toda la información del cliente y no divulgaremos información comercial a terceros excepto según sea necesario para proporcionar nuestros servicios o según lo requiera la ley.'
-                : 'We maintain the confidentiality of all client information and will not disclose business information to third parties except as necessary to provide our services or as required by law.'}
+              {es
+                ? 'Los precios publicados incluyen un descuento pre-aplicado por pagos en Efectivo, ACH o Zelle. Los pagos realizados mediante Tarjeta de Crédito estarán sujetos a un recargo estándar por procesamiento del 3%. Finalizado el plazo de 6 meses, los planes mensuales se renovarán de forma automática mes a mes.'
+                : 'Published prices include a pre-applied discount for Cash, ACH or Zelle payments. Payments made by Credit Card will be subject to a standard 3% processing surcharge. After the 6-month term ends, monthly plans will automatically renew on a month-to-month basis.'}
             </p>
           </section>
 
-          {/* Section 7 */}
+          {/* Section 6 - A2P 10DLC (kept for compliance) */}
           <section>
             <h2 className="text-2xl font-semibold text-foreground mb-4">
-              {language === 'es' ? '7. Limitación de Responsabilidad' : '7. Limitation of Liability'}
-            </h2>
-            <p className="text-muted-foreground leading-relaxed mb-4">
-              {language === 'es'
-                ? 'C3 Marketing Hub (y su entidad matriz L & M Creative Service INC) no será responsable de ningún daño indirecto, incidental, especial, consecuente o punitivo resultante del uso de nuestros servicios.'
-                : 'C3 Marketing Hub (and its parent entity L & M Creative Service INC) shall not be liable for any indirect, incidental, special, consequential, or punitive damages resulting from your use of our services.'}
-            </p>
-            <p className="text-muted-foreground leading-relaxed">
-              {language === 'es'
-                ? 'Nuestra responsabilidad total no excederá el monto pagado por usted por los servicios en los tres (3) meses anteriores a la reclamación.'
-                : 'Our total liability shall not exceed the amount paid by you for services in the three (3) months preceding the claim.'}
-            </p>
-          </section>
-
-          {/* Section 8 */}
-          <section>
-            <h2 className="text-2xl font-semibold text-foreground mb-4">
-              {language === 'es' ? '8. Cancelación del Servicio' : '8. Service Cancellation'}
-            </h2>
-            <p className="text-muted-foreground leading-relaxed mb-4">
-              {language === 'es'
-                ? 'Cualquiera de las partes puede terminar los servicios con aviso por escrito según lo especificado en el acuerdo de servicio. Al terminar:'
-                : 'Either party may terminate services with written notice as specified in the service agreement. Upon termination:'}
-            </p>
-            <ul className="list-disc list-inside text-muted-foreground space-y-2 ml-4">
-              <li>{language === 'es' ? 'Todos los cargos pendientes vencen inmediatamente' : 'All outstanding fees become immediately due'}</li>
-              <li>{language === 'es' ? 'Proporcionaremos asistencia razonable en la transición de servicios' : 'We will provide reasonable assistance in transitioning services'}</li>
-              <li>{language === 'es' ? 'El acceso a cuentas y materiales se transferirá según corresponda' : 'Access to accounts and materials will be transferred as applicable'}</li>
-            </ul>
-          </section>
-
-          {/* Section 9 */}
-          <section>
-            <h2 className="text-2xl font-semibold text-foreground mb-4">
-              {language === 'es' ? '9. Modificaciones a los Términos' : '9. Modifications to Terms'}
-            </h2>
-            <p className="text-muted-foreground leading-relaxed">
-              {language === 'es'
-                ? 'Nos reservamos el derecho de modificar estos Términos de Servicio en cualquier momento. Los cambios serán efectivos al publicarse en nuestro sitio web. El uso continuado de nuestros servicios después de las modificaciones constituye la aceptación de los términos actualizados.'
-                : 'We reserve the right to modify these Terms of Service at any time. Changes will be effective upon posting to our website. Continued use of our services after modifications constitutes acceptance of the updated terms.'}
-            </p>
-          </section>
-
-          {/* Section 10 */}
-          <section>
-            <h2 className="text-2xl font-semibold text-foreground mb-4">
-              {language === 'es' ? '10. Ley Aplicable' : '10. Governing Law'}
-            </h2>
-            <p className="text-muted-foreground leading-relaxed">
-              {language === 'es'
-                ? 'Estos Términos de Servicio se regirán e interpretarán de acuerdo con las leyes del Estado de California, sin tener en cuenta sus disposiciones sobre conflicto de leyes.'
-                : 'These Terms of Service shall be governed by and construed in accordance with the laws of the State of California, without regard to its conflict of law provisions.'}
-            </p>
-          </section>
-
-          {/* Section 11 */}
-          <section>
-            <h2 className="text-2xl font-semibold text-foreground mb-4">
-              {language === 'es' ? '11. Información de Contacto' : '11. Contact Information'}
-            </h2>
-            <p className="text-muted-foreground leading-relaxed mb-4">
-              {language === 'es'
-                ? 'Para preguntas sobre estos Términos de Servicio, contáctenos:'
-                : 'For questions about these Terms of Service, please contact us:'}
-            </p>
-            <div className="bg-card p-6 rounded-xl border border-border">
-              <p className="font-semibold text-foreground mb-2">C3 Marketing Hub</p>
-              <p className="text-muted-foreground">Attn: Carlos Cordero</p>
-              <p className="text-muted-foreground">134B Inger Dr, Santa Maria CA 93454</p>
-              <p className="text-muted-foreground">
-                {language === 'es' ? 'Teléfono: ' : 'Phone: '}<a href="tel:+18056084843" className="text-primary hover:underline">(805) 608-4843</a>
-              </p>
-              <p className="text-muted-foreground">
-                Email: <a href="mailto:info@c3marketinghub.com" className="text-primary hover:underline">info@c3marketinghub.com</a>
-              </p>
-            </div>
-           </section>
-
-          {/* Section 12 - A2P 10DLC */}
-          <section>
-            <h2 className="text-2xl font-semibold text-foreground mb-4">
-              {language === 'es' ? '12. Anexo de Comunicaciones Electrónicas (A2P 10DLC)' : '12. Electronic Communications Addendum (A2P 10DLC)'}
+              {es ? '6. Anexo de Comunicaciones Electrónicas (A2P 10DLC)' : '6. Electronic Communications Addendum (A2P 10DLC)'}
             </h2>
             <div className="space-y-4 text-muted-foreground">
               <p className="leading-relaxed">
-                <strong className="text-foreground">{language === 'es' ? 'Consentimiento:' : 'Consent:'}</strong>{' '}
-                {language === 'es'
-                  ? 'Al proporcionar tu número de teléfono, aceptas recibir mensajes de texto (SMS) y WhatsApp de C3 Marketing Hub para fines de seguimiento de proyectos y marketing. La frecuencia de mensajes puede variar. Pueden aplicarse tarifas estándar de mensajes y datos.'
-                  : 'By providing your phone number, you consent to receiving text messages (SMS) and WhatsApp messages from C3 Marketing Hub for project follow-up and marketing purposes. Message frequency may vary. Standard message and data rates may apply.'}
+                <strong className="text-foreground">{es ? 'Consentimiento: ' : 'Consent: '}</strong>
+                {es
+                  ? 'Al proporcionar tu número de teléfono, aceptas recibir mensajes de texto (SMS) y WhatsApp de C3 Marketing para fines de seguimiento de proyectos y marketing. La frecuencia de mensajes puede variar. Pueden aplicarse tarifas estándar de mensajes y datos.'
+                  : 'By providing your phone number, you consent to receiving text messages (SMS) and WhatsApp messages from C3 Marketing for project follow-up and marketing purposes. Message frequency may vary. Standard message and data rates may apply.'}
               </p>
               <p className="leading-relaxed">
-                <strong className="text-foreground">{language === 'es' ? 'Opt-Out (Cancelación):' : 'Opt-Out:'}</strong>{' '}
-                {language === 'es'
-                  ? 'Puedes cancelar la suscripción en cualquier momento enviando la palabra "STOP" al número desde el cual recibiste el mensaje. Para ayuda, envía "HELP". Tras cancelar, no recibirás más mensajes de marketing.'
-                  : 'You can unsubscribe at any time by replying "STOP" to the number from which you received the message. For help, reply "HELP". After opting out, you will no longer receive marketing messages.'}
+                <strong className="text-foreground">{es ? 'Opt-Out: ' : 'Opt-Out: '}</strong>
+                {es
+                  ? 'Puedes cancelar la suscripción en cualquier momento enviando "STOP". Para ayuda, envía "HELP".'
+                  : 'You can unsubscribe at any time by replying "STOP". For help, reply "HELP".'}
               </p>
               <p className="leading-relaxed">
-                <strong className="text-foreground">{language === 'es' ? 'Privacidad de Datos:' : 'Data Privacy:'}</strong>{' '}
-                {language === 'es'
-                  ? 'No compartimos, vendemos ni cedemos los datos de consentimiento de mensajes de texto con terceros bajo ninguna circunstancia.'
-                  : 'We do not share, sell, or transfer text message consent data to any third parties under any circumstances.'}
+                <strong className="text-foreground">{es ? 'Privacidad de Datos: ' : 'Data Privacy: '}</strong>
+                {es
+                  ? 'No compartimos, vendemos ni cedemos los datos de consentimiento de mensajes con terceros bajo ninguna circunstancia.'
+                  : 'We do not share, sell, or transfer message consent data to any third parties under any circumstances.'}
+              </p>
+            </div>
+          </section>
+
+          {/* Contact */}
+          <section>
+            <h2 className="text-2xl font-semibold text-foreground mb-4">
+              {es ? 'Información de Contacto' : 'Contact Information'}
+            </h2>
+            <div className="bg-card p-6 rounded-xl border border-border">
+              <p className="font-semibold text-foreground mb-2">L &amp; M Creative Service INC (DBA C3 Marketing)</p>
+              <p className="text-muted-foreground">Attn: Carlos Cordero</p>
+              <p className="text-muted-foreground">134B Inger Dr, Santa Maria CA 93454</p>
+              <p className="text-muted-foreground">
+                {es ? 'Teléfono: ' : 'Phone: '}<a href="tel:+18056084843" className="text-primary hover:underline">(805) 608-4843</a>
+              </p>
+              <p className="text-muted-foreground">
+                Email: <a href="mailto:info@c3marketinghub.com" className="text-primary hover:underline">info@c3marketinghub.com</a>
               </p>
             </div>
           </section>
         </div>
 
         <div className="mt-12 pt-8 border-t border-border flex gap-6">
-          <Link 
-            to="/" 
-            className="text-primary hover:underline font-medium"
-          >
+          <Link to="/" className="text-primary hover:underline font-medium">
             {t('legal.backToHome')}
           </Link>
-          <Link 
-            to="/privacy-policy" 
-            className="text-primary hover:underline font-medium"
-          >
-            {language === 'es' ? 'Política de Privacidad' : 'Privacy Policy'}
+          <Link to="/privacy-policy" className="text-primary hover:underline font-medium">
+            {es ? 'Política de Privacidad' : 'Privacy Policy'}
           </Link>
         </div>
       </main>
