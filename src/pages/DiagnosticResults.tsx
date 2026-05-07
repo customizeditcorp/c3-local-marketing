@@ -249,35 +249,31 @@ const determineRecommendation = (
 
 const CALENDAR_URL = '#cta-final';
 
-// Pricing FAQs for objections - Aligned with legal contracts
+// Pricing FAQs for objections - Aligned with current plans
 const pricingFAQs = [
   {
-    question: "¿Qué es la Auditoría NAP?",
-    answer: "La Auditoría NAP ($250) es un análisis profundo de tu presencia digital actual. Revisamos tu Nombre, Dirección y Teléfono (NAP) en 50+ directorios para detectar inconsistencias que afectan tu ranking en Google. Ideal si perdiste acceso a tu perfil de Google o tienes información desactualizada. Nota: No garantizamos decisiones de entidades externas como Google."
-  },
-  {
     question: "¿Cuáles son los compromisos mínimos?",
-    answer: "Los compromisos varían por tier:\n\n• Presencia Digital: Proyecto finito de 90 días, sin mensualidades\n• Tier 1 (Cimientos) y Tier 2 (Expansión): 6 meses mínimo para acceder a la tarifa Starter subsidiada\n• Tier 3 (Dominio Estratégico): 12 meses mínimo debido a la inversión significativa de C3\n\nEstos compromisos nos permiten ofrecerte precios de arranque reducidos."
+    answer: "Cimientos ($149/mes) es suscripción base sin compromiso forzoso, cancelas cuando quieras. Presencia Digital ($399/mes) e Imán Local ($498/mes) requieren compromiso mínimo de 6 meses. Plan Lanzamiento ($1,799 pago único) no tiene contratos mensuales."
   },
   {
-    question: "¿Qué pasa si quiero cancelar antes del compromiso?",
-    answer: "Entendemos que las circunstancias cambian. Si cancelas antes del período mínimo acordado, aplica una liquidación proporcional del subsidio que C3 absorbió en tu arranque. Esto cubre la diferencia entre el precio Starter que pagaste y la tarifa estándar del servicio recibido. Sin sorpresas, todo está documentado en tu contrato."
+    question: "¿Qué pasa si quiero cancelar antes de los 6 meses?",
+    answer: "Si cancelas Presencia Digital o Imán Local antes del sexto mes, no adquieres licencia de uso ni propiedad sobre el diseño web, textos o videos creados por C3 Marketing. Al liquidar la sexta mensualidad obtienes una licencia perpetua sobre los entregables finales y eres libre de transferirlos a otro proveedor."
   },
   {
-    question: "¿Quién paga el Ad Spend (presupuesto publicitario)?",
-    answer: "La gestión de campañas está incluida en los tiers que ofrecen Ads. Sin embargo, el presupuesto publicitario (Ad Spend) es adicional y se paga directamente por ti a las plataformas (Meta, Google, TikTok). Nosotros optimizamos cada dólar, especialmente en etapa de aprendizaje. Presupuesto sugerido: $500-$1,000/mes."
+    question: "¿Quién paga el presupuesto publicitario (Ad Spend)?",
+    answer: "El Acelerador de Campañas ($199/mes por canal) cubre la gestión profesional de Google Ads o Meta Ads. El presupuesto publicitario (Ad Spend) es adicional y se paga directamente por ti a la plataforma. Presupuesto sugerido: $500-$1,000/mes."
   },
   {
     question: "¿Quién es dueño de los activos digitales?",
-    answer: "Tú eres dueño del contenido personalizado (logos, copy, fotos editadas) una vez pagado en su totalidad. Recibes credenciales de dominio, hosting, Google Business y redes sociales. Nota: La tecnología de fondo, metodologías y sistemas propietarios de C3 permanecen como propiedad de la agencia, según términos de servicio."
+    answer: "Con Plan Lanzamiento eres dueño 100% desde el día 1 (transferencia llave en mano). En planes mensuales, al cumplir los 6 meses obtienes una licencia perpetua y libre de regalías sobre los entregables finales (textos, videos, diseño web frontal). El código fuente del CRM C3 Studio, bases de datos y metodologías permanecen como propiedad de la agencia."
+  },
+  {
+    question: "¿Cómo funcionan los pagos?",
+    answer: "Los precios publicados incluyen un descuento pre-aplicado por pago en Efectivo, ACH o Zelle. Pagos con Tarjeta de Crédito tienen un recargo estándar del 3% por procesamiento. Tras los 6 meses, los planes mensuales se renuevan automáticamente mes a mes."
   },
   {
     question: "¿Hay garantía de resultados?",
-    answer: "Garantizamos la entrega de todos los activos digitales prometidos. Para SEO y posicionamiento, ofrecemos un enfoque de mejora continua pero no garantizamos rankings específicos, ya que dependen de factores externos (algoritmos de Google, competencia local). Usamos KPIs medibles para demostrar progreso mensual."
-  },
-  {
-    question: "¿Por qué el precio Starter (Riesgo Compartido)?",
-    answer: "C3 subsidia hasta $1,400 de tu costo inicial porque creemos en tu negocio. El precio Starter reduce tu inversión de entrada mientras construimos tu infraestructura digital. Solo pasas a la tarifa estándar cuando tu sistema ya está funcionando y generando resultados. Nosotros ponemos la inversión, tú pones la confianza."
+    answer: "Garantizamos la entrega de todos los activos digitales prometidos. Para SEO y posicionamiento ofrecemos un enfoque de mejora continua pero no garantizamos rankings específicos, ya que dependen de algoritmos de terceros (Google, Meta). Usamos KPIs medibles para demostrar progreso mensual."
   }
 ];
 
