@@ -696,30 +696,29 @@ const DiagnosticResults = () => {
                     </div>
                   </div>
 
-                  {/* Starter Plan Conditions */}
-                  {(priceType === 'STARTER_TIER2' || priceType === 'STARTER_TIER3') && (
+                  {/* Plan Conditions */}
+                  {(primary === 'expansion' || primary === 'dominio') && (
                     <div className="bg-muted/50 rounded-lg p-4 text-sm text-muted-foreground">
-                      <p className="font-medium text-foreground mb-1">Condiciones del Programa Starter:</p>
+                      <p className="font-medium text-foreground mb-1">Condiciones del Plan:</p>
                       <ul className="space-y-1">
-                        <li>• Requiere permanencia mínima de {priceType === 'STARTER_TIER3' ? '12' : '6'} meses</li>
-                        <li>• El precio Starter aplica solo para nuevos clientes</li>
-                        <li>• 100% de propiedad de activos digitales desde el día 1</li>
+                        <li>• Compromiso mínimo de 6 meses</li>
+                        <li>• Precios con descuento por pago en Efectivo, ACH o Zelle (Tarjeta de crédito +3%)</li>
+                        <li>• Cancelación anticipada anula la licencia sobre los entregables</li>
+                        <li>• Renovación automática mes a mes tras los 6 meses</li>
                       </ul>
                     </div>
                   )}
 
                   {/* CTA Button */}
-                  <Button 
+                  <Button
                     onClick={openCalendar}
                     size="lg"
                     className="w-full text-lg py-6 gap-2"
                   >
                     <Calendar className="h-5 w-5" />
-                    {priceType === 'STARTER_TIER2' || priceType === 'STARTER_TIER3' 
-                      ? 'Aprobar mi Plan Starter'
-                      : 'Agendar Llamada de Estrategia'
-                    }
+                    Agendar Llamada de Estrategia
                   </Button>
+
 
                   {/* Disclaimer */}
                   <p className="text-center text-sm text-muted-foreground">
