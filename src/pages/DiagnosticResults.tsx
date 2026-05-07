@@ -119,7 +119,7 @@ const planData: Record<string, PlanDetails> = {
   },
   presencia: {
     title: 'Plan Lanzamiento',
-    price: '$1,800',
+    price: '$1,799',
     priceNote: 'Pago único — Llave en mano',
     description: 'Propiedad absoluta sin contratos mensuales. Website + Google Business Profile, transferencia total el día 1.',
     helpMessage: 'Vas empezando y quieres ser dueño 100% sin contratos mensuales. Este plan te entrega el website y GBP llave en mano.',
@@ -136,7 +136,7 @@ const planData: Record<string, PlanDetails> = {
   },
   cimientos: {
     title: 'Cimientos',
-    price: '$150/mes',
+    price: '$149/mes',
     priceNote: 'Suscripción base — sin compromiso forzoso',
     description: 'La base operativa para organizar tu negocio y no perder clientes.',
     helpMessage: 'Necesitas organizar tus contactos y dejar de perder leads. Cimientos te da el CRM y las automatizaciones esenciales.',
@@ -213,13 +213,13 @@ const determineRecommendation = (
   let profile: ProfileType = 'INICIAL';
   let priceType: PriceType = 'ONE_TIME';
   
-  // CASE Z: Pre-Revenue (< $10k/month) → One-Time Project
+  // CASE Z: Pre-Revenue (< $10k/month) → Cimientos (CRM base, organizar primero)
   if (revenue === 'menos10k') {
-    primary = 'presencia';
+    primary = 'cimientos';
     profile = 'INICIAL';
-    priceType = 'ONE_TIME';
+    priceType = 'STANDARD_T1';
   }
-  // CASE A: Solopreneur ($10k-$25k) → Tier 1 Cimientos (Standard)
+  // CASE A: Solopreneur ($10k-$25k) → Cimientos (CRM base)
   else if (revenue === '10k-25k') {
     primary = 'cimientos';
     profile = 'ESTABILIDAD';
