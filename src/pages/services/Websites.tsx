@@ -181,10 +181,13 @@ const Websites = () => (
           ))}
         </div>
         <p className="text-sm text-muted-foreground text-center mt-6 italic">
-          * La gestión de campañas está incluida. El presupuesto publicitario (Ad Spend) es adicional y se paga directamente por el cliente a las plataformas.
+          * Add-on Acelerador de Campañas: $199/mes por canal (Google Ads o Meta Ads). El presupuesto publicitario (Ad Spend) se paga directo a la plataforma.
         </p>
         <p className="text-sm text-muted-foreground text-center mt-2 italic">
-          * Compromiso mínimo de 6 meses para Cimientos y Expansión, 12 meses para Dominio Estratégico.
+          * Compromiso mínimo de 6 meses para Presencia Digital e Imán Local. Cancelación anticipada anula la licencia sobre los entregables.
+        </p>
+        <p className="text-sm text-muted-foreground text-center mt-2 italic">
+          * ¿Sin contratos mensuales? Plan Lanzamiento: $1,800 pago único (website + GBP, llave en mano).
         </p>
       </div>
     </section>
