@@ -1,7 +1,6 @@
 import { ReactNode } from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import WhatsAppButton from "./WhatsAppButton";
 import CallNowButton from "./CallNowButton";
 
 interface PageLayoutProps {
@@ -14,10 +13,10 @@ const PageLayout = ({ children }: PageLayoutProps) => {
       <Navbar />
       <main className="pt-16 sm:pt-20">{children}</main>
       <Footer />
-      <WhatsAppButton />
       <CallNowButton />
     </div>
   );
 };
 
 export default PageLayout;
+
