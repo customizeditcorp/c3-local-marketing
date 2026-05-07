@@ -9,7 +9,7 @@ import TestimonialsSection from "@/components/TestimonialsSection";
 import FAQSection from "@/components/FAQSection";
 import FinalCTASection from "@/components/FinalCTASection";
 import Footer from "@/components/Footer";
-import WhatsAppButton from "@/components/WhatsAppButton";
+
 import CallNowButton from "@/components/CallNowButton";
 
 const Index = () => {
@@ -26,7 +26,7 @@ const Index = () => {
       <FAQSection />
       <FinalCTASection />
       <Footer />
-      <WhatsAppButton />
+      
       <CallNowButton />
     </div>
   );
