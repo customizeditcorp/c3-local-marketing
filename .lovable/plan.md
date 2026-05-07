@@ -1,61 +1,74 @@
-# Plan: Pasar preflight de GHL — Chat Widget + remover formularios con teléfono
+# Plan: Actualizar Planes de Precios y Términos Legales
 
-## Contexto
-GHL exige a la vez:
-1. **Chat Widget Compliance** → widget de LeadConnector cargado en todas las rutas.
-2. **Multiple Opt-ins** → cero formularios con teléfono/SMS coexistiendo con el widget.
-
-Solución: el widget queda como único canal de captura durante la validación.
+## Alcance
+Solo actualización de contenido de planes y términos. **No se tocan** scripts, ChatWidget, GHL, integraciones ni lógica.
 
 ## Cambios
 
-### 1. Crear `src/components/ChatWidget.tsx`
-Componente que inyecta el script oficial de LeadConnector una sola vez en el `<body>`. Sin `EXCLUDED_ROUTES`. Maneja cleanup en unmount y evita doble inyección.
+### 1. Nueva estructura de planes (5 productos)
 
-```tsx
-// Inyecta:
-// <script src="https://widgets.leadconnectorhq.com/loader.js"
-//   data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js"
-//   data-widget-id="69f54068e9677e19182a0a5c"
-//   data-source="WEB_USER"></script>
-```
+Reemplazar los planes actuales (Cimientos $399→$599, Expansión $599→$1,299, Dominio $600→$2,599) por:
 
-### 2. Montar `<ChatWidget />` global en `src/App.tsx`
-Insertarlo dentro de `<BrowserRouter>` y fuera de `<Routes>`, para que esté presente en todas las rutas: `/`, `/contact`, `/resultados`, `/servicios/*`, `/industrias/*`, `/areas-de-servicio/*`, `/recursos/*`, `/kb`, legales, NotFound.
+| Plan | Precio | Compromiso |
+|---|---|---|
+| **Cimientos** | $150/mes | Suscripción base |
+| **Presencia Digital** ⭐ | $399/mes | 6 meses mínimo |
+| **Imán Local** | $498/mes | 6 meses mínimo |
+| **Acelerador de Campañas (Ads)** | $199/mes por canal | Add-on |
+| **Plan Lanzamiento** | $1,800 pago único | Sin contrato |
 
-### 3. Limpiar `src/pages/Contact.tsx` (única página con formulario embebido)
-Quitar:
-- El `<iframe>` de `lnk.c3localmarketing.com/widget/form/...`
-- El bloque del checkbox `sms-consent` y el state `hasConsented`
-- El import de `Checkbox` y `Link` (si queda sin uso)
-- La carga del script `form_embed.js` en el `useEffect`
+### 2. Archivos a editar
 
-Reemplazar la columna izquierda (donde estaba el form) por un bloque CTA reforzado:
-- Botón grande **Llamar (805) 608-4843** → `tel:+18056084843`
-- Botón grande **WhatsApp** → `https://wa.me/18056084843`
-- Botón **Email** → `mailto:info@c3marketinghub.com`
-- Mensaje: "Para iniciar conversación al instante, usa el chat en la esquina inferior derecha."
+**Página principal de precios:**
+- `src/components/PricingSection.tsx` — Reemplazar la card única de $3,300 por grid de 5 planes con la nueva estructura, includes/excludes según copy provisto. Titular: "Tu negocio, escalado a tu ritmo."
 
-Se conservan: NAP, mapa de Google, sección "Términos de SMS" (informativa).
+**Página Websites (servicios):**
+- `src/pages/services/Websites.tsx` — Reemplazar los 3 planes actuales (Cimientos/Expansión/Dominio) por los 3 planes mensuales nuevos (Cimientos/Presencia Digital/Imán Local) + mención del Plan Lanzamiento ($1,800) y Acelerador ($199/canal).
 
-### 4. Eliminar `src/components/DiagnosisForm.tsx`
-Ya no tiene importadores en el árbol. Se borra para no dejar opt-in alternativo en el repo.
+**Otras páginas de servicios** (verificar y alinear si muestran tabla de precios):
+- `src/pages/services/GoogleBusinessProfile.tsx`
+- `src/pages/services/MetaAds.tsx`
+- `src/pages/services/CRMAutomation.tsx`
 
-### 5. Actualizar CSP en `index.html`
-Añadir dominios de LeadConnector Chat Widget a la Content Security Policy:
-- `script-src`: agregar `https://widgets.leadconnectorhq.com`
-- `connect-src`: agregar `https://services.leadconnectorhq.com https://backend.leadconnectorhq.com https://widgets.leadconnectorhq.com`
-- `frame-src`: agregar `https://widgets.leadconnectorhq.com https://services.leadconnectorhq.com`
-- `img-src`: ya permite `https:` → OK
+**Resultados del diagnóstico:**
+- `src/components/results/StarterPriceBox.tsx` y `src/pages/DiagnosticResults.tsx` — Actualizar precios mostrados al usuario para reflejar la nueva tabla (Presencia Digital $399 como recomendado por defecto).
 
-Sin esto el script del widget puede ser bloqueado por el navegador.
+**Traducciones:**
+- `src/i18n/translations.ts` — Actualizar claves `pricing.*` (title, subtitle, planTitle, paymentOptions, fullPayment, monthlyPayments, etc.) con el nuevo copy ES/EN.
 
-### 6. Auditoría final (verificación, no cambios)
-Confirmar con `rg` que tras los cambios no queden hits de `widget/form` ni `form_embed` en el árbol activo. Los canales `tel:`, `mailto:`, `wa.me`, `WhatsAppButton` y `CallNowButton` se conservan: **no son formularios**, son links directos compatibles con la regla de Multiple Opt-ins.
+### 3. Términos y Condiciones
 
-## Resultado
-- Chat widget de LeadConnector (`69f54068e9677e19182a0a5c`) cargado en **todas** las rutas.
-- **Cero** formularios con teléfono/SMS embebidos en el sitio.
-- Único opt-in oficial = el propio Chat Widget de GHL.
-- Canales directos (call / WhatsApp / email / mapa) intactos.
-- CSP correctamente configurado para que el widget cargue sin bloqueos.
+- `src/pages/TermsOfService.tsx` — Reemplazar contenido por las 5 secciones provistas:
+  1. Uso de Sistemas y Desarrollo a Riesgo (Fase Cero)
+  2. IA, Metodologías y Obras Derivadas
+  3. Adquisición de Derechos (Vesting) y Cancelaciones — 6 meses forzosos
+  4. Exención de Responsabilidad (Hold Harmless)
+  5. Condiciones de Pago — descuento pre-aplicado por Efectivo/ACH/Zelle, recargo 3% tarjeta de crédito, renovación mes a mes tras 6 meses
+
+Mantener entidad legal: **L & M Creative Service INC (DBA C3 Marketing)**.
+
+### 4. Memoria del proyecto
+
+Actualizar:
+- `mem://business/contract-details/pricing-tiers-conditions` — nueva tabla de precios y términos de cancelación
+- `mem://business/pricing-strategy` — nuevo modelo de 5 planes
+- `mem://business/pricing-logic/shared-risk-starter-plan` — marcar como **deprecado** (ya no hay subsidio Mes 1-2; ahora son precios fijos con compromiso)
+
+### 5. Lo que NO se toca
+
+- ChatWidget de LeadConnector
+- Scripts de tracking (Pixel, GA, Flock, GHL)
+- CSP en `index.html`
+- Calendar booking en `DiagnosticResults.tsx`
+- Wizard de diagnóstico (lógica)
+- Rutas, navegación, SEO schema
+
+## Preguntas antes de implementar
+
+1. **Idioma del copy nuevo**: el texto provisto está en español. ¿Quieres que también traduzca al inglés todo (titular, planes, términos) para mantener bilingüe, o solo español por ahora?
+2. **Lógica del wizard de diagnóstico**: actualmente recomienda un plan basado en respuestas del usuario. ¿Mapeo así?
+   - Negocio nuevo / sin web → **Plan Lanzamiento** ($1,800) o **Presencia Digital** ($399/mes)
+   - Negocio con web pero sin CRM → **Cimientos** ($150/mes)
+   - Negocio establecido buscando crecer → **Imán Local** ($498/mes) + **Acelerador** ($199/canal)
+
+   ¿Confirmas esta lógica o prefieres siempre recomendar Presencia Digital como default?
