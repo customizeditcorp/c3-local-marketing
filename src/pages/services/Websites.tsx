@@ -159,9 +159,8 @@ const Websites = () => (
                 <CardTitle className="text-lg">{plan.name}</CardTitle>
                 <p className="text-xs text-muted-foreground mt-1 uppercase tracking-wide">{plan.subtitle}</p>
                 <div className="mt-3 space-y-1">
-                  <p className="text-sm text-muted-foreground line-through">{plan.starterPrice} <span className="no-underline text-xs">({plan.starterLabel})</span></p>
-                  <p className="text-3xl font-bold text-foreground">{plan.normalPrice}</p>
-                  <p className="text-xs text-muted-foreground">{plan.normalLabel}</p>
+                  <p className="text-3xl font-bold text-foreground">{plan.price}</p>
+                  <p className="text-xs text-muted-foreground">{plan.label}</p>
                 </div>
               </CardHeader>
               <CardContent className="flex-1">
