@@ -213,13 +213,13 @@ const determineRecommendation = (
   let profile: ProfileType = 'INICIAL';
   let priceType: PriceType = 'ONE_TIME';
   
-  // CASE Z: Pre-Revenue (< $10k/month) → One-Time Project
+  // CASE Z: Pre-Revenue (< $10k/month) → Cimientos (CRM base, organizar primero)
   if (revenue === 'menos10k') {
-    primary = 'presencia';
+    primary = 'cimientos';
     profile = 'INICIAL';
-    priceType = 'ONE_TIME';
+    priceType = 'STANDARD_T1';
   }
-  // CASE A: Solopreneur ($10k-$25k) → Tier 1 Cimientos (Standard)
+  // CASE A: Solopreneur ($10k-$25k) → Cimientos (CRM base)
   else if (revenue === '10k-25k') {
     primary = 'cimientos';
     profile = 'ESTABILIDAD';
