@@ -580,98 +580,29 @@ const DiagnosticResults = () => {
                 Tu Plan Recomendado
               </h2>
 
-              {/* STANDARD_T1: Show Starter Price Box for Tier 1 (Cimientos) */}
-              {priceType === 'STANDARD_T1' && (
-                <>
-                  <StarterPriceBox 
-                    starterPrice="$399"
-                    normalPrice="$599"
-                    starterMonths={2}
-                    savings="$400"
-                    planName={currentPlan.title}
-                  />
-                  <PriceRampTimeline 
-                    title="Inversión Escalonada - Programa Cimientos"
-                    steps={[
-                      { month: 'Meses 1-2', price: '$399', isStarter: true, label: 'por mes' },
-                      { month: 'Mes 3+', price: '$599', isStarter: false, label: 'por mes' }
-                    ]}
-                  />
-                </>
-              )}
+              {/* Single Price Card — fixed pricing model */}
+              <Card className="border-2 border-primary bg-primary/5">
+                <CardContent className="p-6 text-center space-y-2">
+                  <p className="text-sm text-muted-foreground">{currentPlan.targetProfile}</p>
+                  <p className="text-5xl font-bold text-primary">{currentPlan.price}</p>
+                  {currentPlan.priceNote && (
+                    <p className="text-sm text-muted-foreground">{currentPlan.priceNote}</p>
+                  )}
+                </CardContent>
+              </Card>
 
-              {/* STARTER_TIER2: Show Starter Price Box */}
-              {priceType === 'STARTER_TIER2' && (
-                <>
-                  <StarterPriceBox 
-                    starterPrice="$599"
-                    normalPrice="$1,299"
-                    starterMonths={2}
-                    savings="$1,400"
-                    planName={currentPlan.title}
-                  />
-                  {/* Ad Spend Disclaimer for Tier 2 */}
-                  <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mt-4">
-                    <p className="text-amber-900 text-sm leading-relaxed">
-                      <strong className="text-amber-800">📢 Sobre el Ad Spend:</strong>{' '}
-                      {language === 'es' 
-                        ? 'La gestión de campañas está incluida. El presupuesto publicitario (Ad Spend) es adicional y se paga directamente por el cliente a las plataformas (Meta, Google, TikTok). Nosotros como empresa optimizamos las primeras inversiones, sobre todo si estás en etapa de aprendizaje, para optimizar cada $ y levantar base de datos.'
-                        : 'Campaign management is included. The advertising budget (Ad Spend) is additional and paid directly by the client to the platforms (Meta, Google, TikTok). As a company, we optimize the first investments, especially if you are in the learning stage, to optimize every $ and build a database.'
-                      }
-                    </p>
-                  </div>
-                </>
-              )}
-
-              {/* STARTER_TIER3: Show Price Ramp Timeline */}
-              {priceType === 'STARTER_TIER3' && (
-                <>
-                  <PriceRampTimeline 
-                    title="Inversión Escalonada - Plan Dominio Estratégico"
-                    showTagline={true}
-                    steps={[
-                      { month: 'Mes 1', price: '$600', isStarter: true },
-                      { month: 'Meses 2-4', price: '$1,299', isStarter: true, label: 'por mes' },
-                      { month: 'Mes 5+', price: '$2,599', isStarter: false, label: 'por mes' }
-                    ]}
-                  />
-                  {/* Ad Spend Disclaimer for Tier 3 */}
-                  <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mt-4">
-                    <p className="text-amber-900 text-sm leading-relaxed">
-                      <strong className="text-amber-800">📢 Sobre el Ad Spend:</strong>{' '}
-                      {language === 'es' 
-                        ? 'La gestión de campañas está incluida. El presupuesto publicitario (Ad Spend) es adicional y se paga directamente por el cliente a las plataformas (Meta, Google, TikTok). Nosotros como empresa optimizamos las primeras inversiones, sobre todo si estás en etapa de aprendizaje, para optimizar cada $ y levantar base de datos.'
-                        : 'Campaign management is included. The advertising budget (Ad Spend) is additional and paid directly by the client to the platforms (Meta, Google, TikTok). As a company, we optimize the first investments, especially if you are in the learning stage, to optimize every $ and build a database.'
-                      }
-                    </p>
-                  </div>
-                </>
-              )}
-
-              {/* Riesgo Compartido Explanation - Updated Speech */}
-              {(priceType === 'STANDARD_T1' || priceType === 'STARTER_TIER2' || priceType === 'STARTER_TIER3') && (
-                <div className="bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-xl p-5">
-                  <p className="text-green-900 text-sm sm:text-base leading-relaxed">
-                    <strong className="text-green-800">🤝 Riesgo Compartido:</strong> En C3 Marketing sabemos que el arranque es crítico, 
-                    por eso <span className="font-bold">subsidiamos hasta $1,400 USD</span> de tu costo inicial. 
-                    Nosotros invertimos en construir tu infraestructura y tú solo cubres una tarifa reducida 
-                    (<span className="font-bold">Starter</span>) mientras preparamos el despegue. Solo pasas a la tarifa 
-                    estándar cuando tu sistema ya está listo para escalar.{" "}
-                    <span className="italic">Nosotros ponemos la inversión, tú pones la confianza.</span>
+              {/* Ad Spend Disclaimer */}
+              {(primary === 'expansion' || primary === 'dominio') && (
+                <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
+                  <p className="text-amber-900 text-sm leading-relaxed">
+                    <strong className="text-amber-800">📢 Add-on Acelerador de Campañas:</strong>{' '}
+                    {language === 'es'
+                      ? '$199/mes por canal (Google Ads o Meta Ads). El presupuesto publicitario (Ad Spend) se paga directo a la plataforma elegida.'
+                      : '$199/month per channel (Google Ads or Meta Ads). Ad budget (Ad Spend) is paid directly to the chosen platform.'}
                   </p>
                 </div>
               )}
 
-              {/* ONE_TIME: Show simple price */}
-              {priceType === 'ONE_TIME' && (
-                <Card className="border-2 border-primary bg-primary/5">
-                  <CardContent className="p-6 text-center">
-                    <p className="text-sm text-muted-foreground mb-2">Proyecto Finito (Sin mensualidades)</p>
-                    <p className="text-4xl font-bold text-primary">{currentPlan.price}</p>
-                    <p className="text-sm text-muted-foreground mt-2">{currentPlan.priceNote}</p>
-                  </CardContent>
-                </Card>
-              )}
 
               {/* Primary Plan Card */}
               <Card className="border-2 border-primary shadow-soft-lg overflow-hidden">
